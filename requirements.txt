@@ -1,0 +1,18 @@
+# Activating venv
+# python -m venv SPDMenv
+# SPDMenv\Scripts\activate
+
+# pip install -r requirements.txt
+
+# Starting Flask app
+# python app.py
+
+
+flask==3.1.0
+flask_sqlalchemy==3.1.1
+flask_wtf==1.2.2
+flask_login==0.6.3
+python-dotenv==1.0.1
+flask_bcrypt==1.0.1
+
+
