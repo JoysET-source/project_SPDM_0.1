@@ -5,7 +5,7 @@
 {% block form_title %}Register Here{% endblock %}
 
 {% block form_content %}
-  <form method="POST" action="{{url_for('register')}}">
+    <form method="POST" action="{{url_for('auth_routes.register')}}">
     {{ form.hidden_tag() }}
     <label for="username">Username</label>
     {{ form.username(class="form-control", placeholder="Username") }}
@@ -28,7 +28,7 @@
       </div>
     {% endif %}
 
-    <p>Hai già un account? <a href="{{ url_for('login') }}" style="color: blue;">Fai il login</a></p><br><br>
+    <p>Hai già un account? <a href="{{ url_for('auth/login') }}" style="color: blue;">Fai il login</a></p><br><br>
     <a href="/">Torna alla pagina principale</a>
 
     <!-- <button>{{ form.submit }}</button> -->
