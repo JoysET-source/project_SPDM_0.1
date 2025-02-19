@@ -4,7 +4,6 @@ from flask_login import login_user, logout_user, login_required
 from import_bridge import bcrypt, db
 from models import LoginForm, User, RegisterForm
 
-
 auth_routes = Blueprint('auth_routes', __name__)
 
 @auth_routes.route("/login", methods=["GET", "POST"])
@@ -16,7 +15,7 @@ def login():
             if bcrypt.check_password_hash(user.password, form.password.data):# questo controlla che la password appartiene a user
                 login_user(user) # e quindi ti logga dentro
                 redirect(url_for("dashboard"))# e ti rimanda alla pagina dashboard in templates(struttura a pagamento per me)
-    return render_template("login.html", form=form)
+    return render_template("auth/login.html", form=form)
 
 @auth_routes.route("/register", methods=["GET", "POST"])
 def register():
@@ -28,11 +27,9 @@ def register():
 
         db.session.add(new_user)
         db.session.commit()
-
         return redirect(url_for("login"))
 
-    return render_template("register.html", form=form)
-
+    return render_template("auth/register.html", form=form)
 
 @auth_routes.route("/logout", methods=["GET", "POST"])
 @login_required
