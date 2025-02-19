@@ -1,6 +1,5 @@
 import os
-
-from flask import Flask
+from flask import Flask, render_template
 from dotenv import load_dotenv
 from import_bridge import db, bcrypt, login_manager
 

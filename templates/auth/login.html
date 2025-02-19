@@ -28,7 +28,10 @@
       </div>
     {% endif %}
 
-    {{ form.login }}
+    <p>Non hai un account? <a href="{{ url_for('auth_routes.register') }}" style="color: blue;">Registrati</a></p><br><br>
+    <a href="/">Torna alla pagina principale</a>
+
+    {{ form.submit }}
 
     <div class="social">
       <div class="go"><i class="fab fa-google"></i>  Google</div>
