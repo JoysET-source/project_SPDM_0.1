@@ -24,7 +24,7 @@
         <div>
             {% for ricetta in ricette %}
             <div class="ricette-container">
-                <a href="{{ url_for('dettaglio_ricetta', categoria=categoria,
+                <a href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=categoria,
                 nome_ricetta=ricetta['description'], image=ricetta['image']) }}">
                 <button>
                     <img src="{{ url_for('static', filename=ricetta['image']) }}"
