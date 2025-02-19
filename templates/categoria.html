@@ -1,0 +1,44 @@
+<!--categoria fa la pagina di ogni tasto categoria con foto di sfondo personalizzata-->
+
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title>Ricette - {{ categoria }}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/categoria_style.css">
+    </head>
+    <!-- il background lo mettiamo qui in questo caso perche css e'solo statico e non analizza jinja -->
+    <style>
+        .background {
+            background-image: url("{{ url_for('static', filename='sfondi/' + categoria + '_sfondo.jpg') }}");
+        }
+    </style>
+    <!-- con jinja creiamo il ciclo per iterare tutte le ricette inserite e mostrarle con la loro immagine personale e info -->
+    <body>
+        <div class="background">
+        <div class="categorie">
+            <mark>Ricette della categoria: {{ categoria }}</mark>
+        </div>
+        <br><br><br>
+        <div>
+            {% for ricetta in ricette %}
+            <div class="ricette-container">
+                <a href="{{ url_for('dettaglio_ricetta', categoria=categoria,
+                nome_ricetta=ricetta['description'], image=ricetta['image']) }}">
+                <button>
+                    <img src="{{ url_for('static', filename=ricetta['image']) }}"
+                    alt="{{ ricetta['nome_ricetta'] }}" width="200">
+                </button>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <a class="back-home" href="/">Torna alla pagina principale</a>
+    </div>
+    </body>
+</html>
+
+
+
