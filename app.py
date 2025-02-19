@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template
+
+from flask import Flask
 from dotenv import load_dotenv
 from import_bridge import db, bcrypt, login_manager
 
@@ -20,11 +21,11 @@ with app.app_context():
     db.create_all()
 
 from routes.auth import auth_routes
-from routes.dashboard import dashboard_routes
+# from routes.dashboard import dashboard_routes
 from routes.ricette import ricette_routes
 
 app.register_blueprint(auth_routes)
-app.register_blueprint(dashboard_routes)
+# app.register_blueprint(dashboard_routes)
 app.register_blueprint(ricette_routes)
 
 if __name__ == '__main__':

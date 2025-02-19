@@ -1,3 +1,12 @@
+import os
+
+from flask import Blueprint, render_template, request, jsonify
+
+from import_bridge import login_manager, db
+from models import Ricetta, User
+
+
+ricette_routes = Blueprint('ricette_routes', __name__)
 # specifica il path contenente le ricette caricate
 ricette_path = os.path.join("static", "Ricette")
 
@@ -23,17 +32,17 @@ def load_ricette(categoria):
     return ricette
 
 #  questo chiama struttura come file per interfaccia
-@app.route('/')
+@ricette_routes.route('/')
 def home():
     return render_template("struttura.html")
 
 # questo chiama categoria come interfaccia per le ricette uploadate
-@app.route("/categoria/<categoria>")
+@ricette_routes.route("/categoria/<categoria>")
 def categoria(categoria):
     ricette = load_ricette(categoria)
     return render_template("categoria.html", categoria=categoria, ricette=ricette)
 
-@app.route("/dettaglio_ricette/<categoria>/<nome_ricetta>")
+@ricette_routes.route("/dettaglio_ricette/<categoria>/<nome_ricetta>")
 def dettaglio_ricetta(categoria, nome_ricetta):
     image = request.args.get("image")  # Recupera il parametro dell'immagine
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
@@ -55,14 +64,14 @@ def dettaglio_ricetta(categoria, nome_ricetta):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route("/run_script")
+@ricette_routes.route("/run_script")
 def run_script():
     # Esegui lo script Python quando il pulsante viene premuto
     # Esegui il tuo script Python qui
     # print("Il pulsante è stato premuto!")
     return 'Script eseguito!'
 
-@app.route("/elenco_ricette", methods=["GET"])
+@ricette_routes.route("/elenco_ricette", methods=["GET"])
 def elenco_ricette():
     elenco_ricette = Ricetta.query.all()
     elenco = []
@@ -72,7 +81,7 @@ def elenco_ricette():
         })
     return jsonify(elenco)
 
-@app.route("/trova_ricetta", methods=["GET"])
+@ricette_routes.route("/trova_ricetta", methods=["GET"])
 def trova_ricetta():
     nome_ricetta = request.args.get("nome_ricetta") # Ottieni il valore del parametro nome_ricetta da JS
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
@@ -84,7 +93,7 @@ def trova_ricetta():
             "kcal": ricetta.kcal
             })
 
-@app.route("/elimina_ricetta", methods=["GET"])
+@ricette_routes.route("/elimina_ricetta", methods=["GET"])
 def elimina_ricetta():
     nome_ricetta = request.args.get("nome_ricetta")
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
@@ -96,7 +105,7 @@ def elimina_ricetta():
     return jsonify({"messaggio":"ricetta cancellata"}), 200
 
 
-@app.route("/utenti")
+@ricette_routes.route("/utenti")
 def lista_utenti():
     users = User.query.all()
     utenti = [{"id": user.id, "username": user.username} for user in users]

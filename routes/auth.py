@@ -1,10 +1,13 @@
+from flask import Blueprint, render_template, redirect, url_for
+from flask_login import login_user, logout_user, login_required
 
-
+from import_bridge import bcrypt, db
+from models import LoginForm, User, RegisterForm
 
 
 auth_routes = Blueprint('auth_routes', __name__)
 
-@app.route("/login", methods=["GET", "POST"])
+@auth_routes.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -15,7 +18,7 @@ def login():
                 redirect(url_for("dashboard"))# e ti rimanda alla pagina dashboard in templates(struttura a pagamento per me)
     return render_template("login.html", form=form)
 
-@app.route("/register", methods=["GET", "POST"])
+@auth_routes.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
 
@@ -31,7 +34,7 @@ def register():
     return render_template("register.html", form=form)
 
 
-@app.route("/logout", methods=["GET", "POST"])
+@auth_routes.route("/logout", methods=["GET", "POST"])
 @login_required
 def logout():
     logout_user()
