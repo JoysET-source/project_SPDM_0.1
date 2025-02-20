@@ -18,42 +18,15 @@
 
     <div id="password-error" class="text-danger"></div>
 
-    <p>Hai già un account? <a href="{{ url_for('auth_routes.login') }}" style="color: blue;">Fai il login</a></p>
+    <p>Hai già un account? <a href="{{ url_for('auth_routes.login') }}" style="color: blue;">Fai il login</a></p><br><br>
     <a href="/">Torna alla pagina principale</a>
 
     {{ form.submit(class="btn btn-primary") }}
+
+    <div class="social">
+      <div class="go"><i class="fab fa-google"></i>  Google</div>
+      <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+    </div>
 </form>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("register-form").addEventListener("submit", function (event) {
-        event.preventDefault();
-        
-        let formData = new FormData(this);
-
-        fetch("{{ url_for('auth_routes.register') }}", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("username-error").innerHTML = "";
-            document.getElementById("password-error").innerHTML = "";
-
-            if (data.success) {
-                alert(data.success);
-                window.location.href = "/login";
-            } else if (data.errors) {
-                if (data.errors.username) {
-                    document.getElementById("username-error").innerHTML = data.errors.username.join("<br>");
-                }
-                if (data.errors.password) {
-                    document.getElementById("password-error").innerHTML = data.errors.password.join("<br>");
-                }
-            }
-        })
-        .catch(error => console.error("Errore:", error));
-    });
-});
-</script>
 {% endblock %}
+

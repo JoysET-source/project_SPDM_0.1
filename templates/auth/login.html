@@ -2,41 +2,30 @@
 
 {% block title %}Login{% endblock %}
 
-{% block form_title %}Login Here{% endblock %}
+{% block form_title %}Login{% endblock %}
 
 {% block form_content %}
-    <form method="POST" action="{{url_for('auth_routes.login')}}">
+<form id="login-form" method="POST">
     {{ form.hidden_tag() }}
+
     <label for="username">Username</label>
     {{ form.username(class="form-control", placeholder="Username") }}
 
-    {% if form.username.errors %}
-        <div class="text-danger">
-            {% for error in form.username.errors %}
-                <small>{{ error }}</small><br>
-            {% endfor %}
-        </div>
-    {% endif %}
+    <div id="username-error" class="text-danger"></div>
 
     <label for="password">Password</label>
-    {{ form.username(class="form-control", placeholder="Password") }}
-    {% if form.password.errors %}
-      <div class="text-danger">
-        {% for error in form.password.errors %}
-            <small>{{ error }}</small><br>
-        {% endfor %}
-      </div>
-    {% endif %}
+    {{ form.password(class="form-control", placeholder="Password") }}
+
+    <div id="password-error" class="text-danger"></div>
 
     <p>Non hai un account? <a href="{{ url_for('auth_routes.register') }}" style="color: blue;">Registrati</a></p><br><br>
     <a href="/">Torna alla pagina principale</a>
 
-    {{ form.submit }}
+    {{ form.submit(class="btn btn-primary") }}
 
     <div class="social">
       <div class="go"><i class="fab fa-google"></i>  Google</div>
       <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
     </div>
+</form>
 {% endblock %}
-
-
