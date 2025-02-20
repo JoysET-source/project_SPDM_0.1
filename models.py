@@ -24,6 +24,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=True)
     password = db.Column(db.String(255), nullable=True)
 
+# verifica la complessita della password usando regex
 def password_complexity_check(form, field):
     password = field.data
     if not re.search(r"[A-Z]", password):
@@ -37,7 +38,9 @@ class RegisterForm(FlaskForm):
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=20), password_complexity_check], render_kw={"placeholder": "Password"})
     submit = SubmitField("Register")
 
-    # assicurarsi che username sia unico
+    # assicurarsi che username non sia gia in uso
+    # usa validate che WTF di default lo legge
+    # FlaskForm gestisce già gli errori, quindi non serve restituire JSON qui.
     def validate_username(self, username):
         user_esistente = User.query.filter_by(username=username.data).first()
         if user_esistente:
@@ -46,5 +49,5 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw= {"placeholder": "Username"})
-    password = StringField(validators=[InputRequired(), Length(min=8, max=20), password_complexity_check], render_kw= {"placeholder": "Password"})
+    password = PasswordField(validators=[InputRequired(), Length(min=8, max=20), password_complexity_check], render_kw= {"placeholder": "Password"})
     submit = SubmitField("Login")

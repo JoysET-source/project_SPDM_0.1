@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, request, jsonify
 from flask_login import login_user, logout_user, login_required
 
 from import_bridge import bcrypt, db
@@ -14,20 +14,28 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):# questo controlla che la password appartiene a user
                 login_user(user) # e quindi ti logga dentro
-                redirect(url_for("admin_dashboard"))# e ti rimanda alla pagina dashboard in templates(struttura a pagamento per me)
+                redirect(url_for("login_dashboard"))# e ti rimanda alla pagina dashboard in templates(struttura a pagamento per me)
     return render_template("auth/login.html", form=form)
 
 @auth_routes.route("/register", methods=["GET", "POST"])
 def register():
+    # crea un'istanza della classe RegisterForm, che è un form Flask-WTF.
+    # Questa istanza viene poi passata al template HTML per essere utilizzata nel frontend.
+    # comunica con class e con block su register.html
     form = RegisterForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
+            new_user = User(username=form.username.data, password=hashed_password)
 
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-        new_user = User(username=form.username.data, password=hashed_password)
-
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for("login"))
+            db.session.add(new_user)
+            db.session.commit()
+            # return redirect(url_for("login"))
+            return jsonify({"success":"Registrazione completata"}),200
+        else:
+            # Flask raccoglie gli errori del form e li restituisce come JSON
+            errors = {field.name: field.errors for field in form if field.errors}
+            return jsonify({"errors": errors}), 400
 
     return render_template("auth/register.html", form=form)
 

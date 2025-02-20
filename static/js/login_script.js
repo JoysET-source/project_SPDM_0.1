@@ -1,30 +1,3 @@
-{% extends "auth/font_login.html" %}
-
-{% block title %}Register{% endblock %}
-
-{% block form_title %}Register Here{% endblock %}
-
-{% block form_content %}
-<form id="register-form" method="POST">
-    {{ form.hidden_tag() }}
-
-    <label for="username">Username</label>
-    {{ form.username(class="form-control", placeholder="Username") }}
-
-    <div id="username-error" class="text-danger"></div>
-
-    <label for="password">Password</label>
-    {{ form.password(class="form-control", placeholder="Password") }}
-
-    <div id="password-error" class="text-danger"></div>
-
-    <p>Hai già un account? <a href="{{ url_for('auth_routes.login') }}" style="color: blue;">Fai il login</a></p>
-    <a href="/">Torna alla pagina principale</a>
-
-    {{ form.submit(class="btn btn-primary") }}
-</form>
-
-<script>
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("register-form").addEventListener("submit", function (event) {
         event.preventDefault();
@@ -55,5 +28,3 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error("Errore:", error));
     });
 });
-</script>
-{% endblock %}
