@@ -1,6 +1,5 @@
-from datetime import datetime
 from sqlalchemy.sql import func
-from import_bridge import db
+from main.import_bridge import db
 
 
 # Creazione della tabella Ricetta

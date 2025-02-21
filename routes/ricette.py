@@ -2,7 +2,7 @@ import os
 
 from flask import Blueprint, render_template, request, jsonify
 
-from import_bridge import login_manager, db
+from main.import_bridge import login_manager, db
 from models.ricetta_model import Ricetta
 from models.user_model import User
 
