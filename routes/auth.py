@@ -2,7 +2,8 @@ from flask import Blueprint, render_template, redirect, url_for, request, jsonif
 from flask_login import login_user, logout_user, login_required
 
 from import_bridge import bcrypt, db
-from models import LoginForm, User, RegisterForm
+from models.login_model import LoginForm, RegisterForm
+from models.user_model import User
 
 auth_routes = Blueprint('auth_routes', __name__)
 

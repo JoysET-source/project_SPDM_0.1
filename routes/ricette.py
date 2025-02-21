@@ -3,7 +3,8 @@ import os
 from flask import Blueprint, render_template, request, jsonify
 
 from import_bridge import login_manager, db
-from models import Ricetta, User
+from models.ricetta_model import Ricetta
+from models.user_model import User
 
 
 ricette_routes = Blueprint('ricette_routes', __name__)
@@ -105,11 +106,11 @@ def elimina_ricetta():
     return jsonify({"messaggio":"ricetta cancellata"}), 200
 
 
-@ricette_routes.route("/utenti")
-def lista_utenti():
-    users = User.query.all()
-    utenti = [{"id": user.id, "username": user.username} for user in users]
-    return jsonify(utenti)
+# @ricette_routes.route("/utenti")
+# def lista_utenti():
+#     users = User.query.all()
+#     utenti = [{"id": user.id, "username": user.username} for user in users]
+#     return jsonify(utenti)
 
 
 
