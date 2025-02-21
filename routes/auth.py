@@ -9,13 +9,17 @@ auth_routes = Blueprint('auth_routes', __name__)
 
 @auth_routes.route("/login", methods=["GET", "POST"])
 def login():
-    form = LoginForm()
+    form = LoginForm() # stai creando un modulo con: campo username, password e tasto di invio
+
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first() # questo serve per controllare se user gia presente in db o no
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):# questo controlla che la password appartiene a user
                 login_user(user) # e quindi ti logga dentro
-                return redirect(url_for("auth_routes.login_dashboard"))# e ti rimanda alla pagina dashboard in templates(struttura a pagamento per me)
+
+                # e ti rimanda alla pagina dashboard in templates(struttura a pagamento per me)
+                # return "Login effettuato! <a href='/'>Torna alla home</a>"
+                return redirect(url_for("auth_routes.login_dashboard"))
     return render_template("auth/login.html", form=form)
 
 @auth_routes.route("/register", methods=["GET", "POST"])
