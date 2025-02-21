@@ -22,10 +22,12 @@ with app.app_context():
 from routes.auth import auth_routes
 # from routes.dashboard import dashboard_routes
 from routes.ricette import ricette_routes
+from routes.manage_recipe import dashboard_routes
 
 app.register_blueprint(auth_routes)
 # app.register_blueprint(dashboard_routes)
 app.register_blueprint(ricette_routes)
+app.register_blueprint(dashboard_routes)
 
 if __name__ == '__main__':
     app.run(debug=True)
