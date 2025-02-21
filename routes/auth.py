@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, jsonify
 from flask_login import login_user, logout_user, login_required
 
-from main.import_bridge import bcrypt, db
+from import_bridge import bcrypt, db
 from models.login_model import LoginForm, RegisterForm
 from models.user_model import User
 

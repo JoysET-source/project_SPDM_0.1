@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from main.import_bridge import db
+from import_bridge import db
 
 
 # Creazione della tabella User

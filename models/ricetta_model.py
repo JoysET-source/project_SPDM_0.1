@@ -1,5 +1,5 @@
 from sqlalchemy.sql import func
-from main.import_bridge import db
+from import_bridge import db
 
 
 # Creazione della tabella Ricetta
