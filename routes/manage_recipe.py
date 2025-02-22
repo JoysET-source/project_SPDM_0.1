@@ -12,13 +12,7 @@ dashboard_routes = Blueprint("dashboard_routes", __name__)
 
 @dashboard_routes.route("/admin_dashboard")
 def admin_dashboard():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user and password_complexity_check(user.password, form.password.data):
-            login_user(user)
-            if user.username == "admin":
-                messaggio =  "Benvenuto Amministratore"
+    messaggio =  "Benvenuto Amministratore"
     return render_template("dashboard/admin_dashboard.html", messaggio=messaggio)
 
 

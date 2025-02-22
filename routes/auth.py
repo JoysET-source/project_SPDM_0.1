@@ -17,9 +17,14 @@ def login():
             if bcrypt.check_password_hash(user.password, form.password.data):# questo controlla che la password appartiene a user
                 login_user(user) # e quindi ti logga dentro
 
-                # e ti rimanda alla pagina dashboard in templates(struttura a pagamento per me)
-                # return "Login effettuato! <a href='/'>Torna alla home</a>"
-                return redirect(url_for("auth_routes.login_dashboard"))
+                # controlla se login di admin
+                if user.username == "admin":
+                    return redirect(url_for("dashboard_routes.admin_dashboard"))
+                else:
+                    # e ti rimanda alla pagina dashboard in templates(struttura a pagamento per me)
+                    # return "Login effettuato! <a href='/'>Torna alla home</a>"
+                    return redirect(url_for("auth_routes.login_dashboard"))
+
     return render_template("auth/login.html", form=form)
 
 @auth_routes.route("/register", methods=["GET", "POST"])
