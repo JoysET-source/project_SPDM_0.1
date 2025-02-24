@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+<header>        
+        <!-- creiamo il menu a tre barre chiamato toggle  -->
+    <div class="menu-toggle">&#9776;</div>         
+    <h1>{{ messaggio }}</h1>      
+    <a class="logout" href="{{url_for('auth_routes.logout')}}">Logout</a>
+<nav id="menu" class="hidden">
+    <ul>
+        <li onclick="loadSection('create_recipe')">Crea Ricetta</li>
+        <li onclick="loadSection('read_recipe')">Lista Ricette</li>
+        <li onclick="loadSection('update_recipe')">Modifica Ricetta</li>
+        <li onclick="loadSection('delete_recipe')">Elimina Ricetta</li>
+    </ul>
+</nav> 
+<script type="text/javascript" src="{{ url_for('static', filename='dashboard/js/admin_dsh_script.js') }}"></script>
+</header> 

@@ -5,7 +5,7 @@
 // }
 
 window.toggleMenu = function () {
-    console.log("toggleMenu chiamato!");
+    // console.log("toggleMenu chiamato!");
     var menu = document.getElementById("menu");
     
     if (menu.classList.contains("hidden")) {
@@ -40,18 +40,18 @@ function loadSection(section) {
 }
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOM caricato!");
+// document.addEventListener("DOMContentLoaded", function () {
+//     console.log("DOM caricato!");
 
-    var toggleButton = document.querySelector(".menu-toggle");
+//     var toggleButton = document.querySelector(".menu-toggle");
 
-    if (toggleButton) {
-        console.log("Elemento .menu-toggle trovato!");
-        toggleButton.addEventListener("click", function () {
-            console.log("Menu cliccato!");
-            toggleMenu();
-        });
-    } else {
-        console.log("Elemento .menu-toggle NON trovato!");
-    }
-});
+//     if (toggleButton) {
+//         console.log("Elemento .menu-toggle trovato!");
+//         toggleButton.addEventListener("click", function () {
+//             console.log("Menu cliccato!");
+//             toggleMenu();
+//         });
+//     } else {
+//         console.log("Elemento .menu-toggle NON trovato!");
+//     }
+// });

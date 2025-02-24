@@ -12,7 +12,7 @@ dashboard_routes = Blueprint("dashboard_routes", __name__)
 
 @dashboard_routes.route("/admin_dashboard")
 def admin_dashboard():
-    messaggio =  "Benvenuto Amministratore"
+    messaggio =  "Benvenuto Amministratore SPDM"
     return render_template("dashboard/admin_dashboard.html", messaggio=messaggio)
 
 

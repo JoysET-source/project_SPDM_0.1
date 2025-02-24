@@ -4,27 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard SPDM</title>
-    <link rel="stylesheet" href="/static/dashboard/css/admin_dsh_style.css">    
+    <link rel="stylesheet" href="/static/dashboard/css/admin_dsh_style.css">
 </head>
 <body>
-    <header>        
-               <!-- creiamo il menu a tre barre chiamato toggle  -->
-        <div class="menu-toggle">&#9776;</div>         
-        <h1>{{ messaggio }}</h1>      
-    </header>  
-    <nav id="menu" class="hidden">
-        <ul>
-            <li onclick="loadSection('create_recipe')">Crea Ricetta</li>
-            <li onclick="loadSection('read_recipe')">Leggi Ricette</li>
-            <li onclick="loadSection('update_recipe')">Modifica Ricetta</li>
-            <li onclick="loadSection('delete_recipe')">Elimina Ricetta</li>
-        </ul>
-    </nav> 
-    <script type="text/javascript" src="/static/dashboard/js/admin_dsh_script.js"></script>  
+    {% include "dashboard/header.html" %}
     <main id="content">
         <p>Seleziona un'opzione dal menu.</p>
     </main>
-    <a href="{{url_for('auth_routes.logout')}}">Logout</a>        
+    {% include "dashboard/footer.html" %}        
 </body>
 </html>
 
