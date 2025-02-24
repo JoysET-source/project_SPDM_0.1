@@ -7,7 +7,6 @@ from models.user_model import User
 from models.login_model import password_complexity_check
 
 
-
 dashboard_routes = Blueprint("dashboard_routes", __name__)
 
 
