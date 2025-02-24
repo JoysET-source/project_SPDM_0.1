@@ -24,7 +24,7 @@ nav {
     top: 110px;    
     background-color: white;
     border: 1px solid #ccc;
-    display: none;
+    display: none; /* menu nascosto di default */
     color: black;
 }
 nav ul {
@@ -40,9 +40,6 @@ nav ul li {
 nav ul li:hover {
     background-color: orange;
 }
-.hidden {
-    display: none;
-}
 main {
     margin-top: 20px;
 }
@@ -51,6 +48,3 @@ main {
     font-size: 20px;
     margin-right: 5px;
 }
-nav.hidden { 
-    display: block; /* Mostra il menu quando la classe .hidden viene rimossa */
-} 

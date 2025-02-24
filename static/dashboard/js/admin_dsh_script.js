@@ -1,12 +1,27 @@
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('nav');
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const menuToggle = document.querySelector('.menu-toggle');
+    //     const nav = document.querySelector('nav');
 
-        menuToggle.addEventListener('click', function() {
-            nav.classList.toggle('hidden');
-        });
+    //     menuToggle.addEventListener('click', function() {
+    //         nav.classList.toggle('hidden');
+    //     });
+    // });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+
+    menuToggle.addEventListener('click', function() {
+        // gestisce la visibilità del menu trasformando NONE(nascosto) in BLOCK(visibile)
+        if (nav.style.display === "none" || nav.style.display === "") {
+            nav.style.display = "block";  // Mostra il menu
+        } else {
+            nav.style.display = "none";  // Nascondi il menu
+        }
     });
+});
 
     
 function loadSection(section) {
