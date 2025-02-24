@@ -1,5 +1,5 @@
 // window.toggleMenu = function() {
-//     console.log("toggleMenu chiamato!");
+//     // console.log("toggleMenu chiamato!");
 //     var menu = document.getElementById("menu");
 //     menu.classList.toggle("hidden");
 // }

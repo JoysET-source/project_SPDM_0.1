@@ -6,7 +6,7 @@ body {
 }
 header {
     display: flex;
-    justify-content: stretch;
+    justify-content: space-between;
     align-items: center;
     background-color: #333;
     color: white;
@@ -14,21 +14,21 @@ header {
 }
 .menu-toggle {
     cursor: pointer;
-    font-size: 24px;
+    font-size: 30px;
     z-index: 1000;
     position: relative;
 }
 nav {
     position: absolute;
-    /* top: 80px; */
-    /* right: 20px; */
-    left: 0;
-    top: 110px;
-    /* background-color: black; */
-    background-color: white;
+    top: 80px;
+    right: 20px;
+    /* left: 0; */
+    /* top: 110px; */
+    background-color: black;
+    /* background-color: white; */
     border: 1px solid #ccc;
     display: none;
-    color: black;
+    /* color: black; */
 }
 nav ul {
     list-style: none;
