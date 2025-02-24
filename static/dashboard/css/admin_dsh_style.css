@@ -19,16 +19,13 @@ header {
     position: relative;
 }
 nav {
-    position: absolute;
-    top: 80px;
-    right: 20px;
-    /* left: 0; */
-    /* top: 110px; */
-    background-color: black;
-    /* background-color: white; */
+    position: absolute;   
+    left: 0;
+    top: 110px;    
+    background-color: white;
     border: 1px solid #ccc;
     display: none;
-    /* color: black; */
+    color: black;
 }
 nav ul {
     list-style: none;
@@ -54,3 +51,6 @@ main {
     font-size: 20px;
     margin-right: 5px;
 }
+nav.hidden { 
+    display: block; /* Mostra il menu quando la classe .hidden viene rimossa */
+} 

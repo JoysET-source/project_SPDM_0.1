@@ -1,11 +1,14 @@
 
 <header>        
         <!-- creiamo il menu a tre barre chiamato toggle  -->
-    <div class="menu-toggle">&#9776;</div>         
+    <div class="menu-toggle">&#9776;</div> 
+        <!-- importiamo il messaggio da python -->
     <h1>{{ messaggio }}</h1>
+        <!-- icona omino come logout -->
     <a  href="{{ url_for('auth_routes.logout') }}">
         <i class="fa fa-user-circle status-icon"></i> Logout
-    </a>       
+    </a>    
+       <!-- interno del menu a tendina -->
 <nav id="menu" class="hidden">
     <ul>
         <li onclick="loadSection('create_recipe')">Crea Ricetta</li>

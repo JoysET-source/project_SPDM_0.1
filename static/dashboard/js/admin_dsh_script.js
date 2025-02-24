@@ -1,23 +1,14 @@
-// window.toggleMenu = function() {
-//     // console.log("toggleMenu chiamato!");
-//     var menu = document.getElementById("menu");
-//     menu.classList.toggle("hidden");
-// }
 
-window.toggleMenu = function () {
-    // console.log("toggleMenu chiamato!");
-    var menu = document.getElementById("menu");
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('hidden');
+        });
+    });
+
     
-    if (menu.classList.contains("hidden")) {
-        menu.classList.remove("hidden");
-        menu.style.display = "block"; // 👈 Forza la visualizzazione
-    } else {
-        menu.classList.add("hidden");
-        menu.style.display = "none"; // 👈 Nasconde di nuovo
-    }
-};
-
-
 function loadSection(section) {
     var content = document.getElementById("content");
     
@@ -38,20 +29,3 @@ function loadSection(section) {
             content.innerHTML = "<p>Seleziona un'opzione dal menu.</p>";
     }
 }
-
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     console.log("DOM caricato!");
-
-//     var toggleButton = document.querySelector(".menu-toggle");
-
-//     if (toggleButton) {
-//         console.log("Elemento .menu-toggle trovato!");
-//         toggleButton.addEventListener("click", function () {
-//             console.log("Menu cliccato!");
-//             toggleMenu();
-//         });
-//     } else {
-//         console.log("Elemento .menu-toggle NON trovato!");
-//     }
-// });
