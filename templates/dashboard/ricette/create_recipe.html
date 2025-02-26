@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "admin_dashboard.html" %}
+{% block content %}
 
-</body>
-</html>
+<form id="ricetta-form" action="/create_recipe" method="POST" enctype="multipart/form-data">
+
+    <label>Categoria:</label>
+    <input type="text" name="categoria" required placeholder="Es. Pasta">
+    
+    <label>Nome Ricetta:</label>
+    <input type="text" name="nome_ricetta" required placeholder="Es. Carbonara">
+    
+    <label>Descrizione:</label>
+    <textarea name="descrizione" required placeholder="Scrivi la descrizione"></textarea>
+    
+    <label>Immagine:</label>
+    <input type="file" name="immagine" accept="image/*">
+
+    <button type="submit">Carica Ricetta</button>
+</form>
+<!-- questo div lo puoi usare per gestire i messaggi di errore su script js -->
+<div id="messaggio"></div>
+
+{% endblock %}

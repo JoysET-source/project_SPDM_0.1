@@ -25,12 +25,10 @@ with app.app_context():
     db.create_all()
 
 from routes.auth import auth_routes
-# from routes.dashboard import dashboard_routes
 from routes.ricette import ricette_routes
 from routes.manage_recipe import dashboard_routes
 
 app.register_blueprint(auth_routes)
-# app.register_blueprint(dashboard_routes)
 app.register_blueprint(ricette_routes)
 app.register_blueprint(dashboard_routes)
 

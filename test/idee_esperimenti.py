@@ -34,3 +34,18 @@
 #         img.save(image_path, optimize=True, quality=85)
 #     except Exception as e:
 #         print(f"Errore nel ridimensionamento: {e}")
+# ======================================================================================================================
+# @app.route("/ricette", methods=["GET"])
+# def get_ricette():
+#     ricette = Ricetta.query.all()
+#     ricette_json = [
+#         {
+#             "id": r.id,
+#             "nome": r.nome,
+#             "categoria": r.categoria,
+#             "descrizione": r.descrizione,
+#             "immagine": r.immagine
+#         }
+#         for r in ricette
+#     ]
+#     return jsonify(ricette_json)

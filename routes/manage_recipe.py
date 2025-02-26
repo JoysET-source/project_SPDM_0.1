@@ -8,8 +8,8 @@ from models.login_model import LoginForm
 from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.login_model import password_complexity_check
-from app import UPLOAD_FOLDER
 from models.controllo_dimensione_immagini import ridimensiona_immagine
+
 
 
 dashboard_routes = Blueprint("dashboard_routes", __name__)
@@ -26,7 +26,7 @@ def create_recipe():
     nome_ricetta = request.form.get("nome_ricetta")
     ingredienti = request.form.get("ingredienti")
     kcal = request.form.get("kcal")
-    immagini = request.files.get("immagini")
+    immagine = request.files.get("immagine")
     titolo = request.form.get("titolo")
     descrizione = request.form.get("descrizione")
     servings = request.form.get("servings")
@@ -39,13 +39,13 @@ def create_recipe():
     autore = request.form.get("author")
 
     image_filename = None
-    if immagini:
-        categoria_path = os.path.join(UPLOAD_FOLDER, categoria)
+    if immagine:
+        categoria_path = os.path.join("static/ricette", categoria)
         os.makedirs(categoria_path, exist_ok=True)
 
         image_filename = f"{nome_ricetta}.jpg"
         image_path = os.path.join(categoria_path, image_filename)
-        immagini.save(image_path)
+        immagine.save(image_path)
 
         # Ridimensionamento immagine
         ridimensiona_immagine(image_path)
@@ -58,7 +58,7 @@ def create_recipe():
         nome = nome_ricetta,
         ingredienti = ingredienti,
         kcal = kcal,
-        immagini = image_filename,
+        immagine = image_filename,
         titolo = titolo,
         descrizione = descrizione,
         servings = servings,

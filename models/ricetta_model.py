@@ -7,7 +7,7 @@ class Ricetta(db.Model):
     nome_ricetta = db.Column(db.String(100), unique=True, nullable=False)
     ingredienti = db.Column(db.String, nullable=False)
     kcal = db.Column(db.Integer, nullable=False)
-    # immagini = db.Column(db.String(500), nullable=True)  # Aggiungi questo campo per memorizzare l'URL(il percorso) dell'immagine che sta su static
+    # immagine = db.Column(db.String(500), nullable=True)  # Aggiungi questo campo per memorizzare l'URL(il percorso) dell'immagine che sta su static
     # categoria = db.Column(db.String, nullable=False)
     # titolo = db.Column(db.String, nullable=False)
     # descrizione = db.Column(db.String, nullable=False)
