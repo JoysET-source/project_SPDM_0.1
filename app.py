@@ -11,6 +11,11 @@ app.config['SQLALCHEMY_BINDS'] = {'users': 'sqlite:///users.db'}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.getenv("SECRET_KEY")
 
+# caricare le immagini inserite in HTML su flask nel percorso specificato
+UPLOAD_FOLDER = "static/ricette"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 db.init_app(app)
 bcrypt.init_app(app)
 login_manager.init_app(app)
