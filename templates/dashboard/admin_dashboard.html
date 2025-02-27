@@ -10,11 +10,7 @@
 </head>
 <body>
     {% include "dashboard/header.html" %}
-    <main id="content">
-        <p>Seleziona un'opzione dal menu.</p> <!-- qui ci puoi mettere quello che vuoi visualizzare nella dash che poi viene sostituito
-        quando scegli una voce del menu-->
-
-        <!-- collegamento tra le varie pagine html -->
+    <main>        
         {% block content %}{% endblock %}
     </main>
     {% include "dashboard/footer.html" %}        
