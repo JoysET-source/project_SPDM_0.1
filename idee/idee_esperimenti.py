@@ -24,7 +24,7 @@
 #         f.write(descrizione)
 #
 #     return jsonify({"success": f"Ricetta '{nome_ricetta}' caricata in '{categoria}'!"}), 201
-
+#
 # ======================================================================================================================
 # def ridimensiona_immagine(image_path):
 #     """Ridimensiona l'immagine prima di salvarla"""
@@ -49,3 +49,32 @@
 #         for r in ricette
 #     ]
 #     return jsonify(ricette_json)
+# ======================================================================================================================
+# ======================================================================================================================
+# Il mixin prende un argomento $padding-x con un valore predefinito di $container-padding-x
+# Quando viene utilizzato, il mixin applica queste regole CSS all'elemento:
+# praticamente crea un container con due bande di spazio a destra e a sinistra come cucchiaio dargento
+#
+# // Source mixin
+# @mixin make-container($padding-x: $container-padding-x) {
+#   width: 100%;
+#   padding-right: $padding-x;
+#   padding-left: $padding-x;
+#   margin-right: auto;
+#   margin-left: auto;
+# }
+#Quando usi il mixin così:
+# // Usage
+# .custom-container {
+#   @include make-container(30px); <----$container-padding-x
+# }
+#Sass lo trasforma in CSS:
+# .custom-container {
+#   width: 100%;
+#   padding-right: 30px;  /* Se $container-padding-x è 30px */
+#   padding-left: 30px;
+#   margin-right: auto;
+#   margin-left: auto;
+# }
+# ======================================================================================================================
+# ======================================================================================================================

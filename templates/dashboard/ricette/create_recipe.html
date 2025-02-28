@@ -3,20 +3,176 @@
 
 <form id="ricetta-form" action="/create_recipe" method="POST" enctype="multipart/form-data">
 
-    <label>Categoria:</label>
-    <input type="text" name="categoria" required placeholder="Es. Pasta">
-    
-    <label>Nome Ricetta:</label>
-    <input type="text" name="nome_ricetta" required placeholder="Es. Carbonara">
-    
-    <label>Descrizione:</label>
-    <textarea name="descrizione" required placeholder="Scrivi la descrizione"></textarea>
-    
-    <label>Immagine:</label>
-    <input type="file" name="immagine" accept="image/*">
 
-    <button type="submit">Carica Ricetta</button>
+    <div class="row">
+        <div class="col-md-3">
+            <label>Categoria:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="text" name="categoria" required placeholder="Es. Pasta" class="form-control">
+        </div>
+    </div>   
+    
+    <div class="row">
+        <div class="col-md-3">
+            <label>Nome Ricetta:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="text" name="nome_ricetta" required placeholder="Es. Carbonara" class="form-control">
+        </div>
+    </div>       
+    
+    <div class="row">
+        <div class="col-md-3">
+            <label>Descrizione:</label>
+        </div>
+        <div class="col-md-9">
+            <textarea name="descrizione" required placeholder="Es. Tipo di piatto" rows="4" class="form-control"></textarea>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3">
+            <label>Immagine:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="file" name="immagine" accept="image/*">
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Ingredienti:</label>
+        </div>
+        <div class="col-md-9">
+            <textarea name="ingredienti" rows="4" class="form-control"></textarea>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Kcal:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="number" name="kcal" required placeholder="Inserisci calorie" min="0" step="0.1" class="form-control">            
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Titolo:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="text" name="titolo" required placeholder="titolo ricetta" class="form-control">            
+        </div>
+    </div>    
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Servings:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="number" name="servings" required placeholder="numero porzioni" min="1" class="form-control">            
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Preparation_time:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="number" name="preparation_time" required placeholder="tempo di preparazione(minuti)"
+             min="0" class="form-control">            
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Cooking_time:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="number" name="cooking_time" required placeholder="tempo di cottura(minuti)" min="0"
+            class="form-control">            
+        </div>
+    </div> 
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Steps:</label>
+        </div>
+        <div class="col-md-9">
+            <textarea name="steps" required placeholder="passi necessari" class="form-control"></textarea>            
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Difficolta:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="text" name="difficulty_level" required placeholder="Es.Media" class="form-control">            
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Tipo di Cucina:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="text" name="cousine_type" required placeholder="Es.Fusion" class="form-control">            
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Autore:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="text" name="autore" required placeholder="Es.Chef Ramsey" class="form-control">            
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Rating:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="number" name="rating" required placeholder="rating" min="0">            
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Tags:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="text" name="tags" required placeholder="Es.#Snack, #Dolci" class="form-control">            
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Prezzo:</label>
+        </div>
+        <div class="col-md-9">
+            <div class="input-group">
+                <select class="form-select" name="valuta">
+                    <option value="€">€ EUR</option>
+                    <option value="$">$ USD</option>
+                    <option value="£">£ GBP</option>
+                    <option value="¥">¥ JPY</option>
+                </select>
+                <input type="number" name="prezzo" required placeholder="Es.80" min="0" step="0.1" class="form-control">            
+            </div>
+        </div>
+    </div>    
+
+    
+    <button type="submit">Carica Ricetta</button>    
 </form>
+
 <!-- questo div lo puoi usare per gestire i messaggi di errore su script js -->
 <div id="messaggio"></div>
 

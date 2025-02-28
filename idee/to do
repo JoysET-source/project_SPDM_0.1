@@ -1,0 +1,21 @@
+Prossimi passi:
+Aggiungere la gestione dei messaggi di errore e successo.
+Completare le funzioni di aggiornamento ed eliminazione delle ricette.
+Aggiungere una gestione dell'errore del database e altre validazioni per i campi numerici.
+
+
+def valida_ricetta(data):
+    errors = []
+
+    if not data["nome_ricetta"]:
+        errors.append("Nome ricetta è obbligatorio.")
+
+    if not data["kcal"] or not data["kcal"].isdigit():
+        errors.append("Kcal deve essere un numero valido.")
+
+    # Aggiungi altre validazioni per altri campi...
+
+    return errors
+
+
+

@@ -11,6 +11,7 @@ from models.login_model import password_complexity_check
 from models.controllo_dimensione_immagini import ridimensiona_immagine
 
 
+
 dashboard_routes = Blueprint("dashboard_routes", __name__)
 
 
@@ -20,28 +21,30 @@ def admin_dashboard():
     messaggio =  "Benvenuto Amministratore SPDM"
     return render_template("dashboard/admin_dashboard.html", messaggio=messaggio)
 
+
 @dashboard_routes.route("/create_recipe", methods=["GET", "POST"])
 @login_required
 def create_recipe():
-    messaggio = "Aggiungi Ricetta"
-    if request.method == "GET":
-        return render_template("dashboard/ricette/create_recipe.html", messaggio=messaggio)
-    else:
-        categoria = request.form.get("categoria")
+    if request.method == "POST":
         nome_ricetta = request.form.get("nome_ricetta")
         ingredienti = request.form.get("ingredienti")
         kcal = request.form.get("kcal")
         immagine = request.files.get("immagine")
+        categoria = request.form.get("categoria")
         titolo = request.form.get("titolo")
         descrizione = request.form.get("descrizione")
         servings = request.form.get("servings")
         preparation_time = request.form.get("preparation_time")
-        coocking_time = request.form.get("coocking_time")
+        cooking_time = request.form.get("cooking_time")
+        total_time = request.form.get("total_time")
         steps = request.form.get("steps")
+        difficulty_level = request.form.get("difficulty_level")
         cousine_type = request.form.get("cousine_type")
+        autore = request.form.get("autore")
+        rating = request.form.get("rating")
         tags = request.form.get("tags")
         prezzo = request.form.get("prezzo")
-        autore = request.form.get("autore")
+        valuta = request.form.get("valuta")
 
         image_filename = None
         if immagine:
@@ -60,7 +63,7 @@ def create_recipe():
 
         nuova_ricetta = Ricetta(
             categoria=categoria,
-            nome=nome_ricetta,
+            nome_ricetta=nome_ricetta,
             ingredienti=ingredienti,
             kcal=kcal,
             immagine=image_filename,
@@ -68,18 +71,26 @@ def create_recipe():
             descrizione=descrizione,
             servings=servings,
             preparation_time=preparation_time,
-            coocking_time=coocking_time,
+            cooking_time=cooking_time,
             steps=steps,
             cousine_type=cousine_type,
             tags=tags,
             prezzo=prezzo,
-            autore=autore
-
+            autore=autore,
+            total_time=total_time,
+            difficulty_level=difficulty_level,
+            rating=rating,
+            valuta=valuta
         )
+
         db.session.add(nuova_ricetta)
         db.session.commit()
 
-    return render_template("dashboard/ricette/create_recipe.html")
+        return render_template("dashboard/admin_dashboard.html")
+
+    messaggio = "Aggiungi Ricetta"
+    return render_template("dashboard/ricette/create_recipe.html", messaggio=messaggio)
+
 
 @dashboard_routes.route("/read_recipe", methods=["GET"])
 def read_recipe():

@@ -55,11 +55,6 @@ def dettaglio_ricetta(categoria, nome_ricetta):
 #     ricetta = Ricetta.query.get(id)  # Ottimizzato per ID
 #     return render_template("dettaglio_ricetta.html", ricetta=ricetta)
 
-# @app.route("/dashboard", methods=["GET", "POST"])
-# @login_required
-# def dashboard():
-#     return render_template("dashboard.html")
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
