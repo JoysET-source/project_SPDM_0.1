@@ -9,7 +9,7 @@ from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.login_model import password_complexity_check
 from models.controllo_dimensione_immagini import ridimensiona_immagine
-
+from test.validazione_input import valida_categoria, get_categorie
 
 
 dashboard_routes = Blueprint("dashboard_routes", __name__)
@@ -25,6 +25,8 @@ def admin_dashboard():
 @dashboard_routes.route("/create_recipe", methods=["GET", "POST"])
 @login_required
 def create_recipe():
+    categorie_valide = get_categorie()
+
     if request.method == "POST":
         nome_ricetta = request.form.get("nome_ricetta")
         ingredienti = request.form.get("ingredienti")
@@ -45,6 +47,16 @@ def create_recipe():
         tags = request.form.get("tags")
         prezzo = request.form.get("prezzo")
         valuta = request.form.get("valuta")
+
+        if not valida_categoria(categoria):
+            errore_categoria = f"Categoria non valida. Scegli tra: {', '.join(categorie_valide)}."
+            return render_template(
+                "dashboard/ricette/create_recipe.html",
+                messaggio="Aggiungi Ricetta",
+                errore_categoria=errore_categoria,
+                categoria=categoria,  # Mantiene il valore nel campo
+                categorie=categorie_valide  # Passa le categorie al template
+            )
 
         image_filename = None
         if immagine:
@@ -86,11 +98,16 @@ def create_recipe():
         db.session.add(nuova_ricetta)
         db.session.commit()
 
-        return render_template("dashboard/admin_dashboard.html")
+        return render_template("dashboard/admin_dashboard.html", categorie=categorie_valide)
 
     messaggio = "Aggiungi Ricetta"
     return render_template("dashboard/ricette/create_recipe.html", messaggio=messaggio)
 
+
+@dashboard_routes.route("/aggiungi_categoria", methods=["GET", "POST"])
+def aggiungi_categoria():
+    messaggio = "Crea Categoria"
+    return render_template("dashboard/categorie/aggiungi_categoria.html", messaggio=messaggio)
 
 @dashboard_routes.route("/read_recipe", methods=["GET"])
 def read_recipe():

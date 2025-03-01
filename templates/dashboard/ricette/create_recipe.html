@@ -9,9 +9,30 @@
             <label>Categoria:</label>
         </div>
         <div class="col-md-6 col-sm-8">
-            <input type="text" name="categoria" required placeholder="Es. Pasta" class="form-control">
+            <input type="text" name="categoria" required placeholder="Es. Pasta" class="form-control">  
+            {% if errore_categoria %}
+            <p class="text-danger">{{ errore_categoria }}</p>
+            {% endif %}          
         </div>
-    </div>   
+    </div>      
+    
+    <div class="row">
+        <div class="col-md-3">
+            <label>Titolo:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="text" name="titolo" required placeholder="titolo ricetta" class="form-control">            
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Descrizione:</label>
+        </div>
+        <div class="col-md-9">
+            <textarea name="descrizione" required placeholder="Es. Tipo di piatto" rows="4" class="form-control"></textarea>
+        </div>
+    </div>    
     
     <div class="row">
         <div class="col-md-3">
@@ -20,16 +41,8 @@
         <div class="col-md-9">
             <input type="text" name="nome_ricetta" required placeholder="Es. Carbonara" class="form-control">
         </div>
-    </div>       
+    </div>   
     
-    <div class="row">
-        <div class="col-md-3">
-            <label>Descrizione:</label>
-        </div>
-        <div class="col-md-9">
-            <textarea name="descrizione" required placeholder="Es. Tipo di piatto" rows="4" class="form-control"></textarea>
-        </div>
-    </div>
     
     <div class="row">
         <div class="col-md-3">
@@ -38,18 +51,17 @@
         <div class="col-md-9">
             <input type="file" name="immagine" accept="image/*">
         </div>
-    </div> 
-
+    </div>    
+    
     <div class="row">
         <div class="col-md-3">
-            <label>Ingredienti:</label>
+            <label>Tipo di Cucina:</label>
         </div>
         <div class="col-md-9">
-            <textarea name="ingredienti" rows="4" class="form-control"></textarea>
+            <input type="text" name="cousine_type" required placeholder="Es.Fusion" class="form-control">            
         </div>
-    </div>
+    </div> 
     
-
     <div class="row">
         <div class="col-md-3">
             <label>Kcal:</label>
@@ -57,16 +69,7 @@
         <div class="col-md-9">
             <input type="number" name="kcal" required placeholder="Inserisci calorie" min="0" step="0.1" class="form-control">            
         </div>
-    </div> 
-
-    <div class="row">
-        <div class="col-md-3">
-            <label>Titolo:</label>
-        </div>
-        <div class="col-md-9">
-            <input type="text" name="titolo" required placeholder="titolo ricetta" class="form-control">            
-        </div>
-    </div>    
+    </div>       
 
     <div class="row">
         <div class="col-md-3">
@@ -74,6 +77,15 @@
         </div>
         <div class="col-md-9">
             <input type="number" name="servings" required placeholder="numero porzioni" min="1" class="form-control">            
+        </div>
+    </div> 
+    
+    <div class="row">
+        <div class="col-md-3">
+            <label>Difficolta:</label>
+        </div>
+        <div class="col-md-9">
+            <input type="text" name="difficulty_level" required placeholder="Es.Media" class="form-control">            
         </div>
     </div> 
 
@@ -97,6 +109,15 @@
         </div>
     </div> 
 
+    <div class="row">
+        <div class="col-md-3">
+            <label>Ingredienti:</label>
+        </div>
+        <div class="col-md-9">
+            <textarea name="ingredienti" rows="4" class="form-control"></textarea>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-md-3">
@@ -105,25 +126,7 @@
         <div class="col-md-9">
             <textarea name="steps" required placeholder="passi necessari" class="form-control"></textarea>            
         </div>
-    </div> 
-
-    <div class="row">
-        <div class="col-md-3">
-            <label>Difficolta:</label>
-        </div>
-        <div class="col-md-9">
-            <input type="text" name="difficulty_level" required placeholder="Es.Media" class="form-control">            
-        </div>
-    </div> 
-
-    <div class="row">
-        <div class="col-md-3">
-            <label>Tipo di Cucina:</label>
-        </div>
-        <div class="col-md-9">
-            <input type="text" name="cousine_type" required placeholder="Es.Fusion" class="form-control">            
-        </div>
-    </div> 
+    </div>    
 
     <div class="row">
         <div class="col-md-3">
@@ -152,22 +155,26 @@
         </div>
     </div> 
 
-    <div class="row">
-        <div class="col-md-3">
-            <label>Prezzo:</label>
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label for="prezzo" class="col-form-label">Prezzo</label>
         </div>
-        <div class="col-md-9">
+        <div class="col-auto">
+            <input type="number" name="prezzo" required placeholder="Es.80" min="0" class="form-control">
+        </div>
+        <div class="col-auto">
+          <span id="prezzo" class="form-text">
             <div class="input-group">
                 <select class="form-select" name="valuta">
                     <option value="€">€ EUR</option>
                     <option value="$">$ USD</option>
                     <option value="£">£ GBP</option>
                     <option value="¥">¥ JPY</option>
-                </select>
-                <input type="number" name="prezzo" required placeholder="Es.80" min="0" step="0.1" class="form-control">            
+                </select>                            
             </div>
+          </span>
         </div>
-    </div>    
+    </div> 
 </div>
     
     <button type="submit">Carica Ricetta</button>    

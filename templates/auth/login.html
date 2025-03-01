@@ -16,7 +16,10 @@
     <label for="password">Password</label>
     {{ form.password(class="form-control", placeholder="Password") }}
 
-    <div id="password-error" class="text-danger"></div>
+    <!-- <div id="password-error" class="text-danger"></div> -->
+    {% if form.password.errors %}
+        <p class="text-danger">{{ form.password.errors[0] }}</p>
+    {% endif %}
 
     <p>Non hai un account? <a href="{{ url_for('auth_routes.register') }}" style="color: blue;">Registrati</a></p><br><br>
     <a href="/">Torna alla pagina principale</a>
