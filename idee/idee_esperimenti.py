@@ -78,3 +78,61 @@
 # }
 # ======================================================================================================================
 # ======================================================================================================================
+# label a tendina con selection di base
+
+# <!-- <select class="form-select form-select-sm" aria-label="Small select example">
+#   <option selected>Scegli Categoria</option>
+#   <option value="1">One</option>
+#   <option value="2">Two</option>
+#   <option value="3">Three</option>
+# </select> -->
+# ======================================================================================================================
+# ======================================================================================================================
+# gestione errore diretto sotto label gestito in backend
+#
+# dentro create_recipe:
+# from test.validazione_input import valida_categoria, get_categorie
+# categorie_valide = get_categorie()
+# if not valida_categoria(categoria):
+#     errore_categoria = f"Categoria non valida. Scegli tra: {', '.join(categorie_valide)}."
+#     return render_template(
+#         "dashboard/ricette/create_recipe.html",
+#         messaggio="Aggiungi Ricetta",
+#         errore_categoria=errore_categoria,
+#         categoria=categoria,  # Mantiene il valore nel campo
+#         categorie=categorie_valide  # Passa le categorie al template
+#     )
+# il return e' dentro if di post
+# return render_template("dashboard/admin_dashboard.html", categorie=categorie_valide)
+#
+# questo nel suo  html
+# <!-- <div class="container-fluid">
+#     <div class="row">
+#         <div class="col-md-3 col-sm-4">
+#             <label>Categoria:</label>
+#         </div>
+#         <div class="col-md-6 col-sm-8">
+#             <input type="text" name="categoria" required placeholder="Es. Pasta" class="form-control">
+#             {% if errore_categoria %}
+#             <p class="text-danger">{{ errore_categoria }}</p>
+#             {% endif %}
+#         </div>
+#     </div>    -->
+#
+#  dentro il file validazione_input.py in test
+# import  os
+#
+# def get_categorie():
+#     """Legge dinamicamente le categorie dalla cartella static/ricette"""
+#     categorie_path = os.path.join("static", "ricette")
+#     if not os.path.exists(categorie_path):
+#         return []
+#     return [nome for nome in os.listdir(categorie_path) if os.path.isdir(os.path.join(categorie_path, nome))]
+#
+# def valida_categoria(categoria):
+#     """Verifica se la categoria inserita è tra quelle valide"""
+#     categorie_valide = get_categorie()  # Ora ottiene l'elenco corretto
+#     return categoria in categorie_valide
+#
+# ======================================================================================================================
+# ======================================================================================================================

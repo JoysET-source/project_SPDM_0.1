@@ -3,19 +3,20 @@
 
 <form id="ricetta-form" action="/create_recipe" method="POST" enctype="multipart/form-data">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3 col-sm-4">
-            <label>Categoria:</label>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-sm-4">
+                <select class="form-select form-select-sm"  aria-label="Small select example" required>
+                <option selected>Seleziona categoria</option>
+                {% for category in elenco_categorie %}
+                <option value="{{ category }}">{{ category }}</option>
+                {% endfor %}
+                </select>
+            </div>
         </div>
-        <div class="col-md-6 col-sm-8">
-            <input type="text" name="categoria" required placeholder="Es. Pasta" class="form-control">  
-            {% if errore_categoria %}
-            <p class="text-danger">{{ errore_categoria }}</p>
-            {% endif %}          
-        </div>
-    </div>      
-    
+    </div>  
+   
     <div class="row">
         <div class="col-md-3">
             <label>Titolo:</label>
@@ -23,7 +24,7 @@
         <div class="col-md-9">
             <input type="text" name="titolo" required placeholder="titolo ricetta" class="form-control">            
         </div>
-    </div> 
+    </div>
 
     <div class="row">
         <div class="col-md-3">
@@ -79,15 +80,19 @@
             <input type="number" name="servings" required placeholder="numero porzioni" min="1" class="form-control">            
         </div>
     </div> 
-    
+
+     
     <div class="row">
         <div class="col-md-3">
-            <label>Difficolta:</label>
+            <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                <option selected>Difficolta</option>
+                <option value="1">Bassa</option>
+                <option value="2">Media</option>
+                <option value="3">Difficile</option>
+            </select>
         </div>
-        <div class="col-md-9">
-            <input type="text" name="difficulty_level" required placeholder="Es.Media" class="form-control">            
-        </div>
-    </div> 
+    </div>
+
 
     <div class="row">
         <div class="col-md-3">
@@ -155,7 +160,7 @@
         </div>
     </div> 
 
-    <div class="row g-3 align-items-center">
+    <div class="row" style="display: flex;">
         <div class="col-auto">
           <label for="prezzo" class="col-form-label">Prezzo</label>
         </div>

@@ -9,7 +9,7 @@ from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.login_model import password_complexity_check
 from models.controllo_dimensione_immagini import ridimensiona_immagine
-from test.validazione_input import valida_categoria, get_categorie
+
 
 
 dashboard_routes = Blueprint("dashboard_routes", __name__)
@@ -25,8 +25,12 @@ def admin_dashboard():
 @dashboard_routes.route("/create_recipe", methods=["GET", "POST"])
 @login_required
 def create_recipe():
-    categorie_valide = get_categorie()
+    # collegamento OS per iterazione sulle cartelle categorie
+    cartella_base = "static/ricette/"
+    elenco_categorie = [cartella_categoria for cartella_categoria in os.listdir(cartella_base)
+                 if os.path.isdir(os.path.join(cartella_base, cartella_categoria))]
 
+    # acquisisce i dati POST-ATI su html
     if request.method == "POST":
         nome_ricetta = request.form.get("nome_ricetta")
         ingredienti = request.form.get("ingredienti")
@@ -48,16 +52,7 @@ def create_recipe():
         prezzo = request.form.get("prezzo")
         valuta = request.form.get("valuta")
 
-        if not valida_categoria(categoria):
-            errore_categoria = f"Categoria non valida. Scegli tra: {', '.join(categorie_valide)}."
-            return render_template(
-                "dashboard/ricette/create_recipe.html",
-                messaggio="Aggiungi Ricetta",
-                errore_categoria=errore_categoria,
-                categoria=categoria,  # Mantiene il valore nel campo
-                categorie=categorie_valide  # Passa le categorie al template
-            )
-
+        # gestisce stoccaggio immagini caricate su html
         image_filename = None
         if immagine:
             categoria_path = os.path.join("static/ricette", categoria)
@@ -73,6 +68,7 @@ def create_recipe():
             # Salva solo il percorso dell immagine nel database
             image_filename = f"static/ricette/{categoria}/{image_filename}"
 
+        # crea la ricetta inserita e salva nel DB
         nuova_ricetta = Ricetta(
             categoria=categoria,
             nome_ricetta=nome_ricetta,
@@ -98,10 +94,10 @@ def create_recipe():
         db.session.add(nuova_ricetta)
         db.session.commit()
 
-        return render_template("dashboard/admin_dashboard.html", categorie=categorie_valide)
+        return render_template("dashboard/admin_dashboard.html")
 
     messaggio = "Aggiungi Ricetta"
-    return render_template("dashboard/ricette/create_recipe.html", messaggio=messaggio)
+    return render_template("dashboard/ricette/create_recipe.html", messaggio=messaggio, elenco_categorie=elenco_categorie)
 
 
 @dashboard_routes.route("/aggiungi_categoria", methods=["GET", "POST"])

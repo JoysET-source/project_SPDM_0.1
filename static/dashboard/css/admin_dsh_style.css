@@ -57,10 +57,14 @@ main {
     font-size: 20px;
     margin-right: 5px;
 }
-.row {
+/* .row {
     display: flex;
-    align-items: center; /* Allinea label e input nella stessa linea */
-}
-input, textarea {
+    align-items: center;  Allinea label e input nella stessa linea 
+}  */
+
+textarea {
     width: 100%;
+}
+input {
+    width: auto;
 }
