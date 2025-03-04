@@ -1,7 +1,10 @@
-body {
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;   
+    padding: 0; 
 }
 header {
     display: flex;
@@ -68,7 +71,7 @@ input {
     margin-bottom: 35px;
 }
 button {
-    position: fixed;
+    position: relaftive;
     bottom: 20px;
     right: 20px;
     background-color: #ff6600;
@@ -77,8 +80,30 @@ button {
     text-decoration: none;
     font-size: 16px;
     border-radius: 5px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);   
+    width: 100%;
+    text-align: center;    
 }
 button:hover {
     background-color: #cc5500;
+}
+.container-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Evita overflow */
+    padding-bottom: 80px; /* Distanza dal footer */
+}
+
+main {
+    flex: 1;
+    max-width: 1200px; /* Imposta una larghezza massima */
+    margin: auto;
+    padding: 20px;
+}
+
+footer {
+    width: 100%;
+    position: relative; /* Evita che copra il contenuto */
+    text-align: center;
 }

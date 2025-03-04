@@ -10,9 +10,11 @@
 </head>
 <body>
     {% include "dashboard/header.html" %}
-    <main>                
-        {% block content %}{% endblock %}
-    </main>
+    <div class="container-main">
+        <main>                
+            {% block content %}{% endblock %}
+        </main>
+    </div>
     {% include "dashboard/footer.html" %}        
 </body>
 </html>
