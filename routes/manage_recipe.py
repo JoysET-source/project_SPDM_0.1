@@ -100,6 +100,7 @@ def create_recipe():
     return render_template("dashboard/ricette/create_recipe.html", messaggio=messaggio, elenco_categorie=elenco_categorie)
 
 
+
 @dashboard_routes.route("/aggiungi_categoria", methods=["GET", "POST"])
 def aggiungi_categoria():
     messaggio = "Crea Categoria"
