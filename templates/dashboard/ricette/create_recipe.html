@@ -3,9 +3,9 @@
 
 <form id="ricetta-form" action="/create_recipe" method="POST" enctype="multipart/form-data">   
      
-        <div class="row g-3 mb-4" style="display: flex; gap: 30px;">
+        <div class="row g-3 mb-4" style="display: flex;">
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label for="categoria" class="form-label mb-2">Categoria</label>
                 <select class="form-select form-select-sm" required>
                 <option selected>Seleziona categoria</option>
@@ -15,27 +15,32 @@
                 </select>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label for="titolo" class="form-label mb-2">Titolo</label>
                 <input type="text" name="titolo" required placeholder="titolo ricetta" class="form-control">
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label for="nome_ricetta" class="form-label mb-2">Nome Ricetta</label>
                 <input type="text" name="nome_ricetta" required placeholder="Es. Carbonara" class="form-control">
             </div>
             
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <label for="immagine" class="form-label mb-2">Immagine</label>
                 <input type="file" name="immagine" accept="image/*" class="form-control">
             </div>
 
-            <div class="col-md-3">
-                <label for="cousine_type" class="form-label mb-2">Tipo di cucina</label>           
-                <input type="text" name="cousine_type" required placeholder="Es.Fusion" class="form-control">            
+            <div class="col-md-2">
+                <label for="difficulty_level" class="form-label mb-2">Difficolta</label>
+                <select class="form-select form-select-lg mb-2" aria-label="Large select example">
+                    <option selected>Difficolta</option>
+                    <option value="1">Bassa</option>
+                    <option value="2">Media</option>
+                    <option value="3">Difficile</option>
+                </select>
             </div>
               
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label for="autore" class="form-label mb-2">Autore</label>           
                 <input type="text" name="autore" required placeholder="Es.Chef Ramsey" class="form-control">            
             </div>                
@@ -43,7 +48,7 @@
         </div>
 
 
-    <div class="row g-3 mb-4">
+    <div class="row">
         <div class="col-md-3">
             <label class="form-label mb-2">Descrizione</label>
         </div>
@@ -52,7 +57,7 @@
         </div>
     </div>  
 
-    <div class="row mb-4">
+    <div class="row">
         <div class="col-md-3">
             <label class="form-label mb-2">Ingredienti</label>
         </div>
@@ -72,26 +77,22 @@
     </div>  
 
     
-    <div class="row g-3 mb-4" style="display: flex; gap: 30px;">      
+    <div class="row mb-4" style="display: flex;">      
     
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label mb-2">Kcal</label>        
             <input type="number" name="kcal" required placeholder="Inserisci calorie" min="0" step="0.1" class="form-control">            
         </div>
     
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label mb-2">Servings</label>        
             <input type="number" name="servings" required placeholder="numero porzioni" min="1" class="form-control">            
-        </div>       
-   
+        </div> 
+        
         <div class="col-md-3">
-            <select class="form-select form-select-lg mb-2" aria-label="Large select example">
-                <option selected>Difficolta</option>
-                <option value="1">Bassa</option>
-                <option value="2">Media</option>
-                <option value="3">Difficile</option>
-            </select>
-        </div>   
+            <label for="cousine_type" class="form-label mb-2">Tipo di cucina</label>           
+            <input type="text" name="cousine_type" required placeholder="Es.Fusion" class="form-control">            
+        </div>          
     
         <div class="col-md-3">
             <label class="form-label mb-2">Preparation_time</label>        
@@ -109,7 +110,7 @@
 
 
 
-    <div class="row g-3 mb-4" style="display: flex;">   
+    <div class="row mb-4" style="display: flex;">   
     
         <div class="col-md-3">
             <label class="form-label mb-2">Rating</label>       
@@ -139,7 +140,7 @@
             </span>
         </div>      
     </div>
-    
+
     <button type="submit">Carica Ricetta</button>   
         
 </form>

@@ -42,7 +42,6 @@ def create_recipe():
         servings = request.form.get("servings")
         preparation_time = request.form.get("preparation_time")
         cooking_time = request.form.get("cooking_time")
-        total_time = request.form.get("total_time")
         steps = request.form.get("steps")
         difficulty_level = request.form.get("difficulty_level")
         cousine_type = request.form.get("cousine_type")
@@ -85,7 +84,6 @@ def create_recipe():
             tags=tags,
             prezzo=prezzo,
             autore=autore,
-            total_time=total_time,
             difficulty_level=difficulty_level,
             rating=rating,
             valuta=valuta
