@@ -7,7 +7,7 @@
 
             <div class="col-md-2">
                 <label for="categoria" class="form-label mb-2">Categoria</label>
-                <select class="form-select form-select-sm" required>
+                <select class="form-select form-select-sm" name="categoria" required>
                 <option selected>Seleziona categoria</option>
                 {% for category in elenco_categorie %}
                 <option value="{{ category }}">{{ category }}</option>
@@ -32,7 +32,7 @@
 
             <div class="col-md-2">
                 <label for="difficulty_level" class="form-label mb-2">Difficolta</label>
-                <select class="form-select form-select-lg mb-2" aria-label="Large select example">
+                <select class="form-select form-select-lg mb-2" name="difficulty_level" aria-label="Large select example">
                     <option selected>Difficolta</option>
                     <option value="1">Bassa</option>
                     <option value="2">Media</option>
