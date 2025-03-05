@@ -9,8 +9,7 @@ from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.login_model import password_complexity_check
 from models.controllo_dimensione_immagini import ridimensiona_immagine
-
-
+from test.format_time_converter import total_time
 
 dashboard_routes = Blueprint("dashboard_routes", __name__)
 
@@ -67,6 +66,9 @@ def create_recipe():
             # Salva solo il percorso dell immagine nel database
             image_filename = f"static/ricette/{categoria}/{image_filename}"
 
+        # calcoliamo il valore total_time prima dell inserimento nel DB
+        total_time = preparation_time + cooking_time
+
         # crea la ricetta inserita e salva nel DB
         nuova_ricetta = Ricetta(
             categoria=categoria,
@@ -86,7 +88,8 @@ def create_recipe():
             autore=autore,
             difficulty_level=difficulty_level,
             rating=rating,
-            valuta=valuta
+            valuta=valuta,
+            total_time=total_time
         )
 
         db.session.add(nuova_ricetta)
@@ -95,7 +98,8 @@ def create_recipe():
         return render_template("dashboard/admin_dashboard.html")
 
     messaggio = "Aggiungi Ricetta"
-    return render_template("dashboard/ricette/create_recipe.html", messaggio=messaggio, elenco_categorie=elenco_categorie)
+    return render_template("dashboard/ricette/create_recipe.html",
+                           messaggio=messaggio, elenco_categorie=elenco_categorie)
 
 
 
