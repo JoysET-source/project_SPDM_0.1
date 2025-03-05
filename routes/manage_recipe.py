@@ -9,7 +9,7 @@ from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.login_model import password_complexity_check
 from models.controllo_dimensione_immagini import ridimensiona_immagine
-from test.format_time_converter import total_time
+
 
 dashboard_routes = Blueprint("dashboard_routes", __name__)
 
@@ -49,6 +49,15 @@ def create_recipe():
         tags = request.form.get("tags")
         prezzo = request.form.get("prezzo")
         valuta = request.form.get("valuta")
+
+        if categoria is None or categoria == "Seleziona categoria":
+            messaggio = "Inserisci una categoria"
+            return render_template("create_recipe.html",
+                                   messaggio=messaggio, elenco_categorie=elenco_categorie)
+
+        if difficulty_level is None or difficulty_level == "Difficolta":
+            messaggio = "Inserisci un valore per difficolta"
+            return render_template("create_recipe.html", messaggio=messaggio)
 
         # gestisce stoccaggio immagini caricate su html
         image_filename = None
@@ -95,7 +104,8 @@ def create_recipe():
         db.session.add(nuova_ricetta)
         db.session.commit()
 
-        return render_template("dashboard/admin_dashboard.html")
+        messaggio = "Benvenuto Amministratore SPDM"
+        return render_template("dashboard/admin_dashboard.html", messaggio=messaggio)
 
     messaggio = "Aggiungi Ricetta"
     return render_template("dashboard/ricette/create_recipe.html",

@@ -13,6 +13,9 @@
                 <option value="{{ category }}">{{ category }}</option>
                 {% endfor %}
                 </select>
+                {% if messaggio %}
+                    <div class="text-danger mt-2">{{ messaggio }}</div>
+                {% endif %}
             </div>
             
             <div class="col-md-2">
@@ -38,6 +41,9 @@
                     <option value="2">Media</option>
                     <option value="3">Difficile</option>
                 </select>
+                {% if messaggio %}
+                    <div class="text-danger mt2">{{ messaggio }}</div>
+                {% endif %}
             </div>
               
             <div class="col-md-2">
@@ -53,7 +59,7 @@
             <label class="form-label mb-2">Descrizione</label>
         </div>
         <div class="col-md-9">
-            <textarea name="descrizione" required placeholder="Es. Tipo di piatto" rows="4" class="form-control"></textarea>
+            <textarea name="descrizione" rows="4" class="form-control"></textarea>
         </div>
     </div>  
 
