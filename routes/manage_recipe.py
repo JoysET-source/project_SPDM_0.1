@@ -51,13 +51,53 @@ def create_recipe():
         valuta = request.form.get("valuta")
 
         if categoria is None or categoria == "Seleziona categoria":
-            messaggio = "Inserisci una categoria"
-            return render_template("create_recipe.html",
-                                   messaggio=messaggio, elenco_categorie=elenco_categorie)
+            errore = "Inserisci una categoria"
+            return render_template("dashboard/ricette/create_recipe.html",
+                                   errore=errore,
+                                   elenco_categorie=elenco_categorie,
+                                   nome_ricetta=request.form.get("nome_ricetta"),
+                                   ingredienti=request.form.get("ingredienti"),
+                                   kcal=request.form.get("kcal"),
+                                   immagine=request.files.get("immagine"),
+                                   categoria=request.form.get("categoria"),
+                                   titolo=request.form.get("titolo"),
+                                   descrizione=request.form.get("descrizione"),
+                                   servings=request.form.get("servings"),
+                                   preparation_time=request.form.get("preparation_time"),
+                                   cooking_time=request.form.get("cooking_time"),
+                                   steps=request.form.get("steps"),
+                                   difficulty_level=request.form.get("difficulty_level"),
+                                   cousine_type=request.form.get("cousine_type"),
+                                   autore=request.form.get("autore"),
+                                   rating=request.form.get("rating"),
+                                   tags=request.form.get("tags"),
+                                   prezzo=request.form.get("prezzo"),
+                                   valuta=request.form.get("valuta"),
+                                   )
 
         if difficulty_level is None or difficulty_level == "Difficolta":
-            messaggio = "Inserisci un valore per difficolta"
-            return render_template("create_recipe.html", messaggio=messaggio)
+            alert = "Inserisci un valore"
+            return render_template("dashboard/ricette/create_recipe.html",
+                                   alert=alert,
+                                   nome_ricetta=request.form.get("nome_ricetta"),
+                                   ingredienti=request.form.get("ingredienti"),
+                                   kcal=request.form.get("kcal"),
+                                   immagine=request.files.get("immagine"),
+                                   categoria=request.form.get("categoria"),
+                                   titolo=request.form.get("titolo"),
+                                   descrizione=request.form.get("descrizione"),
+                                   servings=request.form.get("servings"),
+                                   preparation_time=request.form.get("preparation_time"),
+                                   cooking_time=request.form.get("cooking_time"),
+                                   steps=request.form.get("steps"),
+                                   difficulty_level=request.form.get("difficulty_level"),
+                                   cousine_type=request.form.get("cousine_type"),
+                                   autore=request.form.get("autore"),
+                                   rating=request.form.get("rating"),
+                                   tags=request.form.get("tags"),
+                                   prezzo=request.form.get("prezzo"),
+                                   valuta=request.form.get("valuta"),
+                                   )
 
         # gestisce stoccaggio immagini caricate su html
         image_filename = None

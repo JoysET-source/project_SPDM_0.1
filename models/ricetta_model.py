@@ -19,7 +19,7 @@ class Ricetta(db.Model):
     cooking_time = db.Column(db.Integer, nullable=True)
     total_time = db.Column(db.Integer, nullable=True)
     steps = db.Column(db.String, nullable=True)
-    difficulty_level = db.Column(db.String, nullable=True)
+    difficulty_level = db.Column(db.String, nullable=False)
     cousine_type = db.Column(db.String, nullable=True)
     autore = db.Column(db.String, nullable=True)
     rating = db.Column(db.Integer, nullable=True)
