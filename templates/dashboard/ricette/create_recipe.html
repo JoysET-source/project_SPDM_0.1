@@ -40,15 +40,12 @@
             <div class="col-md-2">
                 <label for="difficulty_level" class="form-label mb-2">Difficolta</label>
                 <select class="form-select form-select-lg mb-2" name="difficulty_level" aria-label="Large select example"
-                value="{{ difficulty_level or '' }}" required>
+                    value="{{ difficulty_level or '' }}" required>
                     <option value="" {% if not difficulty_level %}selected{% endif %}>Difficolta</option>
-                    <option value="1" {% if difficulty_level == '1' %}selected{% endif %}>Bassa</option>
-                    <option value="2" {% if difficulty_level == '2' %}selected{% endif %}>Media</option>
-                    <option value="3" {% if difficulty_level == '3' %}selected{% endif %}>Difficile</option>
-                </select>                
-                {% if alert %}
-                    <div class="text-danger mt2">{{ alert }}</div>
-                {% endif %}
+                    <option value="Bassa" {% if difficulty_level == 'Bassa' %}selected{% endif %}>Bassa</option>
+                    <option value="Media" {% if difficulty_level == 'Media' %}selected{% endif %}>Media</option>
+                    <option value="Difficile" {% if difficulty_level == 'Difficile' %}selected{% endif %}>Difficile</option>
+                </select>                   
             </div>
               
             <div class="col-md-2">
@@ -65,7 +62,7 @@
             <label class="form-label mb-2">Descrizione</label>
         </div>
         <div class="col-md-9">
-            <textarea name="descrizione" rows="2" class="form-control"></textarea>
+            <textarea name="descrizione" rows="6" class="form-control"></textarea>
         </div>
     </div>  
 
@@ -74,7 +71,7 @@
             <label class="form-label mb-2">Ingredienti</label>
         </div>
         <div class="col-md-9">
-            <textarea name="ingredienti" rows="2" class="form-control"></textarea>
+            <textarea name="ingredienti" rows="6" class="form-control"></textarea>
         </div>
     </div>
 
@@ -84,7 +81,7 @@
             <label class="form-label mb-2">Steps</label>
         </div>
         <div class="col-md-9">
-            <textarea name="steps"  rows="2" class="form-control"></textarea>            
+            <textarea name="steps"  rows="6" class="form-control"></textarea>            
         </div>
     </div>  
 
@@ -111,14 +108,14 @@
     
         <div class="col-md-3">
             <label class="form-label mb-2">Preparation_time</label>        
-            <input type="number" name="preparation_time" required placeholder="tempo di preparazione(minuti)"
+            <input type="number" name="preparation_time" required placeholder="Preparazione(minuti)"
              min="0" class="form-control"
              value="{{ preparation_time or '' }}" required>            
         </div>
    
         <div class="col-md-3">
             <label class="form-label mb-2">Cooking_time</label>        
-            <input type="number" name="cooking_time" required placeholder="tempo di cottura(minuti)" min="0"
+            <input type="number" name="cooking_time" required placeholder="Cottura(minuti)" min="0"
             class="form-control" value="{{ cooking_time or '' }}" required>            
         </div>
 

@@ -17,8 +17,7 @@ dashboard_routes = Blueprint("dashboard_routes", __name__)
 @dashboard_routes.route("/admin_dashboard")
 @login_required
 def admin_dashboard():
-    messaggio =  "Benvenuto Amministratore SPDM"
-    return render_template("dashboard/admin_dashboard.html", messaggio=messaggio)
+    return render_template("dashboard/admin_dashboard.html", messaggio="Benvenuto Amministratore SPDM")
 
 
 @dashboard_routes.route("/create_recipe", methods=["GET", "POST"])
@@ -75,29 +74,6 @@ def create_recipe():
                                    valuta=request.form.get("valuta"),
                                    )
 
-        if difficulty_level is None or difficulty_level == "Difficolta":
-            alert = "Inserisci un valore"
-            return render_template("dashboard/ricette/create_recipe.html",
-                                   alert=alert,
-                                   nome_ricetta=request.form.get("nome_ricetta"),
-                                   ingredienti=request.form.get("ingredienti"),
-                                   kcal=request.form.get("kcal"),
-                                   immagine=request.files.get("immagine"),
-                                   categoria=request.form.get("categoria"),
-                                   titolo=request.form.get("titolo"),
-                                   descrizione=request.form.get("descrizione"),
-                                   servings=request.form.get("servings"),
-                                   preparation_time=request.form.get("preparation_time"),
-                                   cooking_time=request.form.get("cooking_time"),
-                                   steps=request.form.get("steps"),
-                                   difficulty_level=request.form.get("difficulty_level"),
-                                   cousine_type=request.form.get("cousine_type"),
-                                   autore=request.form.get("autore"),
-                                   rating=request.form.get("rating"),
-                                   tags=request.form.get("tags"),
-                                   prezzo=request.form.get("prezzo"),
-                                   valuta=request.form.get("valuta"),
-                                   )
 
         # gestisce stoccaggio immagini caricate su html
         image_filename = None
@@ -144,19 +120,41 @@ def create_recipe():
         db.session.add(nuova_ricetta)
         db.session.commit()
 
-        messaggio = "Benvenuto Amministratore SPDM"
-        return render_template("dashboard/admin_dashboard.html", messaggio=messaggio)
 
-    messaggio = "Aggiungi Ricetta"
+        return render_template("dashboard/admin_dashboard.html",
+                               messaggio="Benvenuto Amministratore SPDM"
+                               )
+
+
     return render_template("dashboard/ricette/create_recipe.html",
-                           messaggio=messaggio, elenco_categorie=elenco_categorie)
-
+                           messaggio="Aggiungi Ricetta",
+                           elenco_categorie=elenco_categorie
+                           )
 
 
 @dashboard_routes.route("/aggiungi_categoria", methods=["GET", "POST"])
 def aggiungi_categoria():
-    messaggio = "Crea Categoria"
-    return render_template("dashboard/categorie/aggiungi_categoria.html", messaggio=messaggio)
+    cartella_base = "static/ricette/"
+    alert = None
+    errore = None
+
+    if request.method == "POST":
+        nome_categoria = request.form.get("nome_categoria","").strip()
+        new_categoria = os.path.join(cartella_base, nome_categoria)
+
+        if not os.path.exists(new_categoria):
+            os.makedirs(new_categoria)
+            alert = "Categoria Aggiunta"
+        else:
+            errore = "Categoria esistente"
+
+    return render_template("dashboard/categorie/aggiungi_categoria.html",
+                           messaggio="Crea Categoria",
+                           alert=alert,
+                           errore=errore
+                           )
+
+
 
 @dashboard_routes.route("/read_recipe", methods=["GET"])
 def read_recipe():
