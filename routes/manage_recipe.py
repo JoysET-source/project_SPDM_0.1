@@ -49,6 +49,7 @@ def create_recipe():
         prezzo = request.form.get("prezzo")
         valuta = request.form.get("valuta")
 
+        # questo serve a rimandare il template gia compilato se abbiamo dimenticato il campo categoria
         if categoria is None or categoria == "Seleziona categoria":
             errore = "Inserisci una categoria"
             return render_template("dashboard/ricette/create_recipe.html",
@@ -81,7 +82,8 @@ def create_recipe():
             categoria_path = os.path.join("static/ricette", categoria)
             os.makedirs(categoria_path, exist_ok=True)
 
-            image_filename = f"{nome_ricetta}.jpg"
+            estensione = os.path.splitext(immagine.filename)[1]
+            image_filename = f"{nome_ricetta}{estensione}"
             image_path = os.path.join(categoria_path, image_filename)
             immagine.save(image_path)
 
@@ -92,7 +94,7 @@ def create_recipe():
             image_filename = f"static/ricette/{categoria}/{image_filename}"
 
         # calcoliamo il valore total_time prima dell inserimento nel DB
-        total_time = preparation_time + cooking_time
+        total_time = int(preparation_time or 0) + int(cooking_time or 0)
 
         # crea la ricetta inserita e salva nel DB
         nuova_ricetta = Ricetta(
@@ -117,18 +119,29 @@ def create_recipe():
             total_time=total_time
         )
 
-        db.session.add(nuova_ricetta)
-        db.session.commit()
+        try:
+            db.session.add(nuova_ricetta)
+            db.session.commit()
+            errore = None
+        except Exception as error:
+            db.session.rollback()
+            success = None
+            return render_template("dashboard/ricette/create_recipe.html",
+                                   messaggio="Aggiungi Ricetta",
+                                   elenco_categorie=elenco_categorie,
+                                   errore=f"Salvataggio non riuscito, {error}",
+                                   success=success
+                                   )
 
-
-        return render_template("dashboard/admin_dashboard.html",
-                               messaggio="Benvenuto Amministratore SPDM"
+        return render_template("dashboard/ricette/create_recipe.html",
+                               messaggio="Aggiungi Ricetta",
+                               success="Ricetta aggiunta al DB",
+                               errore=errore
                                )
-
 
     return render_template("dashboard/ricette/create_recipe.html",
                            messaggio="Aggiungi Ricetta",
-                           elenco_categorie=elenco_categorie
+                           elenco_categorie=elenco_categorie,
                            )
 
 
