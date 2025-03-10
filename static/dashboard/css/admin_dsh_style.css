@@ -71,16 +71,14 @@ input {
 .row {
     margin-bottom: 35px;
 }
-button {
-    position: relaftive;
+button {    
     bottom: 20px;
     right: 20px;
     background-color: #ff6600;
     color: white;
     padding: 10px 15px;
     text-decoration: none;
-    font-size: 16px;
-    border-radius: 5px;
+    font-size: 16px;    
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);   
     width: 100%;
     text-align: center;    
@@ -94,6 +92,7 @@ button:hover {
     flex-direction: column;
     overflow-y: auto; /* Evita overflow */
     padding-bottom: 80px; /* Distanza dal footer */
+    background-color: lightblue;
 }
 
 main {
