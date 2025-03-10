@@ -25,9 +25,10 @@ class Ricetta(db.Model):
     rating = db.Column(db.Integer, nullable=True)
     tags = db.Column(db.String, nullable=True)
     prezzo = db.Column(db.Integer, nullable=True)
+    valuta = db.Column(db.String, nullable=True)
     created_at = db.Column(db.DateTime, nullable=True, default=func.now()) # Assegna la data automatica alla creazione
     updated_at = db.Column(db.DateTime, nullable=True, default=func.now(), onupdate=func.now()) # Aggiorna ogni volta che viene modificato
-    valuta = db.Column(db.String, nullable=True)
+
 
 
 
