@@ -9,7 +9,7 @@ from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.login_model import password_complexity_check
 from models.controllo_dimensione_immagini import ridimensiona_immagine
-
+from routes.ricette import elenco_ricette
 
 dashboard_routes = Blueprint("dashboard_routes", __name__)
 
@@ -169,9 +169,22 @@ def aggiungi_categoria():
 
 
 
-@dashboard_routes.route("/read_recipe", methods=["GET"])
-def read_recipe():
-    return render_template("dashboard/ricette/read_recipe.html")
+@dashboard_routes.route("/read_recipes", methods=["GET"])
+def read_recipes():
+    # Ottieni tutte le ricette dal database
+    lista_ricette = Ricetta.query.all()
+    # Crea una lista di dizionari per ogni ricetta
+    elenco_ricette = []
+    for ricetta in lista_ricette:
+        elenco_ricette.append({
+            "nome_ricetta": ricetta.nome_ricetta,
+            "ingredienti": ricetta.ingredienti,
+            "total_time": ricetta.total_time,
+            "categoria": ricetta.categoria,
+            "prezzo": ricetta.prezzo
+        })
+    # Passa la lista di ricette al template
+    return render_template("dashboard/ricette/read_recipes.html", elenco_ricette=elenco_ricette)
 
 @dashboard_routes.route("/update_recipe", methods=["GET","POST"])
 def update_recipe():
