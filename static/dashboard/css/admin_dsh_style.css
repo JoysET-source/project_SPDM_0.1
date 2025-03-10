@@ -34,7 +34,7 @@ footer{
 nav {
     position: absolute;   
     left: 0;
-    top: 110px;    
+    top: 80px;    
     background-color: white;
     border: 1px solid #ccc;
     display: none; /* menu nascosto di default */
