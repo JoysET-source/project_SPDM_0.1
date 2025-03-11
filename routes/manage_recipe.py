@@ -177,6 +177,7 @@ def read_recipes():
     elenco_ricette = []
     for ricetta in lista_ricette:
         elenco_ricette.append({
+            "id": ricetta.id,
             "nome_ricetta": ricetta.nome_ricetta,
             "ingredienti": ricetta.ingredienti,
             "total_time": ricetta.total_time,
@@ -184,7 +185,10 @@ def read_recipes():
             "prezzo": ricetta.prezzo
         })
     # Passa la lista di ricette al template
-    return render_template("dashboard/ricette/read_recipes.html", elenco_ricette=elenco_ricette)
+    return render_template("dashboard/ricette/read_recipes.html",
+                           elenco_ricette=elenco_ricette,
+                           messaggio="Lista Data Base Ricette"
+                           )
 
 @dashboard_routes.route("/update_recipe", methods=["GET","POST"])
 def update_recipe():
