@@ -161,12 +161,11 @@ def aggiungi_categoria():
         else:
             errore = "Categoria esistente"
 
-    return render_template("dashboard/categorie/aggiungi_categoria.html",
-                           messaggio="Crea Categoria",
+    return render_template("dashboard/ricette/list_recipes.html",
+                           messaggio="Lista Data Base Ricette",
                            alert=alert,
                            errore=errore
                            )
-
 
 
 @dashboard_routes.route("/list_recipes", methods=["GET"])

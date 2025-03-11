@@ -22,6 +22,7 @@
                 .catch(error => console.error('Errore:', error)); // Gestione degli errori
         };
 
+
         document.getElementById("search-button").onclick = function(){ //quando premi il pulsante fai function
             const cercaRicetta = document.getElementById("search-input").value; //prendi il valore dell`input
             if (!cercaRicetta){
@@ -46,7 +47,19 @@
                 document.getElementById("search-input").value = ""; //refresh alla barra di ricerca
         };
 
-        document.getElementById("elimina-button").onclick = function(){
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("elimina-button").onclick = function(){
+                const nomeRicetta = this.getAttribute("data-nome_ricetta");
+                fetch("/elimina_ricetta?nome_ricetta" + nomeRicetta)
+                .then(() => location.reload()) // Ricarica la pagina subito dopo l'eliminazione
+                .catch(error => console.error("Errore nella richiesta:", error));
+            }
+        });
+        
+        
+
+        document.getElementById("creaCategoria").onclick = function(){
             const eliminaRicetta = document.getElementById("search-input").value;
             fetch("/elimina_ricetta?nome_ricetta=" + eliminaRicetta)
                 .then(response => response.json())

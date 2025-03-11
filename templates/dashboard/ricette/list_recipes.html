@@ -2,10 +2,9 @@
 {% block content %}
 
 <form id="categoria-form" action="/aggiungi_categoria" method="POST">
-  <div class="row">
-      <div class="col-2">                 
-        <input type="text" class="form-control" placeholder="categoria" name="nome_categoria" required>                       
-             
+  <div class="row g-2">
+      <div class="col-auto">                 
+        <input type="text" class="form-control" placeholder="+ nuova categoria" name="nome_categoria" required>              
       
         {% if alert %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -20,9 +19,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endif %}
-
-        <button type="submit">Crea Nuova Categoria</button>
+        
       </div> 
+      <div class="col-auto">
+        <button id="creaCategoria" class="btn btn-primary mb-3" type="submit">Crea</button>
+      </div>
   </div>
 </form> 
 
@@ -36,28 +37,36 @@
         <th scope="col">nome_ricetta</th>
         <th scope="col">ingredienti</th>
         <th scope="col">total_time</th>
-        <th scope="col">prezzo</th>        
+        <th scope="col">prezzo</th>
+        <th scope="col">elimina</th>     
       </tr>
     </thead>
     <tbody class="table-group-divider">
         {% for ricetta in elenco_ricette %}
-        <tr>
-            
-            <th scope="row"><a class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe') }}" 
+        <tr>            
+            <td scope="row"><a class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe') }}" 
               role="button"><i class="bi bi-search"></i></a>                
-            </th>
-            <th scope="row"><a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe') }}" 
+            </td>
+            <td scope="row"><a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe') }}" 
                 role="button">Vai</a>
-            </th>           
-            <th scope="row">{{ ricetta['id'] }}</th>
+            </td>           
+            <td>{{ ricetta['id'] }}</td>
             <td>{{ ricetta['categoria'] }}</td>
             <td>{{ ricetta['nome_ricetta'] }}</td>
             <td>{{ ricetta['ingredienti'] }}</td>
             <td>{{ ricetta['total_time'] }}</td>
-            <td>{{ ricetta['prezzo'] }}</td>            
+            <td>{{ ricetta['prezzo'] }}</td>
+            <td>
+              <!-- crea il pulsante elimina e gli associa il nome ricetta -->
+              <button id="elimina-button" class="btn btn-danger" data-nome_ricetta="{{ ricetta['nome_ricetta'] }}">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
         </tr>
-        {% endfor %}     
+        {% endfor %}             
     </tbody>
   </table>
+
+  <script type="text/javascript" src="static/js/struttura_script.js"></script>
  
 {% endblock %}
