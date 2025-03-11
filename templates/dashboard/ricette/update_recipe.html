@@ -1,6 +1,172 @@
 {% extends "dashboard/admin_dashboard.html" %}
 {% block content %}
 
-<p>aggiorna la ricetta orsetto</p>
+    {% if success %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ success }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% elif errore %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ errore }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>    
+    {% endif %}
+
+<form id="ricetta-form" action="/update_recipe" method="POST" enctype="multipart/form-data">   
+     
+        <div class="row g-3 mb-4">
+
+            <div class="col-md-2">
+                <label for="categoria" class="form-label mb-2">Categoria</label>
+                <select class="form-select form-select" name="categoria" required>
+                <option selected>Seleziona categoria</option>
+                {% for category in elenco_categorie %}
+                    <option value="{{ category }}" 
+                        {% if category == categoria %}selected{% endif %}>{{ category }}
+                    </option>
+                {% endfor %}    
+                </select>
+                {% if errore %}
+                    <div class="text-danger mt-4">{{ errore }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="col-md-2">
+                <label for="titolo" class="form-label mb-2">Titolo</label>
+                <input type="text" name="titolo" required placeholder="titolo ricetta" class="form-control"
+                value="{{ titolo or '' }}" required>
+            </div>
+            
+            <div class="col-md-2">
+                <label for="nome_ricetta" class="form-label mb-2">Nome Ricetta</label>
+                <input type="text" name="nome_ricetta" required placeholder="Es. Carbonara" class="form-control" 
+                value="{{ nome_ricetta or '' }}" required>
+            </div>
+            
+            <div class="col-md-2">
+                <label for="immagine" class="form-label mb-2">Immagine</label>
+                <input type="file" name="immagine" accept="image/*" class="form-control">
+            </div>
+
+            <div class="col-md-2">
+                <label for="difficulty_level" class="form-label mb-2">Difficolta</label>
+                <select class="form-select form-select mb-2" name="difficulty_level" 
+                    value="{{ difficulty_level or '' }}" required>
+                    <option value="" {% if not difficulty_level %}selected{% endif %}>Difficolta</option>
+                    <option value="Bassa" {% if difficulty_level == 'Bassa' %}selected{% endif %}>Bassa</option>
+                    <option value="Media" {% if difficulty_level == 'Media' %}selected{% endif %}>Media</option>
+                    <option value="Difficile" {% if difficulty_level == 'Difficile' %}selected{% endif %}>Difficile</option>
+                </select>                   
+            </div>
+              
+            <div class="col-md-2">
+                <label for="autore" class="form-label mb-2">Autore</label>           
+                <input type="text" name="autore" required placeholder="Es.Chef Ramsey" class="form-control"
+                value="{{ autore or '' }}" required>            
+            </div>                
+             
+        </div>
+
+
+    <div class="row">
+        <div class="col">
+            <label class="form-label mb-2">Descrizione</label>        
+            <textarea name="descrizione" rows="6" class="form-control"></textarea>
+        </div>
+    </div>  
+
+    <div class="row">
+        <div class="col">
+            <label class="form-label mb-2">Ingredienti</label>       
+            <textarea name="ingredienti" rows="6" class="form-control"></textarea>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <label class="form-label mb-2">Steps</label>       
+            <textarea name="steps"  rows="6" class="form-control"></textarea>            
+        </div>
+    </div>  
+
+    
+    <div class="row mb-4">      
+    
+        <div class="col-md-2">
+            <label class="form-label mb-2">Kcal</label>        
+            <input type="number" name="kcal" required placeholder="Inserisci calorie" min="0" step="0.1" class="form-control"
+            value="{{ kcal or '' }}" required>            
+        </div>
+    
+        <div class="col-md-2">
+            <label class="form-label mb-2">Servings</label>        
+            <input type="number" name="servings" required placeholder="numero porzioni" min="1" class="form-control"
+            value="{{ servings or '' }}" required>            
+        </div> 
+        
+        <div class="col-md-2">
+            <label for="cousine_type" class="form-label mb-2">Tipo di cucina</label>           
+            <input type="text" name="cousine_type" required placeholder="Es.Fusion" class="form-control"
+            value="{{ cousine_type or '' }}" required>            
+        </div>          
+    
+        <div class="col-md-2">
+            <label class="form-label mb-2">Preparation_time</label>        
+            <input type="number" name="preparation_time" required placeholder="Preparazione(minuti)"
+             min="0" class="form-control"
+             value="{{ preparation_time or '' }}" required>            
+        </div>
+   
+        <div class="col-md-2">
+            <label class="form-label mb-2">Cooking_time</label>        
+            <input type="number" name="cooking_time" required placeholder="Cottura(minuti)" min="0"
+            class="form-control" value="{{ cooking_time or '' }}" required>            
+        </div>
+
+    </div>
+
+
+
+    <div class="row mb-4">   
+    
+        <div class="col-auto">
+            <label for="rating" class="form-label mb-2">Rating</label>        
+            <input type="number" name="rating"  min="0" class="form-control"
+            value="{{ prezzo or '' }}" required>
+        </div>
+    
+        <div class="col-auto">
+            <label for="tags" class="form-label mb-2">Tags</label>        
+            <input type="text" name="tags" required placeholder="Es.#Snack, #Dolci" class="form-control"
+            value="{{ tags or '' }}" required>            
+        </div>    
+
+        <div class="col-auto">
+            <label for="prezzo" class="form-label mb-2">Prezzo</label>        
+            <input type="number" name="prezzo" required placeholder="Es.80" min="0" class="form-control"
+            value="{{ prezzo or '' }}" required>
+        </div>
+
+        <div class="col-auto">            
+                <label for="valuta" class="form-label mb-2">Valuta</label>
+                <select class="form-select form-select" name="valuta" required>
+                    <option value="€">€ EUR</option>
+                    <option value="$">$ USD</option>
+                    <option value="£">£ GBP</option>
+                    <option value="¥">¥ JPY</option>
+                </select>                            
+        </div>      
+    </div>
+
+    <button type="submit">Carica Ricetta</button>   
+
+    
+        
+</form>
+
+<!-- questo div lo puoi usare per gestire i messaggi di errore su script js -->
+<div id="messaggio"></div>
 
 {% endblock %}
