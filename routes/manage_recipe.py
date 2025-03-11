@@ -169,8 +169,8 @@ def aggiungi_categoria():
 
 
 
-@dashboard_routes.route("/read_recipes", methods=["GET"])
-def read_recipes():
+@dashboard_routes.route("/list_recipes", methods=["GET"])
+def list_recipes():
     # Ottieni tutte le ricette dal database
     lista_ricette = Ricetta.query.all()
     # Crea una lista di dizionari per ogni ricetta
@@ -185,14 +185,18 @@ def read_recipes():
             "prezzo": ricetta.prezzo
         })
     # Passa la lista di ricette al template
-    return render_template("dashboard/ricette/read_recipes.html",
+    return render_template("dashboard/ricette/list_recipes.html",
                            elenco_ricette=elenco_ricette,
                            messaggio="Lista Data Base Ricette"
                            )
 
+@dashboard_routes.route("/read_recipe", methods=["GET","POST"])
+def read_recipe():
+    return render_template("dashboard/ricette/read_recipe.html", messaggio="Anteprima Ricetta")
+
 @dashboard_routes.route("/update_recipe", methods=["GET","POST"])
 def update_recipe():
-    return render_template("dashboard/ricette/update_recipe.html")
+    return render_template("dashboard/ricette/update_recipe.html", messaggio="Modifica Ricetta")
 
 @dashboard_routes.route("/delete_recipe", methods=["GET", "POST"])
 def delete_recipe():
