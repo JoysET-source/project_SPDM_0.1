@@ -1,6 +1,29 @@
 {% extends "dashboard/admin_dashboard.html" %}
 {% block content %}
 
-<p>ciao ciccio orsetto</p>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">categoria</th>
+        <th scope="col">nome_ricetta</th>
+        <th scope="col">ingredienti</th>
+        <th scope="col">total_time</th>
+        <th scope="col">prezzo</th>        
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        {% for ricetta in elenco_ricette %}
+        <tr>
+            <th scope="row">{{ ricetta['id'] }}</th>
+            <td>{{ ricetta['categoria'] }}</td>
+            <td>{{ ricetta['nome_ricetta'] }}</td>
+            <td>{{ ricetta['ingredienti'] }}</td>
+            <td>{{ ricetta['total_time'] }}</td>
+            <td>{{ ricetta['prezzo'] }}</td>            
+        </tr>
+        {% endfor %}     
+    </tbody>
+  </table>
  
 {% endblock %}
