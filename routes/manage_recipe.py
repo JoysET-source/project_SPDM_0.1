@@ -165,7 +165,6 @@ def aggiungi_categoria():
         return jsonify({"errore": "Categoria esistente"})
 
 
-
 @dashboard_routes.route("/list_recipes", methods=["GET"])
 def list_recipes():
     # Ottieni tutte le ricette dal database
@@ -193,7 +192,7 @@ def read_recipe():
     ricetta = Ricetta.query.filter_by(id=id).first()
 
     if ricetta is None:
-        abort(404, description="non trovato")
+        abort(404, description="non trovata")
 
     return render_template("dashboard/ricette/read_recipe.html", messaggio="Anteprima Ricetta", ricetta=ricetta)
 
@@ -203,18 +202,19 @@ def update_recipe():
     return render_template("dashboard/ricette/update_recipe.html", messaggio="Modifica Ricetta")
 
 
-@dashboard_routes.route("/delete_recipe", methods=["GET"])
+@dashboard_routes.route("/delete_recipe", methods=["DELETE"])
 def delete_recipe():
-    nome_ricetta = request.args.get("nome_ricetta")  # Ottieni il valore del parametro nome_ricetta da JS
-    ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
+    id = request.json.get("id")  # Ottieni dalla query string (in questo caso il pulsante)
+    # ottieni dal DB la ricetta corrispondente a id
+    ricetta = Ricetta.query.filter_by(id=id).first()
 
-    if not ricetta:  # Se la ricetta non esiste
-        return '', 204  # Risponde con un codice 204 (No Content) senza messaggi
+    if ricetta is None:
+        abort(404, description="non trovata")
 
     db.session.delete(ricetta)
     db.session.commit()
 
-    return '', 204  # Risponde con 204 senza JSON
+    return jsonify({"messaggio": "Ricetta eliminata con successo"}), 200
 
 
 @dashboard_routes.route("/logout", methods=["GET", "POST"])

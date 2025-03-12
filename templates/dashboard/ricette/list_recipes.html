@@ -4,24 +4,13 @@
 <form id="categoria-form" action="/aggiungi_categoria" method="POST">
   <div class="row g-2">
     <div class="col-auto">
-      <input type="text" id="inputCategoria" class="form-control" placeholder="+ nuova categoria" name="nome_categoria" required>
-
-      <!-- <div id="alert-box" class="alert alert-success alert-dismissible fade show d-none" role="alert">
-        <span id="alert-message"></span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-
-      <div id="errore-box" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
-        <span id="errore-message"></span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div> -->
-
+      <input type="text" id="inputCategoria" class="form-control" placeholder="+ nuova categoria" 
+      name="nome_categoria" required>
     </div>
     <div class="col-auto">
       <button id="creaCategoria" class="btn btn-primary mb-3" type="submit">Crea</button>
     </div>
-  </div>
-  <script type="text/javascript" src="static/js/struttura_script.js"></script>
+  </div>  
 </form>
 
 
@@ -41,12 +30,15 @@
     </thead>
     <tbody class="table-group-divider">
         {% for ricetta in elenco_ricette %}
-        <tr>            
-            <td scope="row">
+        <tr>
+            <!-- crea il tasto anteprima e gli associa id di appartenenza-->
+            <td>
               <a class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe', id=ricetta['id']) }}" 
-              role="button"><i class="bi bi-search"></i></a>                
+                role="button"><i class="bi bi-search"></i></a>                
             </td>
-            <td scope="row"><a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe') }}" 
+            <!-- crea il tasto modifica e gli associa id di appartenenza-->
+            <td>
+              <a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe') }}" 
                 role="button">Vai</a>
             </td>           
             <td>{{ ricetta['id'] }}</td>
@@ -56,9 +48,9 @@
             <td>{{ ricetta['total_time'] }}</td>
             <td>{{ ricetta['prezzo'] }}</td>
             
-            <!-- crea il pulsante elimina e gli associa il nome ricetta -->
+            <!-- crea il tasto elimina e gli associa id di appartenenza-->
             <td>              
-              <button class="btn btn-danger" data-nome_ricetta="{{ ricetta['nome_ricetta'] }}">
+              <button class="btn btn-danger elimina-ricetta" data-id="{{ ricetta['id'] }}">
                 <i class="bi bi-trash"></i>
               </button>
             </td>
@@ -66,7 +58,34 @@
         {% endfor %}             
     </tbody>
   </table>
+  <!-- gestione js del pulsante delete sulla tabella -->
+  <script>
+     document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".elimina-ricetta").forEach(button => {
+                button.addEventListener("click", function () {
+                    const idRicetta = this.getAttribute("data-id");  
+                    
+                    if (!confirm("Sei sicuro di voler eliminare questa ricetta?")) return;
+        
+                    fetch("/delete_recipe", {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ id: idRicetta })  // Manda i dati nel body (JSON)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert("Ricetta eliminata con successo!");
+                            location.reload();  
+                        } else {
+                            alert("Errore nell'eliminazione della ricetta.");
+                        }
+                    })
+                    .catch(error => console.error("Errore nella richiesta:", error));
+                });
+            });
+        });
+  </script>
 
-  
- 
 {% endblock %}

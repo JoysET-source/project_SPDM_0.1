@@ -1,17 +1,16 @@
 Prossimi passi:
-Aggiungere la gestione dei messaggi di errore e successo.
-
-Aggiungere una gestione dell'errore del database e altre validazioni per i campi numerici.
+verificare la gestione dei messaggi di errore e successo.
 
 sistemare il footer
 
 sulla dash mettere commenti grafici controllo ospiti analsi andamento sito
 
-lista ricette a tabella con pulsanti modifica ed elimina
+finire pagina di modifica(update_recipe)
 
-pagina di modifica(update_recipe)
+correggere i messaggi di errore per aggiungi categoria
 
-aggiungi su lista nuova categoria come pulsantone unico e togli la pagina
+capire perche non prende <script type="text/javascript" src="static/js/struttura_script.js"></script>
+per i tasti delete e crea categoria
 
 
 libreria matplotlib per i grafici su dashboard admin

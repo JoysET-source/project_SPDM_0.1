@@ -5,7 +5,7 @@
             });
         };
 
-
+        // gestisce tasto elenco ricette su HomePage
         document.getElementById("runButton1").onclick = function(){
             fetch("/elenco_ricette") // Effettua la richiesta GET all'endpoint
                 .then(response => response.json())  // Parsifica la risposta JSON
@@ -22,7 +22,7 @@
                 .catch(error => console.error('Errore:', error)); // Gestione degli errori
         };
 
-
+        // gestisce barra di ricerca e  tasto search su homePage
         document.getElementById("search-button").onclick = function(){ //quando premi il pulsante fai function
             const cercaRicetta = document.getElementById("search-input").value; //prendi il valore dell`input
             if (!cercaRicetta){
@@ -47,24 +47,8 @@
                 document.getElementById("search-input").value = ""; //refresh alla barra di ricerca
         };
 
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // Seleziona tutti i bottoni di eliminazione
-            document.querySelectorAll(".btn-danger").forEach(button =>{
-                button.addEventListener("click", function(){
-                    const nomeRicetta = this.getAttribute("data-nome_ricetta");
-                    fetch("/delete_recipe?nome_ricetta=" + nomeRicetta)
-                    .then(response => {
-                        if (response.ok){
-                            location.reload();
-                        }
-                    })
-                    .catch(error => console.error("Errore nella richiesta:", error));
-                });
-                
-            });
-        });
-
+// ===========================================================================================================================
+// questa parte al momento non viene usata
 
         // gestisce aggiungi categoria su lista ricette per admin
         document.getElementById("creaCategoria").onclick = function(){ //quando premi il pulsante fai function
@@ -82,6 +66,36 @@
                 .catch(error => console.error("Errore:", error))};
                 document.getElementById("inputCategoria").value = ""; //refresh alla barra di ricerca
         };
+
+
+        // gestisce i tasti elimina per ogni ricetta sulla tabella
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".elimina-ricetta").forEach(button => {
+                button.addEventListener("click", function () {
+                    const idRicetta = this.getAttribute("data-id");  
+                    
+                    if (!confirm("Sei sicuro di voler eliminare questa ricetta?")) return;
+        
+                    fetch("/delete_recipe", {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ id: idRicetta })  // ✅ Mandiamo i dati nel body (JSON)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert("Ricetta eliminata con successo!");
+                            location.reload();  
+                        } else {
+                            alert("Errore nell'eliminazione della ricetta.");
+                        }
+                    })
+                    .catch(error => console.error("Errore nella richiesta:", error));
+                });
+            });
+        });
+        
        
         
         
