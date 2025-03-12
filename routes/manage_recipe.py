@@ -202,17 +202,20 @@ def read_recipe():
 def update_recipe():
     return render_template("dashboard/ricette/update_recipe.html", messaggio="Modifica Ricetta")
 
-@dashboard_routes.route("/delete_recipe", methods=["GET", "POST"])
+
+@dashboard_routes.route("/delete_recipe", methods=["GET"])
 def delete_recipe():
-    return render_template("dashboard/ricette/delete_recipe.html")
+    nome_ricetta = request.args.get("nome_ricetta")  # Ottieni il valore del parametro nome_ricetta da JS
+    ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
 
-@dashboard_routes.route("/footer")
-def footer():
-    return render_template("dashboard/footer.html")
+    if not ricetta:  # Se la ricetta non esiste
+        return '', 204  # Risponde con un codice 204 (No Content) senza messaggi
 
-@dashboard_routes.route("/header")
-def header():
-    return render_template("dashboard/header.html")
+    db.session.delete(ricetta)
+    db.session.commit()
+
+    return '', 204  # Risponde con 204 senza JSON
+
 
 @dashboard_routes.route("/logout", methods=["GET", "POST"])
 @login_required

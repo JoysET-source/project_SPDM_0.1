@@ -42,7 +42,8 @@
     <tbody class="table-group-divider">
         {% for ricetta in elenco_ricette %}
         <tr>            
-            <td scope="row"><a class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe', id=ricetta['id']) }}" 
+            <td scope="row">
+              <a class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe', id=ricetta['id']) }}" 
               role="button"><i class="bi bi-search"></i></a>                
             </td>
             <td scope="row"><a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe') }}" 

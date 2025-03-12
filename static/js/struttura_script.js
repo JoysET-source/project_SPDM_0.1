@@ -53,7 +53,7 @@
             document.querySelectorAll(".btn-danger").forEach(button =>{
                 button.addEventListener("click", function(){
                     const nomeRicetta = this.getAttribute("data-nome_ricetta");
-                    fetch("/elimina_ricetta?nome_ricetta=" + nomeRicetta)
+                    fetch("/delete_recipe?nome_ricetta=" + nomeRicetta)
                     .then(response => {
                         if (response.ok){
                             location.reload();

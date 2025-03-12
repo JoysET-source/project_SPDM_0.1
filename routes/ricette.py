@@ -90,16 +90,7 @@ def trova_ricetta():
 
 @ricette_routes.route("/elimina_ricetta", methods=["GET"])
 def elimina_ricetta():
-    nome_ricetta = request.args.get("nome_ricetta") # Ottieni il valore del parametro nome_ricetta da JS
-    ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
-
-    if not ricetta:  # Se la ricetta non esiste
-        return '', 204  # Risponde con un codice 204 (No Content) senza messaggi
-
-    db.session.delete(ricetta)
-    db.session.commit()
-
-    return '', 204  # Risponde con 204 senza JSON
+    pass
 
 
 # @ricette_routes.route("/utenti")
