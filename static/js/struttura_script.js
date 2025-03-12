@@ -49,27 +49,39 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("elimina-button").onclick = function(){
-                const nomeRicetta = this.getAttribute("data-nome_ricetta");
-                fetch("/elimina_ricetta?nome_ricetta" + nomeRicetta)
-                .then(() => location.reload()) // Ricarica la pagina subito dopo l'eliminazione
-                .catch(error => console.error("Errore nella richiesta:", error));
-            }
+            // Seleziona tutti i bottoni di eliminazione
+            document.querySelectorAll(".btn-danger").forEach(button =>{
+                button.addEventListener("click", function(){
+                    const nomeRicetta = this.getAttribute("data-nome_ricetta");
+                    fetch("/elimina_ricetta?nome_ricetta=" + nomeRicetta)
+                    .then(response => {
+                        if (response.ok){
+                            location.reload();
+                        }
+                    })
+                    .catch(error => console.error("Errore nella richiesta:", error));
+                });
+                
+            });
         });
-        
-        
 
-        document.getElementById("creaCategoria").onclick = function(){
-            const eliminaRicetta = document.getElementById("search-input").value;
-            fetch("/elimina_ricetta?nome_ricetta=" + eliminaRicetta)
+
+        // gestisce aggiungi categoria su lista ricette per admin
+        document.getElementById("creaCategoria").onclick = function(){ //quando premi il pulsante fai function
+            const categoria = document.getElementById("inputCategoria").value; //prendi il valore dell`input
+            if (!categoria){
+                alert("inserisci una categoria")
+            }
+            else{
+            fetch("/aggiungi_categoria?nome_categoria=" + categoria) // passa il valore come parametro nella richiesta a python
                 .then(response => response.json())
                 .then(data => {
-                    if (data.detail){
-                        alert(`${data.detail}`)
-                    }
-                    if (data.messaggio) {
-                        alert(`${data.messaggio}`)
-                    }
-                });
-                document.getElementById("search-input").value = "";
+                    if (data.alert){alert(`${data.alert}`)}
+                    else { alert(`${data.errore}`)}
+                    })
+                .catch(error => console.error("Errore:", error))};
+                document.getElementById("inputCategoria").value = ""; //refresh alla barra di ricerca
         };
+       
+        
+        

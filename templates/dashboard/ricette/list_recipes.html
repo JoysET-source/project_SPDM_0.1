@@ -3,29 +3,27 @@
 
 <form id="categoria-form" action="/aggiungi_categoria" method="POST">
   <div class="row g-2">
-      <div class="col-auto">                 
-        <input type="text" class="form-control" placeholder="+ nuova categoria" name="nome_categoria" required>              
-      
-        {% if alert %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ alert }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endif %}       
+    <div class="col-auto">
+      <input type="text" id="inputCategoria" class="form-control" placeholder="+ nuova categoria" name="nome_categoria" required>
 
-        {% if errore %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          {{ errore }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endif %}
-        
-      </div> 
-      <div class="col-auto">
-        <button id="creaCategoria" class="btn btn-primary mb-3" type="submit">Crea</button>
+      <!-- <div id="alert-box" class="alert alert-success alert-dismissible fade show d-none" role="alert">
+        <span id="alert-message"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
+
+      <div id="errore-box" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+        <span id="errore-message"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div> -->
+
+    </div>
+    <div class="col-auto">
+      <button id="creaCategoria" class="btn btn-primary mb-3" type="submit">Crea</button>
+    </div>
   </div>
-</form> 
+  <script type="text/javascript" src="static/js/struttura_script.js"></script>
+</form>
+
 
 <table class="table table-hover">
     <thead>
@@ -44,7 +42,7 @@
     <tbody class="table-group-divider">
         {% for ricetta in elenco_ricette %}
         <tr>            
-            <td scope="row"><a class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe') }}" 
+            <td scope="row"><a class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe', id=ricetta['id']) }}" 
               role="button"><i class="bi bi-search"></i></a>                
             </td>
             <td scope="row"><a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe') }}" 
@@ -56,9 +54,10 @@
             <td>{{ ricetta['ingredienti'] }}</td>
             <td>{{ ricetta['total_time'] }}</td>
             <td>{{ ricetta['prezzo'] }}</td>
-            <td>
-              <!-- crea il pulsante elimina e gli associa il nome ricetta -->
-              <button id="elimina-button" class="btn btn-danger" data-nome_ricetta="{{ ricetta['nome_ricetta'] }}">
+            
+            <!-- crea il pulsante elimina e gli associa il nome ricetta -->
+            <td>              
+              <button class="btn btn-danger" data-nome_ricetta="{{ ricetta['nome_ricetta'] }}">
                 <i class="bi bi-trash"></i>
               </button>
             </td>
@@ -67,6 +66,6 @@
     </tbody>
   </table>
 
-  <script type="text/javascript" src="static/js/struttura_script.js"></script>
+  
  
 {% endblock %}

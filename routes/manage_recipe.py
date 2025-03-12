@@ -1,6 +1,8 @@
 import os
+import re
 
-from flask import Blueprint, render_template, redirect, url_for, request, jsonify
+from flask import abort, request, jsonify
+from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 
 from import_bridge import bcrypt, db
@@ -145,27 +147,23 @@ def create_recipe():
                            )
 
 
-@dashboard_routes.route("/aggiungi_categoria", methods=["GET", "POST"])
+@dashboard_routes.route("/aggiungi_categoria", methods=["POST"])
 def aggiungi_categoria():
     cartella_base = "static/ricette/"
-    alert = None
-    errore = None
+    nome_categoria = request.form.get("nome_categoria", "").strip()
 
-    if request.method == "POST":
-        nome_categoria = request.form.get("nome_categoria","").strip()
-        new_categoria = os.path.join(cartella_base, nome_categoria)
+    # # Controllo che il nome sia valido (solo lettere e spazi, minimo 3 caratteri)
+    # if not re.match(r"^[a-zA-ZÀ-ÿ\s]{3,}$", nome_categoria):
+    #     return jsonify({"errore": "Categoria non accettata"}), 400
 
-        if not os.path.exists(new_categoria):
-            os.makedirs(new_categoria)
-            alert = "Categoria Aggiunta"
-        else:
-            errore = "Categoria esistente"
+    new_categoria = os.path.join(cartella_base, nome_categoria)
 
-    return render_template("dashboard/ricette/list_recipes.html",
-                           messaggio="Lista Data Base Ricette",
-                           alert=alert,
-                           errore=errore
-                           )
+    if not os.path.exists(new_categoria):
+        os.makedirs(new_categoria)
+        return jsonify({"alert": "Categoria Aggiunta"})
+    else:
+        return jsonify({"errore": "Categoria esistente"})
+
 
 
 @dashboard_routes.route("/list_recipes", methods=["GET"])
@@ -189,9 +187,16 @@ def list_recipes():
                            messaggio="Lista Data Base Ricette"
                            )
 
-@dashboard_routes.route("/read_recipe", methods=["GET","POST"])
+@dashboard_routes.route("/read_recipe", methods=["GET"])
 def read_recipe():
-    return render_template("dashboard/ricette/read_recipe.html", messaggio="Anteprima Ricetta")
+    id = request.args.get("id")  # Ottieni il valore del parametro nome_ricetta da JS
+    ricetta = Ricetta.query.filter_by(id=id).first()
+
+    if ricetta is None:
+        abort(404, description="non trovato")
+
+    return render_template("dashboard/ricette/read_recipe.html", messaggio="Anteprima Ricetta", ricetta=ricetta)
+
 
 @dashboard_routes.route("/update_recipe", methods=["GET","POST"])
 def update_recipe():
