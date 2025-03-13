@@ -1,25 +1,22 @@
 {% extends "dashboard/admin_dashboard.html" %}
 {% block content %}
-
-    {% if success %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ success }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% elif errore %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ errore }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>    
-    {% endif %}
+   
 
 <form id="ricetta-form" action="/update_recipe" method="POST" enctype="multipart/form-data">   
      
         <div class="row g-3 mb-4">
 
-            <div class="col-md-2">
-                <label for="categoria" class="form-label mb-2">Categoria</label>
-                <input type="text" name="categoria" class="form-control" value="{{ db_ricetta.categoria }}" required>                
+            <div class="col-md-3">
+                <label for="categoria" class="form-label mb-2">Categoria attuale: 
+                    <strong>{{ db_ricetta.categoria }}</strong></label>                 
+                <select class="form-select form-select" name="categoria" required>
+                    <option selected>Seleziona categoria</option>
+                    {% for category in elenco_categorie %}
+                        <option value="{{ category }}" 
+                            {% if category == categoria %}selected{% endif %}>{{ category }}
+                        </option>
+                    {% endfor %}    
+                </select>                              
             </div>
             
             <div class="col-md-2">
@@ -37,7 +34,7 @@
                 <input type="file" name="immagine" accept="image/*" class="form-control">
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <label for="difficulty_level" class="form-label mb-2">Difficolta</label>                               
                 <select class="form-select form-select mb-2" name="difficulty_level" required>
                     <option value="" {% if not db_ricetta.difficulty_level %}selected{% endif %}>Difficolta</option>
@@ -128,13 +125,13 @@
         </div>
 
         <div class="col-auto">            
-                <label for="valuta" class="form-label mb-2">Valuta</label>                
-                <select class="form-select form-select" name="valuta" value="{{ db_ricetta.valuta }}" required>
-                    <option value="€">€ EUR</option>
-                    <option value="$">$ USD</option>
-                    <option value="£">£ GBP</option>
-                    <option value="¥">¥ JPY</option>
-                </select>                            
+            <label for="valuta" class="form-label mb-2">Valuta attuale: <strong>{{ db_ricetta.valuta }}</strong></label>                                
+            <select class="form-select form-select" name="valuta" required>
+                <option value="€">€ EUR</option>
+                <option value="$">$ USD</option>
+                <option value="£">£ GBP</option>
+                <option value="¥">¥ JPY</option>
+            </select>             
         </div>      
     </div>
 

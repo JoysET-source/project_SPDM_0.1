@@ -207,6 +207,11 @@ def read_recipe():
 @login_required
 def update_recipe(id):
 
+    # collegamento OS per iterazione sulle cartelle categorie
+    cartella_base = "static/ricette/"
+    elenco_categorie = [cartella_categoria for cartella_categoria in os.listdir(cartella_base)
+                        if os.path.isdir(os.path.join(cartella_base, cartella_categoria))]
+
     # Ottieni dal DB tutti i parametri della ricetta in base a id richiesto
     db_ricetta = Ricetta.query.get(id)
     # Se la ricetta non esiste, reindirizza alla lista delle ricette
@@ -215,7 +220,10 @@ def update_recipe(id):
 
     # Se la richiesta è GET, mostra il modulo con i dati esistenti
     if request.method == "GET":
-        return render_template("dashboard/ricette/update_recipe.html", db_ricetta=db_ricetta)
+        return render_template("dashboard/ricette/update_recipe.html",
+                               db_ricetta=db_ricetta,
+                               elenco_categorie=elenco_categorie
+                               )
 
     # Se la richiesta è POST, acquisisci i nuovi dati da html da mettere nel db
     if request.method == "POST":
@@ -267,10 +275,10 @@ def update_recipe(id):
             db.session.commit()
         except Exception as Fallito:
             db.session.rollback()
-            return render_template("dashboard/ricette/update_recipe.html", db_ricetta=db_ricetta,
+            return render_template("dashboard/ricette/list_recipes.html", db_ricetta=db_ricetta,
                                    errore=f"Errore nell'aggiornamento: {Fallito}")
 
-    return redirect(url_for("dashboard_routes.list_recipes", success="Ricetta Modificata"))  # Redirect alla lista delle ricette
+    return render_template("dashboard/ricette/list_recipes.html", success="Ricetta Modificata")
 
 
 @dashboard_routes.route("/delete_recipe", methods=["DELETE"])
