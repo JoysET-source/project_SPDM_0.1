@@ -180,7 +180,8 @@ def list_recipes():
             "ingredienti": ricetta.ingredienti,
             "total_time": ricetta.total_time,
             "categoria": ricetta.categoria,
-            "prezzo": ricetta.prezzo
+            "prezzo": ricetta.prezzo,
+            "valuta": ricetta.valuta
         })
     # Passa la lista di ricette al template
     return render_template("dashboard/ricette/list_recipes.html",
@@ -264,11 +265,12 @@ def update_recipe(id):
         try:
             # Salva le modifiche nel database
             db.session.commit()
-            return redirect(url_for("/templates\dashboard/ricette/list_recipes.html"))  # Redirect alla lista delle ricette
-        except Exception as e:
+        except Exception as Fallito:
             db.session.rollback()
             return render_template("dashboard/ricette/update_recipe.html", db_ricetta=db_ricetta,
-                                   errore=f"Errore nell'aggiornamento: {e}")
+                                   errore=f"Errore nell'aggiornamento: {Fallito}")
+
+    return redirect(url_for("dashboard_routes.list_recipes", success="Ricetta Modificata"))  # Redirect alla lista delle ricette
 
 
 @dashboard_routes.route("/delete_recipe", methods=["DELETE"])

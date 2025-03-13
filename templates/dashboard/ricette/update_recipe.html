@@ -19,7 +19,7 @@
 
             <div class="col-md-2">
                 <label for="categoria" class="form-label mb-2">Categoria</label>
-                <input type="text" name="categoria" class="form-control" value="{{ db_ricetta.categoria }}" required>
+                <input type="text" name="categoria" class="form-control" value="{{ db_ricetta.categoria }}" required>                
             </div>
             
             <div class="col-md-2">
@@ -38,8 +38,14 @@
             </div>
 
             <div class="col-md-2">
-                <label for="difficulty_level" class="form-label mb-2">Difficolta</label>
-                <input type="text" name="difficulty_level" class="form-control" value="{{ db_ricetta.difficulty_level }}" required>                 
+                <label for="difficulty_level" class="form-label mb-2">Difficolta</label>                               
+                <select class="form-select form-select mb-2" name="difficulty_level" required>
+                    <option value="" {% if not db_ricetta.difficulty_level %}selected{% endif %}>Difficolta</option>
+                    <option value="Bassa" {% if db_ricetta.difficulty_level == 'Bassa' %}selected{% endif %}>Bassa</option>
+                    <option value="Media" {% if db_ricetta.difficulty_level == 'Media' %}selected{% endif %}>Media</option>
+                    <option value="Difficile" {% if db_ricetta.difficulty_level == 'Difficile' %}selected{% endif %}>Difficile</option>
+                </select>
+                
             </div>
               
             <div class="col-md-2">
@@ -53,14 +59,14 @@
     <div class="row">
         <div class="col">
             <label for="descrizione" class="form-label mb-2">Descrizione</label>        
-            <textarea name="descrizione" rows="6" class="form-control"></textarea>
+            <textarea name="descrizione" rows="6" class="form-control">{{ db_ricetta.descrizione }}</textarea>
         </div>
     </div>  
 
     <div class="row">
         <div class="col">
             <label for="ingredienti" class="form-label mb-2">Ingredienti</label>       
-            <textarea name="ingredienti" rows="6" class="form-control"></textarea>
+            <textarea name="ingredienti" rows="6" class="form-control">{{ db_ricetta.ingredienti }}</textarea>
         </div>
     </div>
 
@@ -68,7 +74,7 @@
     <div class="row">
         <div class="col">
             <label for="steps" class="form-label mb-2">Steps</label>       
-            <textarea name="steps"  rows="6" class="form-control"></textarea>            
+            <textarea name="steps"  rows="6" class="form-control">{{ db_ricetta.steps }}</textarea>            
         </div>
     </div>  
 
