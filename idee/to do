@@ -1,19 +1,37 @@
 Prossimi passi:
-verificare la gestione dei messaggi di errore e successo.
 
-sistemare il footer
-
-sulla dash mettere commenti grafici controllo ospiti analsi andamento sito
+# per la dashboard:
 
 finire pagina di modifica(update_recipe)
 
+finire pagina di read_recipe
+
 correggere i messaggi di errore per aggiungi categoria
+
+aggiungere quill sui textarea
 
 capire perche non prende <script type="text/javascript" src="static/js/struttura_script.js"></script>
 per i tasti delete e crea categoria
 
+sulla dash mettere commenti grafici controllo ospiti analsi andamento sito (libreria matplotlib)
 
-libreria matplotlib per i grafici su dashboard admin
+sistemare il footer
+========================================================================================================================
+
+verificare la gestione dei messaggi di errore e successo.
+
+verificare gestione messaggi errori input per pagina login
+
+rifare impaginazione home (che fa schifo)
+
+sistemare la pagina di dettaglio ricette
+
+capire come nascondere alcune parti se non ce il login
+
+implementare la registrazione con google e facebook (video su youtube)
+
+
+
 
 
 

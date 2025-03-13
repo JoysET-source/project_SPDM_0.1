@@ -38,7 +38,7 @@
             </td>
             <!-- crea il tasto modifica e gli associa id di appartenenza-->
             <td>
-              <a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe') }}" 
+              <a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe', id=ricetta['id']) }}" 
                 role="button">Vai</a>
             </td>           
             <td>{{ ricetta['id'] }}</td>

@@ -1,6 +1,7 @@
 {% extends "dashboard/admin_dashboard.html" %}
 {% block content %}
 
+    <!-- gestione delle flag per successo / fallimento di registrazione nuova ricetta -->
     {% if success %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ success }}

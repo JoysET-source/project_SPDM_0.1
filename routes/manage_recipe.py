@@ -148,6 +148,7 @@ def create_recipe():
 
 
 @dashboard_routes.route("/aggiungi_categoria", methods=["POST"])
+@login_required
 def aggiungi_categoria():
     cartella_base = "static/ricette/"
     nome_categoria = request.form.get("nome_categoria", "").strip()
@@ -166,6 +167,7 @@ def aggiungi_categoria():
 
 
 @dashboard_routes.route("/list_recipes", methods=["GET"])
+@login_required
 def list_recipes():
     # Ottieni tutte le ricette dal database
     lista_ricette = Ricetta.query.all()
@@ -187,8 +189,9 @@ def list_recipes():
                            )
 
 @dashboard_routes.route("/read_recipe", methods=["GET"])
+@login_required
 def read_recipe():
-    id = request.args.get("id")  # Ottieni il valore del parametro nome_ricetta da JS
+    id = request.args.get("id")  # Ottieni il valore del parametro id da JS
     ricetta = Ricetta.query.filter_by(id=id).first()
 
     if ricetta is None:
@@ -196,15 +199,81 @@ def read_recipe():
 
     return render_template("dashboard/ricette/read_recipe.html", messaggio="Anteprima Ricetta", ricetta=ricetta)
 
+# il valore del parametro id da JS lo passiamo diretto nella route
+@dashboard_routes.route("/update_recipe/<int:id>", methods=["GET", "POST"])
+@login_required
+def update_recipe(id):
 
-@dashboard_routes.route("/update_recipe", methods=["GET","POST"])
-def update_recipe():
-    return render_template("dashboard/ricette/update_recipe.html", messaggio="Modifica Ricetta")
+    # Ottieni dal DB tutti i parametri della ricetta in base a id richiesto
+    db_ricetta = Ricetta.query.get(id)
+    # Se la ricetta non esiste, reindirizza alla lista delle ricette
+    if not db_ricetta:
+        return redirect(url_for("dashboard_routes.list_recipes"))
+
+    # Se la richiesta è GET, mostra il modulo con i dati esistenti
+    if request.method == "GET":
+        return render_template("dashboard/ricette/update_recipe.html", db_ricetta=db_ricetta)
+
+    # Se la richiesta è POST, acquisisci i nuovi dati da html da mettere nel db
+    if request.method == "POST":
+        db_ricetta.nome_ricetta = request.form.get("nome_ricetta")
+        db_ricetta.ingredienti = request.form.get("ingredienti")
+        db_ricetta.kcal = request.form.get("kcal")
+        db_ricetta.categoria = request.form.get("categoria")
+        db_ricetta.titolo = request.form.get("titolo")
+        db_ricetta.descrizione = request.form.get("descrizione")
+        db_ricetta.servings = request.form.get("servings")
+        db_ricetta.preparation_time = request.form.get("preparation_time")
+        db_ricetta.cooking_time = request.form.get("cooking_time")
+        db_ricetta.steps = request.form.get("steps")
+        db_ricetta.difficulty_level = request.form.get("difficulty_level")
+        db_ricetta.cousine_type = request.form.get("cousine_type")
+        db_ricetta.autore = request.form.get("autore")
+        db_ricetta.rating = request.form.get("rating")
+        db_ricetta.tags = request.form.get("tags")
+        db_ricetta.prezzo = request.form.get("prezzo")
+        db_ricetta.valuta = request.form.get("valuta")
+
+        # Gestisci l'immagine, se è stata aggiornata
+        immagine = request.files.get("immagine")
+        if immagine:
+            # Elimina la vecchia immagine, se esiste
+            if db_ricetta.immagine:
+                os.remove(db_ricetta.immagine)
+
+            # Salva la nuova immagine
+            categoria = request.form.get("categoria")  # Assumendo che la categoria venga fornita dal form
+            categoria_path = os.path.join("static/ricette", categoria)
+            if not os.path.exists(categoria_path):
+                os.makedirs(categoria_path)  # Crea la cartella se non esiste
+            estensione = os.path.splitext(immagine.filename)[1]
+            image_filename = f"{db_ricetta.nome_ricetta}{estensione}"
+            image_path = os.path.join(categoria_path, image_filename)
+            immagine.save(image_path)
+
+            # Ridimensionamento immagine
+            ridimensiona_immagine(image_path)
+
+            # Salva il percorso dell'immagine nel database
+            db_ricetta.immagine = f"static/ricette/{categoria}/{image_filename}"
+
+        db_ricetta.total_time = int(db_ricetta.preparation_time) + int(db_ricetta.cooking_time)
+
+        try:
+            # Salva le modifiche nel database
+            db.session.commit()
+            return redirect(url_for('dashboard_routes.lista_ricette'))  # Redirect alla lista delle ricette
+        except Exception as e:
+            db.session.rollback()
+            return render_template("dashboard/ricette/update_recipe.html", db_ricetta=db_ricetta,
+                                   errore=f"Errore nell'aggiornamento: {e}")
 
 
 @dashboard_routes.route("/delete_recipe", methods=["DELETE"])
+@login_required
 def delete_recipe():
-    id = request.json.get("id")  # Ottieni dalla query string (in questo caso il pulsante)
+    # Ottieni id dalla query string (in questo caso il pulsante)
+    id = request.json.get("id")
     # ottieni dal DB la ricetta corrispondente a id
     ricetta = Ricetta.query.filter_by(id=id).first()
 
