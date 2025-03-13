@@ -199,6 +199,8 @@ def read_recipe():
 
     return render_template("dashboard/ricette/read_recipe.html", messaggio="Anteprima Ricetta", ricetta=ricetta)
 
+
+
 # il valore del parametro id da JS lo passiamo diretto nella route
 @dashboard_routes.route("/update_recipe/<int:id>", methods=["GET", "POST"])
 @login_required
@@ -262,7 +264,7 @@ def update_recipe(id):
         try:
             # Salva le modifiche nel database
             db.session.commit()
-            return redirect(url_for('dashboard_routes.lista_ricette'))  # Redirect alla lista delle ricette
+            return redirect(url_for("/templates\dashboard/ricette/list_recipes.html"))  # Redirect alla lista delle ricette
         except Exception as e:
             db.session.rollback()
             return render_template("dashboard/ricette/update_recipe.html", db_ricetta=db_ricetta,
