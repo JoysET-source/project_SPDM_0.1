@@ -4,7 +4,7 @@ Prossimi passi:
 
 finire pagina di modifica(update_recipe)
 
-finire pagina di read_recipe
+finire pagina di read_recipe che deve essere uguale a dettaglio_categoria
 
 correggere i messaggi di errore per aggiungi categoria
 
@@ -24,7 +24,7 @@ aggiungere la foto sulla tabella lista admin
 
 verificare la gestione dei messaggi di errore e successo.
 
-verificare gestione messaggi errori input per pagina login
+verificare gestione messaggi errori input passwd errata per pagina login
 
 rifare impaginazione home (che fa schifo)
 
