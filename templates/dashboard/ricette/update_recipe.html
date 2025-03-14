@@ -2,7 +2,7 @@
 {% block content %}
    
 
-<form id="ricetta-form" action="/update_recipe" method="POST" enctype="multipart/form-data">   
+<form id="ricetta-form" action="/update_recipe/{{ db_ricetta.id }}" method="POST" enctype="multipart/form-data">   
      
         <div class="row g-3 mb-4">
 

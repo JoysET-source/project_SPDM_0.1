@@ -278,7 +278,8 @@ def update_recipe(id):
             return render_template("dashboard/ricette/list_recipes.html", db_ricetta=db_ricetta,
                                    errore=f"Errore nell'aggiornamento: {Fallito}")
 
-    return render_template("dashboard/ricette/list_recipes.html", success="Ricetta Modificata")
+    return redirect(url_for("dashboard_routes.list_recipes"))
+    # return render_template("dashboard/ricette/list_recipes.html", success="Ricetta Modificata")
 
 
 @dashboard_routes.route("/delete_recipe", methods=["DELETE"])
