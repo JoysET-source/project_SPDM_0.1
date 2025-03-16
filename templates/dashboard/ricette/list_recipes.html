@@ -47,10 +47,9 @@
 <table class="table table-hover">
     <thead>
     <tr>
+        <th scope="col">#</th>
         <th scope="col">Anteprima</th>
         <th scope="col">Modifica</th>
-        <th scope="col">Immagine</th>
-        <th scope="col">id</th>
         <th scope="col">categoria</th>
         <th scope="col">nome_ricetta</th>
         <th scope="col">ingredienti</th>
@@ -63,25 +62,25 @@
     <tbody class="table-group-divider">
     {% for ricetta in elenco_ricette %}
     <tr>
+        <td>{{ ricetta['id'] }}</td>
         <!-- crea il tasto anteprima e gli associa id di appartenenza-->
         <td>
-            <a class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe', id=ricetta['id']) }}"
-               role="button"><i class="bi bi-search"></i></a>
+            <a style="border: none; outline: none; box-shadow: none; background: transparent; padding: 0;"
+               class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe', id=ricetta['id']) }}"
+               role="button">
+                {% if ricetta.immagine %}
+                <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta"
+                     style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                {% else %}
+                <p alt="Nessuna immagine disponibile" style="color: black">Immagine non disponibile</p>
+                {% endif %}
+            </a>
         </td>
         <!-- crea il tasto modifica e gli associa id di appartenenza-->
         <td>
             <a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe', id=ricetta['id']) }}"
                role="button">Vai</a>
         </td>
-        <td>
-            {% if ricetta.immagine %}
-            <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta"
-                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-            {% else %}
-            <p alt="Nessuna immagine disponibile">Immagine non disponibile</p>
-            {% endif %}
-        </td>
-        <td>{{ ricetta['id'] }}</td>
         <td>{{ ricetta['categoria'] }}</td>
         <td>{{ ricetta['nome_ricetta'] }}</td>
         <td>{{ ricetta['ingredienti'] }}</td>
