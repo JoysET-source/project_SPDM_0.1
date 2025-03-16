@@ -288,6 +288,13 @@ def delete_recipe():
     if ricetta is None:
         abort(404, description="non trovata")
 
+    if ricetta.immagine:
+        # Variabile che identifica il percorso dell`immagine
+        percorso_immagine = os.path.join("static/ricette", ricetta.immagine)
+        # se esiste cancella l`immagine
+        if os.path.exists(percorso_immagine):
+            os.remove(percorso_immagine)
+
     db.session.delete(ricetta)
     db.session.commit()
 
