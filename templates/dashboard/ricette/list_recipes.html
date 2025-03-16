@@ -1,35 +1,52 @@
 {% extends "dashboard/admin_dashboard.html" %}
 {% block content %}
 
-<!-- non so se giusto da verificare -->
-{% if success %}
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ success }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-{% elif errore %}
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{ errore }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>    
-{% endif %}
-
+<!--gestisce e crea html per aggiungi categoria label tasto colonne e righe-->
 <form id="categoria-form" action="/aggiungi_categoria" method="POST">
-  <div class="row g-2">
-    <div class="col-auto">
-      <input type="text" id="inputCategoria" class="form-control" placeholder="+ nuova categoria" 
-      name="nome_categoria" required>
+    <div class="row g-2">
+        <div class="col-auto">
+            <input type="text" id="inputCategoria" class="form-control" placeholder="+ nuova categoria"
+                   name="nome_categoria" required>
+        </div>
+        <div class="col-auto">
+            <button id="creaCategoria" class="btn btn-primary mb-3" type="submit">Crea</button>
+        </div>
     </div>
-    <div class="col-auto">
-      <button id="creaCategoria" class="btn btn-primary mb-3" type="submit">Crea</button>
-    </div>
-  </div>  
 </form>
+<!--script per la funziona tasto e il collegamento backend per aggiungi categoria-->
+<script>
+    document.getElementById("categoria-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Impedisce l'invio del form tramite submit ma lo invia con JS sotto
+
+        const categoria = document.getElementById("inputCategoria").value.trim(); // Trim rimuove spazi extra
+
+        if (!categoria) {
+            alert("Inserisci una categoria");
+            return;
+        }
+
+        fetch("/aggiungi_categoria", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({nome_categoria: categoria}) // Invia i dati in formato JSON a backend
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.alert) {
+                    alert(`${data.alert}`);
+                } else {
+                    alert(`${data.errore}`);
+                }
+                document.getElementById("inputCategoria").value = ""; // Pulisce il campo solo dopo la risposta
+            })
+            .catch(error => console.error("Errore:", error));
+    });
+</script>
 
 
 <table class="table table-hover">
     <thead>
-      <tr>
+    <tr>
         <th scope="col">Anteprima</th>
         <th scope="col">Modifica</th>
         <th scope="col">id</th>
@@ -39,68 +56,68 @@
         <th scope="col">total_time</th>
         <th scope="col">prezzo</th>
         <th scope="col">valuta</th>
-        <th scope="col">elimina</th>     
-      </tr>
+        <th scope="col">elimina</th>
+    </tr>
     </thead>
     <tbody class="table-group-divider">
-        {% for ricetta in elenco_ricette %}
-        <tr>
-            <!-- crea il tasto anteprima e gli associa id di appartenenza-->
-            <td>
-              <a class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe', id=ricetta['id']) }}" 
-                role="button"><i class="bi bi-search"></i></a>                
-            </td>
-            <!-- crea il tasto modifica e gli associa id di appartenenza-->
-            <td>
-              <a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe', id=ricetta['id']) }}" 
-                role="button">Vai</a>
-            </td>           
-            <td>{{ ricetta['id'] }}</td>
-            <td>{{ ricetta['categoria'] }}</td>
-            <td>{{ ricetta['nome_ricetta'] }}</td>
-            <td>{{ ricetta['ingredienti'] }}</td>
-            <td>{{ ricetta['total_time'] }}</td>
-            <td>{{ ricetta['prezzo'] }}</td>
-            <td>{{ ricetta['valuta'] }}</td>
-            
-            <!-- crea il tasto elimina e gli associa id di appartenenza-->
-            <td>              
-              <button class="btn btn-danger elimina-ricetta" data-id="{{ ricetta['id'] }}">
+    {% for ricetta in elenco_ricette %}
+    <tr>
+        <!-- crea il tasto anteprima e gli associa id di appartenenza-->
+        <td>
+            <a class="btn btn-primary" href="{{ url_for('dashboard_routes.read_recipe', id=ricetta['id']) }}"
+               role="button"><i class="bi bi-search"></i></a>
+        </td>
+        <!-- crea il tasto modifica e gli associa id di appartenenza-->
+        <td>
+            <a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe', id=ricetta['id']) }}"
+               role="button">Vai</a>
+        </td>
+        <td>{{ ricetta['id'] }}</td>
+        <td>{{ ricetta['categoria'] }}</td>
+        <td>{{ ricetta['nome_ricetta'] }}</td>
+        <td>{{ ricetta['ingredienti'] }}</td>
+        <td>{{ ricetta['total_time'] }}</td>
+        <td>{{ ricetta['prezzo'] }}</td>
+        <td>{{ ricetta['valuta'] }}</td>
+
+        <!-- crea il tasto elimina e gli associa id di appartenenza-->
+        <td>
+            <button class="btn btn-danger elimina-ricetta" data-id="{{ ricetta['id'] }}">
                 <i class="bi bi-trash"></i>
-              </button>
-            </td>
-        </tr>
-        {% endfor %}             
+            </button>
+        </td>
+    </tr>
+    {% endfor %}
     </tbody>
-  </table>
-  <!-- gestione js del pulsante delete sulla tabella -->
-  <script>
-     document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll(".elimina-ricetta").forEach(button => {
-                button.addEventListener("click", function () {
-                    const idRicetta = this.getAttribute("data-id");  
-                    
-                    if (!confirm("Sei sicuro di voler eliminare questa ricetta?")) return;
-        
-                    fetch("/delete_recipe", {
-                        method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({ id: idRicetta })  // Manda i dati nel body (JSON)
-                    })
+</table>
+<!-- gestione js del pulsante delete sulla tabella -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".elimina-ricetta").forEach(button => {
+            button.addEventListener("click", function () {
+                const idRicetta = this.getAttribute("data-id");
+
+                if (!confirm("Sei sicuro di voler eliminare questa ricetta?")) return;
+
+                fetch("/delete_recipe", {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({id: idRicetta})  // Manda i dati nel body (JSON)
+                })
                     .then(response => {
                         if (response.ok) {
                             alert("Ricetta eliminata con successo!");
-                            location.reload();  
+                            location.reload();
                         } else {
                             alert("Errore nell'eliminazione della ricetta.");
                         }
                     })
                     .catch(error => console.error("Errore nella richiesta:", error));
-                });
             });
         });
-  </script>
+    });
+</script>
 
 {% endblock %}
