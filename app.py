@@ -33,7 +33,7 @@ app.register_blueprint(ricette_routes)
 app.register_blueprint(dashboard_routes)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
     # app.run(host='0.0.0.0', port=5000) questo fa il sito raggiungibile da tutti i connessi in LAN
 
     # Ora, se il tuo computer è connesso alla rete,
