@@ -1,13 +1,4 @@
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     const menuToggle = document.querySelector('.menu-toggle');
-    //     const nav = document.querySelector('nav');
-
-    //     menuToggle.addEventListener('click', function() {
-    //         nav.classList.toggle('hidden');
-    //     });
-    // });
-
 // crea il menu a barre
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.menu-toggle');
@@ -23,25 +14,37 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-    
-// // crea lo switch nella dashboard tra id content e le varie setioni del menu 
-// function loadSection(section) {
-//     var content = document.getElementById("content");
-    
-//     switch(section) {
-//         case "create_recipe":
-//             content.innerHTML = "<h2>Crea una nuova ricetta</h2><p>Form per inserire una nuova ricetta.</p>";            
-//             break;
-//         case "read_recipe":
-//             content.innerHTML = "<h2>Lista Ricette</h2><p>Visualizza tutte le ricette disponibili.</p>";
-//             break;
-//         case "update_recipe":
-//             content.innerHTML = "<h2>Modifica Ricetta</h2><p>Seleziona una ricetta da modificare.</p>";
-//             break;
-//         case "delete_recipe":
-//             content.innerHTML = "<h2>Elimina Ricetta</h2><p>Seleziona una ricetta da eliminare.</p>";
-//             break;
-//         default:
-//             content.innerHTML = "<p>Seleziona un'opzione dal menu.</p>";
-//     }
-// }
+// script per inizializzare editor di testo Quill
+document.addEventListener("DOMContentLoaded", function () {
+    // // Inizializzare Quill per Descrizione
+    // const quillDescrizione = new Quill('#editorDescrizione', {
+    //     theme: "snow"
+    // });
+
+    // Inizializzare Quill per Ingredienti
+    const quillIngredienti = new Quill('#editorIngredienti', {
+        theme: "snow"
+    });
+
+    // Inizializzare Quill per Steps
+    const quillSteps = new Quill('#editorSteps', {
+        theme: "snow"
+    });
+
+    // Mandare il contenuto del Quill al backend quando il form viene inviato
+    document.querySelector("form").addEventListener("submit", function (event) {
+        // Impedire che il form venga inviato prima di aggiornare i campi nascosti
+        event.preventDefault();
+
+        // Aggiornare i campi nascosti con il contenuto degli editor Quill
+        // document.querySelector("#hiddenDescrizione").value = quillDescrizione.root.innerHTML;
+        document.querySelector("#hiddenIngredienti").value = quillIngredienti.root.innerHTML;
+        document.querySelector("#hiddenSteps").value = quillSteps.root.innerHTML;
+
+        // Invia il form dopo aver aggiornato i campi nascosti
+        this.submit();
+    });
+});
+
+
+
