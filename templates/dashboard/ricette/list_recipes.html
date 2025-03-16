@@ -49,6 +49,7 @@
     <tr>
         <th scope="col">Anteprima</th>
         <th scope="col">Modifica</th>
+        <th scope="col">Immagine</th>
         <th scope="col">id</th>
         <th scope="col">categoria</th>
         <th scope="col">nome_ricetta</th>
@@ -71,6 +72,14 @@
         <td>
             <a class="btn btn-primary" href="{{ url_for('dashboard_routes.update_recipe', id=ricetta['id']) }}"
                role="button">Vai</a>
+        </td>
+        <td>
+            {% if ricetta.immagine %}
+            <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta"
+                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+            {% else %}
+            <p alt="Nessuna immagine disponibile">Immagine non disponibile</p>
+            {% endif %}
         </td>
         <td>{{ ricetta['id'] }}</td>
         <td>{{ ricetta['categoria'] }}</td>
