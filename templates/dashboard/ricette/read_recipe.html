@@ -1,27 +1,75 @@
-{% extends "dashboard/admin_dashboard.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dettaglio Ricetta: {{ ricetta.nome_ricetta }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dettaglio_ricetta_style.css') }}">
+</head>
+<body>
+<h1 style="text-align: center">{{ ricetta.nome_ricetta }}</h1>
+<!-- Sezione superiore -->
+<div class="container-top">
+    <div class="top-section-left">
+        {% if ricetta.immagine %}
+        <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
+        {% else %}
+        <p alt="Nessuna immagine disponibile">Immagine non disponibile</p>
+        {% endif %}
+    </div>
+    <div class="top-section-right">
+        <ul class="lista-dettagli-ricetta">
+            <li>Categoria: <strong>{{ ricetta.categoria }}</strong></li>
+            <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
+            <li>Autore: <strong>{{ ricetta.autore }}</strong></li>
+            <li>Calorie: <strong>{{ ricetta.kcal }}</strong></li>
+            <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
+            <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
+            <li>Preparazione: <strong>{{ ricetta.preparation_time }}</strong></li>
+            <li>Tempo Cottura: <strong>{{ ricetta.cooking_time }}</strong></li>
+            <li>Tempo Totale: <strong>{{ ricetta.total_time }}</strong></li>
+            <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
+        </ul>
+    </div>
+</div>
 
+<table>
 
+    <tr>
+        <th><strong style="color: #ff6600; font-size: xx-large;">Ingredienti</strong></th>
+        <th>{{ ricetta.ingredienti }}</th>
+    </tr>
+</table>
 
-<p>categoria: {{ ricetta.categoria }}</p>
-<p>titolo: {{ ricetta.titolo }}</p>
-<p>nome_ricetta: {{ ricetta.nome_ricetta }}</p>
-<p>immagine: {{ ricetta.immagine }}</p>
-<p>difficulty_level: {{ ricetta.difficulty_level }}</p>
-<p>autore: {{ ricetta.autore }}</p>
-<p>descrizione: {{ ricetta.descrizione }}</p>
-<p>ingredienti: {{ ricetta.ingredienti }}</p>
-<p>steps: {{ ricetta.steps }}</p>
-<p>kcal: {{ ricetta.kcal }}</p>
-<p>servings: {{ ricetta.servings }}</p>
-<p>cousine_type: {{ ricetta.cousine_type }}</p>
-<p>preparation_time: {{ ricetta.preparation_time }}</p>
-<p>total_time: {{ ricetta.total_time }}</p>
-<p>cooking_time: {{ ricetta.cooking_time }}</p>
-<p>rating: {{ ricetta.rating }}</p>
-<p>tags: {{ ricetta.tags }}</p>
-<p>prezzo: {{ ricetta.prezzo }}</p>
-<p>valuta: {{ ricetta.valuta }}</p>
+<!-- Sezione descrizione passo passo -->
+<div class="next-section">
+    <h2>Procedimento</h2>
 
+    <div class="step">
+        <h3>Step 1</h3>
+        <p>Preparare il ragù cuocendo carne e pomodoro per almeno 30 minuti.</p>
+    </div>
 
-{% endblock %}
+    <div class="step">
+        <h3>Step 2</h3>
+        <p>Preparare la besciamella mescolando burro, farina e latte fino a ottenere una crema.</p>
+    </div>
+
+    <div class="step">
+        <h3>Step 3</h3>
+        <p>Alternare strati di pasta, ragù e besciamella in una teglia.</p>
+    </div>
+
+    <div class="step">
+        <h3>Step 4</h3>
+        <p>Cuocere in forno preriscaldato a 180°C per circa 30 minuti.</p>
+    </div>
+
+    <div class="step">
+        <h3>Step 5</h3>
+        <p>Lasciare riposare per 10 minuti prima di servire.</p>
+    </div>
+</div>
+<a href="{{ url_for('dashboard_routes.list_recipes') }}" class="back-home">Torna al menu pricipale</a>
+</body>
+</html>
