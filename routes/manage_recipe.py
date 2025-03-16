@@ -1,5 +1,4 @@
 import os
-import re
 
 from flask import abort, request, jsonify
 from flask import Blueprint, render_template, redirect, url_for
@@ -28,7 +27,7 @@ def create_recipe():
     # collegamento OS per iterazione sulle cartelle categorie
     cartella_base = "static/ricette/"
     elenco_categorie = [cartella_categoria for cartella_categoria in os.listdir(cartella_base)
-                 if os.path.isdir(os.path.join(cartella_base, cartella_categoria))]
+                        if os.path.isdir(os.path.join(cartella_base, cartella_categoria))]
 
     # acquisisce i dati POST-ATI su html
     if request.method == "POST":
@@ -77,7 +76,6 @@ def create_recipe():
                                    valuta=request.form.get("valuta"),
                                    )
 
-
         # gestisce stoccaggio immagini caricate su html
         image_filename = None
         if immagine:
@@ -100,25 +98,25 @@ def create_recipe():
 
         # crea la ricetta inserita e salva nel DB
         nuova_ricetta = Ricetta(
-            categoria=categoria,
-            nome_ricetta=nome_ricetta,
-            ingredienti=ingredienti,
-            kcal=kcal,
-            immagine=image_filename,
-            titolo=titolo,
-            descrizione=descrizione,
-            servings=servings,
-            preparation_time=preparation_time,
-            cooking_time=cooking_time,
-            steps=steps,
-            cousine_type=cousine_type,
-            tags=tags,
-            prezzo=prezzo,
-            autore=autore,
-            difficulty_level=difficulty_level,
-            rating=rating,
-            valuta=valuta,
-            total_time=total_time
+                categoria=categoria,
+                nome_ricetta=nome_ricetta,
+                ingredienti=ingredienti,
+                kcal=kcal,
+                immagine=image_filename,
+                titolo=titolo,
+                descrizione=descrizione,
+                servings=servings,
+                preparation_time=preparation_time,
+                cooking_time=cooking_time,
+                steps=steps,
+                cousine_type=cousine_type,
+                tags=tags,
+                prezzo=prezzo,
+                autore=autore,
+                difficulty_level=difficulty_level,
+                rating=rating,
+                valuta=valuta,
+                total_time=total_time
         )
 
         try:
@@ -151,19 +149,15 @@ def create_recipe():
 @login_required
 def aggiungi_categoria():
     cartella_base = "static/ricette/"
-    nome_categoria = request.form.get("nome_categoria", "").strip()
-
-    # # Controllo che il nome sia valido (solo lettere e spazi, minimo 3 caratteri)
-    # if not re.match(r"^[a-zA-ZÀ-ÿ\s]{3,}$", nome_categoria):
-    #     return jsonify({"errore": "Categoria non accettata"}), 400
+    nome_categoria = request.json.get("nome_categoria", "").strip()
 
     new_categoria = os.path.join(cartella_base, nome_categoria)
 
     if not os.path.exists(new_categoria):
         os.makedirs(new_categoria)
-        return jsonify({"alert": "Categoria Aggiunta"})
+        return jsonify({"alert": "Categoria Aggiunta"}), 200
     else:
-        return jsonify({"errore": "Categoria esistente"})
+        return jsonify({"errore": "Categoria esistente"}), 400
 
 
 @dashboard_routes.route("/list_recipes", methods=["GET"])
@@ -181,13 +175,15 @@ def list_recipes():
             "total_time": ricetta.total_time,
             "categoria": ricetta.categoria,
             "prezzo": ricetta.prezzo,
-            "valuta": ricetta.valuta
+            "valuta": ricetta.valuta,
+            "immagine": ricetta.immagine
         })
     # Passa la lista di ricette al template
     return render_template("dashboard/ricette/list_recipes.html",
                            elenco_ricette=elenco_ricette,
                            messaggio="Lista Data Base Ricette"
                            )
+
 
 @dashboard_routes.route("/read_recipe", methods=["GET"])
 @login_required
@@ -199,7 +195,6 @@ def read_recipe():
         abort(404, description="non trovata")
 
     return render_template("dashboard/ricette/read_recipe.html", messaggio="Anteprima Ricetta", ricetta=ricetta)
-
 
 
 # il valore del parametro id da JS lo passiamo diretto nella route
