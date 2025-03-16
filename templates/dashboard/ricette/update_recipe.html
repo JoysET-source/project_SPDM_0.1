@@ -1,144 +1,168 @@
 {% extends "dashboard/admin_dashboard.html" %}
 {% block content %}
-   
 
-<form id="ricetta-form" action="/update_recipe/{{ db_ricetta.id }}" method="POST" enctype="multipart/form-data">   
-     
-        <div class="row g-3 mb-4">
 
-            <div class="col-md-3">
-                <label for="categoria" class="form-label mb-2">Categoria attuale: 
-                    <strong>{{ db_ricetta.categoria }}</strong></label>                 
-                <select class="form-select form-select" name="categoria" required>
-                    <option selected>Seleziona categoria</option>
-                    {% for category in elenco_categorie %}
-                        <option value="{{ category }}" 
-                            {% if category == categoria %}selected{% endif %}>{{ category }}
-                        </option>
-                    {% endfor %}    
-                </select>                              
-            </div>
-            
-            <div class="col-md-2">
-                <label for="titolo" class="form-label mb-2">Titolo</label>
-                <input type="text" name="titolo" class="form-control" value="{{ db_ricetta.titolo }}" required>                                 
-            </div>
-            
-            <div class="col-md-2">
-                <label for="nome_ricetta" class="form-label mb-2">Nome Ricetta</label>
-                <input type="text" name="nome_ricetta" class="form-control" value="{{ db_ricetta.nome_ricetta }}" required>
-            </div>
-            
-            <div class="col-md-2">
-                <label for="immagine" class="form-label mb-2">Immagine</label>
-                <input type="file" name="immagine" accept="image/*" class="form-control">
-            </div>
+<form id="ricetta-form" action="/update_recipe/{{ db_ricetta.id }}" method="POST" enctype="multipart/form-data">
 
-            <div class="col-md-1">
-                <label for="difficulty_level" class="form-label mb-2">Difficolta</label>                               
-                <select class="form-select form-select mb-2" name="difficulty_level" required>
-                    <option value="" {% if not db_ricetta.difficulty_level %}selected{% endif %}>Difficolta</option>
-                    <option value="Bassa" {% if db_ricetta.difficulty_level == 'Bassa' %}selected{% endif %}>Bassa</option>
-                    <option value="Media" {% if db_ricetta.difficulty_level == 'Media' %}selected{% endif %}>Media</option>
-                    <option value="Difficile" {% if db_ricetta.difficulty_level == 'Difficile' %}selected{% endif %}>Difficile</option>
-                </select>
-                
-            </div>
-              
-            <div class="col-md-2">
-                <label for="autore" class="form-label mb-2">Autore</label>           
-                <input type="text" name="autore" class="form-control" value="{{ db_ricetta.autore }}" required>      
-            </div>                
-             
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-3">
+            <label for="categoria" class="form-label mb-2">Categoria</label>
+            <select id="categoria" name="categoria"
+                    class="form-select form-select">
+                <option selected>Seleziona categoria</option>
+                {% for category in elenco_categorie %}
+                <option value="{{ category }}"
+                        {% if category== db_ricetta.categoria %}selected{% endif %}>{{ category }}
+                </option>
+                {% endfor %}
+            </select>
         </div>
+
+        <div class="col-md-2">
+            <label for="titolo" class="form-label mb-2">Titolo</label>
+            <input type="text" id="titolo" name="titolo"
+                   class="form-control" value="{{ db_ricetta.titolo }}">
+        </div>
+
+        <div class="col-md-2">
+            <label for="nome_ricetta" class="form-label mb-2">Nome Ricetta</label>
+            <input type="text" id="nome_ricetta" name="nome_ricetta"
+                   class="form-control" value="{{ db_ricetta.nome_ricetta }}">
+        </div>
+
+        <div class="col-md-2">
+            <label for="immagine" class="form-label mb-2">Immagine</label>
+            <input type="file" id="immagine" name="immagine"
+                   class="form-control" accept="image/*">
+        </div>
+
+        <div class="col-md-1">
+            <label for="difficulty_level" class="form-label mb-2">Difficolta</label>
+            <select id="difficulty_level" name="difficulty_level"
+                    class="form-select form-select mb-2">
+                <option value="" {% if not db_ricetta.difficulty_level %}selected{% endif %}>Difficolta</option>
+                <option value="Bassa" {% if db_ricetta.difficulty_level==
+                'Bassa' %}selected{% endif %}>Bassa</option>
+                <option value="Media" {% if db_ricetta.difficulty_level==
+                'Media' %}selected{% endif %}>Media</option>
+                <option value="Difficile" {% if db_ricetta.difficulty_level==
+                'Difficile' %}selected{% endif %}>Difficile</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <label for="autore" class="form-label mb-2">Autore</label>
+            <input type="text" id="autore" name="autore"
+                   class="form-control" value="{{ db_ricetta.autore }}">
+        </div>
+
+    </div>
 
 
     <div class="row">
         <div class="col">
-            <label for="descrizione" class="form-label mb-2">Descrizione</label>        
-            <textarea name="descrizione" rows="6" class="form-control">{{ db_ricetta.descrizione }}</textarea>
+            <label for="descrizione" class="form-label mb-2">Descrizione</label>
+            <textarea id="descrizione" name="descrizione" rows="6"
+                      class="form-control">{{ db_ricetta.descrizione }}</textarea>
         </div>
-    </div>  
+    </div>
 
     <div class="row">
         <div class="col">
-            <label for="ingredienti" class="form-label mb-2">Ingredienti</label>       
-            <textarea name="ingredienti" rows="6" class="form-control">{{ db_ricetta.ingredienti }}</textarea>
+            <label for="ingredienti" class="form-label mb-2">Ingredienti</label>
+            <textarea id="ingredienti" name="ingredienti" rows="6"
+                      class="form-control">{{ db_ricetta.ingredienti }}</textarea>
         </div>
     </div>
 
 
     <div class="row">
         <div class="col">
-            <label for="steps" class="form-label mb-2">Steps</label>       
-            <textarea name="steps"  rows="6" class="form-control">{{ db_ricetta.steps }}</textarea>            
+            <label for="steps" class="form-label mb-2">Steps</label>
+            <textarea id="steps" name="steps" rows="6"
+                      class="form-control">{{ db_ricetta.steps }}</textarea>
         </div>
-    </div>  
+    </div>
 
-    
-    <div class="row mb-4">      
-    
+
+    <div class="row mb-4">
+
         <div class="col-md-2">
-            <label for="kcal" class="form-label mb-2">Kcal</label>        
-            <input type="number" name="kcal" min="0" class="form-control" value="{{ db_ricetta.kcal }}" required>           
+            <label for="kcal" class="form-label mb-2">Kcal</label>
+            <input type="number" id="kcal" name="kcal" min="0"
+                   class="form-control" value="{{ db_ricetta.kcal }}">
         </div>
-    
+
         <div class="col-md-2">
-            <label for="servings" class="form-label mb-2">Servings</label>        
-            <input type="number" name="servings" min="1" class="form-control" value="{{ db_ricetta.servings }}" required>                                   
-        </div> 
-        
-        <div class="col-md-2">
-            <label for="cousine_type" class="form-label mb-2">Tipo di cucina</label>           
-            <input type="text" name="cousine_type" class="form-control" value="{{ db_ricetta.cousine_type }}" required>          
-        </div>          
-    
-        <div class="col-md-2">
-            <label for="preparation_time" class="form-label mb-2">Preparation_time</label>   
-            <input type="number" name="preparation_time" min="0" class="form-control" value="{{ db_ricetta.preparation_time }}" required>                     
+            <label for="servings" class="form-label mb-2">Servings</label>
+            <input type="number" id="servings" name="servings" min="1"
+                   class="form-control" value="{{ db_ricetta.servings }}">
         </div>
-   
+
         <div class="col-md-2">
-            <label for="cooking_time" class="form-label mb-2">Cooking_time</label> 
-            <input type="number" name="cooking_time" min="0" class="form-control" value="{{ db_ricetta.cooking_time }}" required>                  
+            <label for="cousine_type" class="form-label mb-2">Tipo di cucina</label>
+            <input type="text" id="cousine_type" name="cousine_type"
+                   class="form-control" value="{{ db_ricetta.cousine_type }}">
+        </div>
+
+        <div class="col-md-2">
+            <label for="preparation_time" class="form-label mb-2">Preparation_time</label>
+            <input type="number" id="preparation_time" name="preparation_time" min="0"
+                   class="form-control" value="{{ db_ricetta.preparation_time }}">
+        </div>
+
+        <div class="col-md-2">
+            <label for="cooking_time" class="form-label mb-2">Cooking_time</label>
+            <input type="number" id="cooking_time" name="cooking_time" min="0"
+                   class="form-control" value="{{ db_ricetta.cooking_time }}">
         </div>
 
     </div>
 
 
+    <div class="row mb-4">
 
-    <div class="row mb-4">   
-    
         <div class="col-auto">
             <label for="rating" class="form-label mb-2">Rating</label>
-            <input type="number" name="rating" min="0" class="form-control" value="{{ db_ricetta.rating }}" required>              
+            <input type="number" id="rating" name="rating" min="0"
+                   class="form-control" value="{{ db_ricetta.rating }}">
         </div>
-    
+
         <div class="col-auto">
-            <label for="tags" class="form-label mb-2">Tags</label>        
-            <input type="text" name="tags" class="form-control" value="{{ db_ricetta.tags }}" required>           
-        </div>    
+            <label for="tags" class="form-label mb-2">Tags</label>
+            <input type="text" id="tags" name="tags"
+                   class="form-control" value="{{ db_ricetta.tags }}">
+        </div>
 
         <div class="col-auto">
             <label for="prezzo" class="form-label mb-2">Prezzo</label>
-            <input type="number" name="prezzo" min="0" class="form-control" value="{{ db_ricetta.prezzo }}" required>              
+            <input type="number" id="prezzo" name="prezzo" min="0"
+                   class="form-control" value="{{ db_ricetta.prezzo }}">
         </div>
 
-        <div class="col-auto">            
-            <label for="valuta" class="form-label mb-2">Valuta attuale: <strong>{{ db_ricetta.valuta }}</strong></label>                                
-            <select class="form-select form-select" name="valuta" required>
-                <option value="€">€ EUR</option>
-                <option value="$">$ USD</option>
-                <option value="£">£ GBP</option>
-                <option value="¥">¥ JPY</option>
-            </select>             
-        </div>      
+        <div class="col-auto">
+            <label for="valuta" class="form-label mb-2">
+                Valuta
+            </label>
+            <select id="valuta" name="valuta" class="form-select form-select">
+                <option value="€" {% if db_ricetta.valuta==
+                '€' %}selected{% endif %}>€ EUR</option>
+                <option value="$" {% if db_ricetta.valuta==
+                '$' %}selected{% endif %}>$ USD</option>
+                <option value="£" {% if db_ricetta.valuta==
+                '£' %}selected{% endif %}>£ GBP</option>
+                <option value="¥" {% if db_ricetta.valuta==
+                '¥' %}selected{% endif %}>¥ JPY</option>
+            </select>
+        </div>
+
     </div>
 
-    <button type="submit">Modifica</button>   
 
-    
-        
+    <button type="submit">Modifica</button>
+
+
 </form>
 
 <!-- questo div lo puoi usare per gestire i messaggi di errore su script js -->
