@@ -2,9 +2,6 @@ Prossimi passi:
 
 # per la dashboard:
 
-controllare delete perche anche con la ricetta cancellata immagine rimane nella cartella si cancella solo il percorso
-non l immagine in se
-
 finire pagina di read_recipe che deve essere uguale a dettaglio_categoria
 
 capire perche non prende <script type="text/javascript" src="static/js/struttura_script.js"></script>
