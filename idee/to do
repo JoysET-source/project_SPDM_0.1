@@ -2,6 +2,8 @@ Prossimi passi:
 
 # per la dashboard:
 
+sistemare crea ricetta dopo inserimento quill
+
 finire pagina di read_recipe che deve essere uguale a dettaglio_categoria
 
 capire perche non prende <script type="text/javascript" src="static/js/struttura_script.js"></script>
@@ -10,8 +12,6 @@ per i tasti delete e crea categoria
 sulla dash mettere commenti grafici controllo ospiti analsi andamento sito (libreria matplotlib)
 
 sistemare il footer
-
-aggiungere quill sui textarea
 
 aggiungere la sezione fatte da voi come giallo zafferano
 
