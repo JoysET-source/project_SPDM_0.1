@@ -61,10 +61,6 @@ main {
     font-size: 20px;
     margin-right: 5px;
 }
-
-textarea {
-    width: 100%;
-}
 input {
     width: auto;
 } 
@@ -107,3 +103,13 @@ footer {
     position: relative; /* Evita che copra il contenuto */
     text-align: center;
 }
+/* questa aggiunta manuale serve perche Quill non eredita gli stili di Bootstrap */
+#editorDescrizione, #editorIngredienti, #editorSteps {
+    min-height: 150px; /* Imposta un'altezza minima per l'editor */
+    border: 1px solid #ced4da; /* Aggiunge un bordo simile ai campi di input */
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+}
+
+
