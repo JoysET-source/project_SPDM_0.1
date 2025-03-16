@@ -2,13 +2,10 @@ Prossimi passi:
 
 # per la dashboard:
 
-finire pagina di modifica(update_recipe)
+controllare delete perche anche con la ricetta cancellata immagine rimane nella cartella si cancella solo il percorso
+non l immagine in se
 
 finire pagina di read_recipe che deve essere uguale a dettaglio_categoria
-
-correggere i messaggi di errore per aggiungi categoria
-
-aggiungere quill sui textarea
 
 capire perche non prende <script type="text/javascript" src="static/js/struttura_script.js"></script>
 per i tasti delete e crea categoria
@@ -17,9 +14,10 @@ sulla dash mettere commenti grafici controllo ospiti analsi andamento sito (libr
 
 sistemare il footer
 
-optional:
+aggiungere quill sui textarea
 
-aggiungere la foto sulla tabella lista admin
+aggiungere la sezione fatte da voi come giallo zafferano
+
 ========================================================================================================================
 
 verificare la gestione dei messaggi di errore e successo.
