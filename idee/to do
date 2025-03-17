@@ -1,8 +1,8 @@
 Prossimi passi:
 
-# per la dashboard:
+sistemare il db con migration per non doverlo cancellare ogni volta che lo aggiorni
 
-sistemare crea ricetta dopo inserimento quill
+# per la dashboard:
 
 finire pagina di read_recipe che deve essere uguale a dettaglio_categoria
 

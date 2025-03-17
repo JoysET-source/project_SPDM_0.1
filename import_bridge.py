@@ -7,3 +7,4 @@ bcrypt = Bcrypt()
 login_manager = LoginManager()
 
 
+

@@ -2,14 +2,21 @@ import os
 from flask import Flask
 from dotenv import load_dotenv
 from import_bridge import db, bcrypt, login_manager
+# from flask_migrate import Migrate
 
 load_dotenv()
 
 app = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ricette.db'
 app.config['SQLALCHEMY_BINDS'] = {'users': 'sqlite:///users.db'}
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@127.0.0.1/ricette'
+# app.config['SQLALCHEMY_BINDS'] = {'users': 'mysql+pymysql://root@127.0.0.1/users'}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.getenv("SECRET_KEY")
+
+# migrate = Migrate(app, db)
+
 
 # caricare le immagini inserite in HTML su flask nel percorso specificato
 UPLOAD_FOLDER = "static/ricette"

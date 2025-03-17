@@ -290,7 +290,7 @@ def delete_recipe():
 
     if ricetta.immagine:
         # Variabile che identifica il percorso dell`immagine
-        percorso_immagine = os.path.join("static/ricette", ricetta.immagine)
+        percorso_immagine = os.path.join("", ricetta.immagine)
         # se esiste cancella l`immagine
         if os.path.exists(percorso_immagine):
             os.remove(percorso_immagine)

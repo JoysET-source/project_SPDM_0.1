@@ -32,3 +32,5 @@ class Ricetta(db.Model):
 
 
 
+
+
