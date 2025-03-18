@@ -1,22 +1,54 @@
+/* Container principale per limitare la larghezza della pagina */
+.container-main {
+    max-width: 850px; /* Larghezza massima della pagina */
+    margin: 0 auto; /* Centra il contenuto orizzontalmente */
+    background-color: white; /* Sfondo bianco */
+    padding: 0px; /* Aggiunge spazio interno */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombra per un effetto più pulito */
+    border-radius: 10px; /* Angoli arrotondati */
+}
+
+/* Assicura che il body abbia uno sfondo diverso per risaltare il container */
+body {
+    background-color: aliceblue; /* Colore di sfondo leggero */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Occupa almeno tutta l'altezza della finestra */
+}
+
+
 /* Contenitore della parte superiore */
 .container-top {
     display: flex;
-    align-items: center;
+    align-items: center; /* Allinea verticalmente immagine e testo */
     justify-content: space-between;
-    padding: 20px;
+    padding: 0px;
+    background-color: white; /* Sfondo per distinguere la sezione */
+    border-radius: 10px; /* Angoli arrotondati */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Leggera ombra */
 }
 
-/* Sezione sinistra con immagine */
+.top-section-left,
+.top-section-right {
+    flex: 1; /* Entrambi occupano lo stesso spazio */
+    padding: 10px;
+}
+
+ /*Sezione sinistra con immagine*/
 .top-section-left {
     width: 50%;
 }
 
 .top-section-left img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
-    display: block;
     border-radius: 10px;
+    object-fit: cover;
 }
+
 
 /* Sezione destra con elenco puntato */
 .top-section-right {
@@ -26,9 +58,16 @@
     justify-content: center;
 }
 
+/*.top-section-right ul {*/
+/*    list-style-type: disc;*/ /* Punti elenco */
+/*    padding-left: 20px;*/
+/*    font-size: 18px;*/
+/*}*/
+
 .top-section-right ul {
-    list-style-type: disc;
-    padding-left: 20px;
+    list-style-type: none; /* Rimuove i punti elenco */
+    padding: 0;
+    text-align: left;
     font-size: 18px;
 }
 
@@ -82,6 +121,7 @@ table, td, th {
 
 table {
     border-spacing: 30px;
+    background-color: antiquewhite;
 }
 
 td, th {

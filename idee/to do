@@ -1,7 +1,5 @@
 Prossimi passi:
 
-sistemare il db con migration per non doverlo cancellare ogni volta che lo aggiorni
-
 # per la dashboard:
 
 finire pagina di read_recipe che deve essere uguale a dettaglio_categoria

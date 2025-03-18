@@ -63,25 +63,29 @@
     <div class="row">
         <div class="col">
             <label for="descrizione" class="form-label mb-2">Descrizione</label>
-            <textarea id="descrizione" name="descrizione" rows="6"
+            <textarea id="descrizione" name="descrizione" rows="1"
                       class="form-control">{{ db_ricetta.descrizione }}</textarea>
         </div>
     </div>
 
     <div class="row">
         <div class="col">
-            <label for="ingredienti" class="form-label mb-2">Ingredienti</label>
-            <textarea id="ingredienti" name="ingredienti" rows="6"
-                      class="form-control">{{ db_ricetta.ingredienti }}</textarea>
+            <label for="editorIngredienti" class="form-label mb-2">Ingredienti</label>
+<!--            <textarea id="ingredienti" name="ingredienti" rows="6"-->
+<!--                      class="form-control">{{ db_ricetta.ingredienti }}</textarea>-->
+            <div id="editorIngredienti" style="height: 200px;">{{ db_ricetta.ingredienti }}</div>
+            <input type="hidden" name="ingredienti" id="hiddenIngredienti">
         </div>
     </div>
 
 
     <div class="row">
         <div class="col">
-            <label for="steps" class="form-label mb-2">Steps</label>
-            <textarea id="steps" name="steps" rows="6"
-                      class="form-control">{{ db_ricetta.steps }}</textarea>
+            <label for="editorSteps" class="form-label mb-2">Steps</label>
+<!--            <textarea id="steps" name="steps" rows="6"-->
+<!--                      class="form-control">{{ db_ricetta.steps }}</textarea>-->
+            <div id="editorSteps" style="height: 200px;">{{ db_ricetta.steps }}</div>
+            <input type="hidden" name="steps" id="hiddenSteps">
         </div>
     </div>
 

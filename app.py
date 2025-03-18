@@ -1,33 +1,38 @@
 import os
 from flask import Flask
 from dotenv import load_dotenv
-from import_bridge import db, bcrypt, login_manager
-# from flask_migrate import Migrate
+from import_bridge import db, migrate, bcrypt, login_manager
+from models.user_model import User
+from models.ricetta_model import Ricetta
+
+
 
 load_dotenv()
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ricette.db'
-app.config['SQLALCHEMY_BINDS'] = {'users': 'sqlite:///users.db'}
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@127.0.0.1/ricette'
-# app.config['SQLALCHEMY_BINDS'] = {'users': 'mysql+pymysql://root@127.0.0.1/users'}
+# collegamenti per creare DB in sql lite
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ricette.db'
+# app.config['SQLALCHEMY_BINDS'] = {'users': 'sqlite:///users.db'}
+
+# collegamenti per creare db in mysql e secret key
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'mysql+pymysql://root@localhost/spdm')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.getenv("SECRET_KEY")
-
-# migrate = Migrate(app, db)
-
 
 # caricare le immagini inserite in HTML su flask nel percorso specificato
 UPLOAD_FOLDER = "static/ricette"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+# inizializza app, migrate, bcrypt e login
 db.init_app(app)
+migrate.init_app(app, db)
 bcrypt.init_app(app)
 login_manager.init_app(app)
 login_manager.login_view = "auth_routes.login"
 
+# apre app e crea i db
 with app.app_context():
     db.create_all()
 
