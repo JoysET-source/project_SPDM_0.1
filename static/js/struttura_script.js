@@ -48,7 +48,7 @@
         };
 
 // ===========================================================================================================================
-// questa parte al momento non viene usata
+// questa parte non viene usata
 
         // gestisce aggiungi categoria su lista ricette per admin
         document.getElementById("creaCategoria").onclick = function(){ //quando premi il pulsante fai function

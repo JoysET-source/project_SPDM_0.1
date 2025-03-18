@@ -52,28 +52,10 @@ def create_recipe():
 
         # questo serve a rimandare il template gia compilato se abbiamo dimenticato il campo categoria
         if categoria is None or categoria == "Seleziona categoria":
-            errore = "Inserisci una categoria"
             return render_template("dashboard/ricette/create_recipe.html",
-                                   errore=errore,
+                                   errore="Inserisci una categoria",
                                    elenco_categorie=elenco_categorie,
-                                   nome_ricetta=request.form.get("nome_ricetta"),
-                                   ingredienti=request.form.get("ingredienti"),
-                                   kcal=request.form.get("kcal"),
-                                   immagine=request.files.get("immagine"),
-                                   categoria=request.form.get("categoria"),
-                                   titolo=request.form.get("titolo"),
-                                   descrizione=request.form.get("descrizione"),
-                                   servings=request.form.get("servings"),
-                                   preparation_time=request.form.get("preparation_time"),
-                                   cooking_time=request.form.get("cooking_time"),
-                                   steps=request.form.get("steps"),
-                                   difficulty_level=request.form.get("difficulty_level"),
-                                   cousine_type=request.form.get("cousine_type"),
-                                   autore=request.form.get("autore"),
-                                   rating=request.form.get("rating"),
-                                   tags=request.form.get("tags"),
-                                   prezzo=request.form.get("prezzo"),
-                                   valuta=request.form.get("valuta"),
+                                   **request.form
                                    )
 
         # gestisce stoccaggio immagini caricate su html
@@ -119,30 +101,24 @@ def create_recipe():
                 total_time=total_time
         )
 
+        # Salvataggio nel database con gestione errori
         try:
             db.session.add(nuova_ricetta)
             db.session.commit()
-            errore = None
+            return render_template("dashboard/ricette/create_recipe.html",
+                                   success="Ricetta aggiunta",
+                                   elenco_categorie=elenco_categorie)
         except Exception as error:
             db.session.rollback()
-            success = None
             return render_template("dashboard/ricette/create_recipe.html",
-                                   messaggio="Aggiungi Ricetta",
+                                   errore=f"Errore durante il salvataggio: {error}",
                                    elenco_categorie=elenco_categorie,
-                                   errore=f"Salvataggio non riuscito, {error}",
-                                   success=success
-                                   )
+                                   **request.form)
 
-        return render_template("dashboard/ricette/create_recipe.html",
-                               messaggio="Aggiungi Ricetta",
-                               success="Ricetta aggiunta al DB",
-                               errore=errore
-                               )
-
+        # GET request - Mostra il form per creare una nuova ricetta
     return render_template("dashboard/ricette/create_recipe.html",
                            messaggio="Aggiungi Ricetta",
-                           elenco_categorie=elenco_categorie,
-                           )
+                           elenco_categorie=elenco_categorie)
 
 
 @dashboard_routes.route("/aggiungi_categoria", methods=["POST"])
@@ -194,7 +170,7 @@ def read_recipe():
     if ricetta is None:
         abort(404, description="non trovata")
 
-    return render_template("dashboard/ricette/read_recipe.html", messaggio="Anteprima Ricetta", ricetta=ricetta)
+    return render_template("dashboard/ricette/read_recipe.html", ricetta=ricetta)
 
 
 # il valore del parametro id da JS lo passiamo diretto nella route
@@ -217,7 +193,8 @@ def update_recipe(id):
     if request.method == "GET":
         return render_template("dashboard/ricette/update_recipe.html",
                                db_ricetta=db_ricetta,
-                               elenco_categorie=elenco_categorie
+                               elenco_categorie=elenco_categorie,
+                               messaggio="Modifica Ricetta"
                                )
 
     # Se la richiesta è POST, acquisisci i nuovi dati da html da mettere nel db
@@ -273,8 +250,7 @@ def update_recipe(id):
             return render_template("dashboard/ricette/list_recipes.html", db_ricetta=db_ricetta,
                                    errore=f"Errore nell'aggiornamento: {Fallito}")
 
-    return redirect(url_for("dashboard_routes.list_recipes"))
-    # return render_template("dashboard/ricette/list_recipes.html", success="Ricetta Modificata")
+    return redirect(url_for("dashboard_routes.list_recipes", db_ricetta=db_ricetta, messaggio="Modifica Ricetta"))
 
 
 @dashboard_routes.route("/delete_recipe", methods=["DELETE"])

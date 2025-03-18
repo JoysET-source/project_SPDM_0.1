@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// ========================================== non utilizzato =========================================================
+
 // script per inizializzare editor di testo Quill
 document.addEventListener("DOMContentLoaded", function () {
     // // Inizializzare Quill per Descrizione
