@@ -5,22 +5,7 @@
             });
         };
 
-        // gestisce tasto elenco ricette su HomePage
-        document.getElementById("runButton1").onclick = function(){
-            fetch("/elenco_ricette") // Effettua la richiesta GET all'endpoint
-                .then(response => response.json())  // Parsifica la risposta JSON
-                .then(data => {
-            // Creiamo una nuova finestra per visualizzare i dati delle ricette
-                    const newWindow = window.open();
-                    data.forEach(ricetta => { // Loop su ogni ricetta
-                    newWindow.document.write(`
-                    <h1>${ricetta.nome_ricetta}</h1>
-                `);
-            });
-            newWindow.document.close();
-            })
-                .catch(error => console.error('Errore:', error)); // Gestione degli errori
-        };
+
 
         // gestisce barra di ricerca e  tasto search su homePage
         document.getElementById("search-button").onclick = function(){ //quando premi il pulsante fai function
@@ -49,6 +34,28 @@
 
 // ===========================================================================================================================
 // questa parte non viene usata
+
+
+        // // obsoleto sostituito con collegamento diretto ad html
+        // // gestisce tasto elenco ricette su HomePage
+        // document.getElementById("runButton1").onclick = function(){
+        //     fetch("/elenco_ricette") // Effettua la richiesta GET all'endpoint
+        //         .then(response => response.json())  // Parsifica la risposta JSON
+        //         .then(data => {
+        //     // Creiamo una nuova finestra per visualizzare i dati delle ricette
+        //             const newWindow = window.open();
+        //             data.forEach(ricetta => { // Loop su ogni ricetta
+        //             newWindow.document.write(`
+        //             <h1>${ricetta.nome_ricetta}</h1>
+        //         `);
+        //     });
+        //     newWindow.document.close();
+        //     })
+        //         .catch(error => console.error('Errore:', error)); // Gestione degli errori
+        // };
+
+
+
 
         // // gestisce aggiungi categoria su lista ricette per admin
         // document.getElementById("creaCategoria").onclick = function(){ //quando premi il pulsante fai function
