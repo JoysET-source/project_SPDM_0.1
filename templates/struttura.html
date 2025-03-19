@@ -13,7 +13,7 @@
     <meta name="description" content="here we made, learn and taste good and healthy food"> <!-- cosa fa il sito -->
     <!-- dovrebbe adattare le immagini per diverse grandezze schermo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/struttura_style_test.css">  <!-- collegamento con struttura_style -->
+    <link rel="stylesheet" href="static/css/struttura_style.css">  <!-- collegamento con struttura_style -->
 </head>
 
 <body>
@@ -46,7 +46,9 @@
         </div>
         <div class="top-section-right">
             <div class="btn-container">
-                <button class="btn" id="runButton1">Elenco Ricette</button>
+                <a href="{{ url_for('ricette_routes.elenco_ricette') }}">
+                    <button class="btn">Elenco Ricette</button>
+                </a>
                 <button class="btn" onclick="location.href='/categoria/entree'">Entree</button>
                 <button class="btn" onclick="location.href='/categoria/primi'">Primi Piatti</button>
                 <button class="btn" onclick="location.href='/categoria/pasta'">Paste</button>
