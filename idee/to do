@@ -2,8 +2,6 @@ Prossimi passi:
 
 # per la dashboard:
 
-finire pagina di read_recipe che deve essere uguale a dettaglio_categoria
-
 capire perche non prende <script type="text/javascript" src="static/js/struttura_script.js"></script>
 per i tasti delete e crea categoria
 
@@ -15,19 +13,13 @@ aggiungere la sezione fatte da voi come giallo zafferano
 
 ========================================================================================================================
 
-verificare la gestione dei messaggi di errore e successo.
-
 verificare gestione messaggi errori input passwd errata per pagina login
-
-rifare impaginazione home (che fa schifo)
-
-sistemare la pagina di dettaglio ricette
 
 capire come nascondere alcune parti se non ce il login
 
 implementare la registrazione con google e facebook (video su youtube)
 
-
+implementare il modo per creare il tasto sulla home quando admin crea una nuova categoria
 
 
 
