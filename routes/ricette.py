@@ -11,26 +11,7 @@ ricette_routes = Blueprint('ricette_routes', __name__)
 # specifica il path contenente le ricette caricate
 ricette_path = os.path.join("static", "Ricette")
 
-# carica le ricette in categoria.html per la visualizzazione grafica e restituisce json
-def load_ricette(categoria):
-    categoria_path = os.path.join(ricette_path, categoria)
-    ricette = []
-    if os.path.exists(categoria_path):
-        for filename in os.listdir(categoria_path):
-            if filename.endswith(".jpg"):
-                image_path = f"Ricette/{categoria}/{filename}"  # Rimuovi "static" dal percorso
-                recipe_txt = filename.replace(".jpg", ".txt")
-                txt_path = os.path.join(categoria_path, recipe_txt)
-                if os.path.exists(txt_path):
-                    with open(txt_path, "r") as f:
-                        description = f.read()
-                        ricette.append({"image": image_path, "description": description}) # restituzione json
-                        # questo serve per il debugging se non carica immagini e/o testo inserito
-                        # print(f"Immagine trovata: {image_path}")
-                        # print(f"Caricata ricetta: {filename}, descrizione: {description}") questi print aiutano il debug se non passano i dati richiesti
-    # else:
-        # print(f"Categoria '{categoria}' non trovata in {categoria_path}") come altro print
-    return ricette
+
 
 #  questo chiama struttura come file per interfaccia home
 @ricette_routes.route('/')
@@ -42,31 +23,35 @@ def home():
 def categoria(categoria):
     # recuperiamo tutte le ricette appartenenti alla categoria scelta
     elenco_ricette = Ricetta.query.filter_by(categoria=categoria).all()
-
+    # restituiamo gli attributi a categoria html per visualizzarle
     return render_template("categoria.html", categoria=categoria, elenco_ricette=elenco_ricette)
 
+# dettaglio e`la parte che gestisce il dettaglio delle singole ricette
 @ricette_routes.route("/dettaglio_ricette/<categoria>/<nome_ricetta>")
 def dettaglio_ricetta(categoria, nome_ricetta):
+    # chiamiamo dal DB la ricetta in base a nome e categoria
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta, categoria=categoria).first()
     # passa i parametri specificati a dettaglio_ricetta.html
     return render_template("dettaglio_ricetta.html", categoria=categoria, ricetta=ricetta)
 
-# @app.route("/dettaglio_ricetta/<int:id>")
-# def dettaglio_ricetta(id):
-#     ricetta = Ricetta.query.get(id)  # Ottimizzato per ID
-#     return render_template("dettaglio_ricetta.html", ricetta=ricetta)
 
+# la seguente gestisce utenticazione utente per le sessioni utente
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+
+# ======================================================================================================================
 @ricette_routes.route("/run_script")
 def run_script():
     # Esegui lo script Python quando il pulsante viene premuto
     # Esegui il tuo script Python qui
     # print("Il pulsante è stato premuto!")
     return 'Script eseguito!'
+# ======================================================================================================================
 
+
+# sessione che gestisce elenco delle ricette inserite visualizzabili da utente
 @ricette_routes.route("/elenco_ricette", methods=["GET"])
 def elenco_ricette():
     elenco_ricette = Ricetta.query.all()
@@ -77,6 +62,20 @@ def elenco_ricette():
         })
     return jsonify(elenco)
 
+# esempio per visualizzazione parziale se non loggati
+from flask_login import current_user
+# @ricette_routes.route("/elenco_ricette", methods=["GET"])
+# def elenco_ricette():
+#     if current_user.is_authenticated:
+#         # Utente loggato, restituisci tutte le ricette
+#         elenco_ricette = Ricetta.query.all()
+#     else:
+#         # Utente non loggato, restituisci solo alcune ricette
+#         elenco_ricette = Ricetta.query.limit(5).all()
+#     return render_template("elenco_ricette.html")
+
+
+# sessione per la ricerca della ricetta desiderata tramite barra di ricerca
 @ricette_routes.route("/trova_ricetta", methods=["GET"])
 def trova_ricetta():
     nome_ricetta = request.args.get("nome_ricetta") # Ottieni il valore del parametro nome_ricetta da JS
@@ -89,16 +88,8 @@ def trova_ricetta():
             "kcal": ricetta.kcal
             })
 
-@ricette_routes.route("/elimina_ricetta", methods=["GET"])
-def elimina_ricetta():
-    pass
 
 
-# @ricette_routes.route("/utenti")
-# def lista_utenti():
-#     users = User.query.all()
-#     utenti = [{"id": user.id, "username": user.username} for user in users]
-#     return jsonify(utenti)
 
 
 
