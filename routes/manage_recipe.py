@@ -12,6 +12,8 @@ from models.login_model import password_complexity_check
 from models.controllo_dimensione_immagini import ridimensiona_immagine
 from routes.ricette import elenco_ricette
 
+
+
 dashboard_routes = Blueprint("dashboard_routes", __name__)
 
 
@@ -282,3 +284,13 @@ def delete_recipe():
 def logout():
     logout_user()
     return redirect(url_for("auth_routes.login"))
+
+
+# vedere tutti gli utenti registrati
+# @dashboard_routes.route("/utenti", methods=["GET"])
+# def lista_utenti():
+#     users = User.query.all()
+#     utenti = [{"id": user.id, "username": user.username} for user in users]
+#     return jsonify(utenti)
+
+
