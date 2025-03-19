@@ -55,12 +55,8 @@ def run_script():
 @ricette_routes.route("/elenco_ricette", methods=["GET"])
 def elenco_ricette():
     elenco_ricette = Ricetta.query.all()
-    elenco = []
-    for ricetta in elenco_ricette:
-        elenco.append({
-            "nome_ricetta": ricetta.nome_ricetta,
-        })
-    return jsonify(elenco)
+
+    return render_template("elenco_ricette_utente.html", elenco_ricette=elenco_ricette)
 
 # esempio per visualizzazione parziale se non loggati
 from flask_login import current_user
@@ -87,6 +83,16 @@ def trova_ricetta():
             "ingredienti": ricetta.ingredienti,
             "kcal": ricetta.kcal
             })
+
+# sessione per gestire ricerca ricette in base alle calorie
+@ricette_routes.route("/trova_calorie", methods=["GET"])
+def trova_calorie():
+    calorie = request.args.get("kcal") # Ottieni il valore del parametro calorie da JS
+    elenco = Ricetta.query.filter_by(kcal=calorie).all()
+    if elenco is None:
+        return jsonify({"detail": "Ricette non trovate per calorie specificate"}),404
+
+    return render_template("lista_calorie.html", calorie=calorie, elenco=elenco)
 
 
 
