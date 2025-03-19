@@ -6,7 +6,6 @@ from models.user_model import User
 from models.ricetta_model import Ricetta
 
 
-
 load_dotenv()
 
 app = Flask(__name__)
