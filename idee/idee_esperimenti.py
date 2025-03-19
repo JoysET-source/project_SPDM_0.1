@@ -136,3 +136,60 @@
 #
 # ======================================================================================================================
 # ======================================================================================================================
+# serve per vedere gli utenti loggati in tempo reale
+# from flask import session
+# from flask_login import current_user, login_user, logout_user
+# from route_app import app
+#
+# logged_in_users = set()
+#
+# # Quando un utente fa il login, aggiungilo alla lista degli utenti loggati
+# @app.before_request
+# def before_request():
+#     if current_user.is_authenticated:
+#         logged_in_users.add(current_user.id)
+#
+# # Quando un utente fa il logout, rimuovilo dalla lista
+# @app.teardown_request
+# def teardown_request(exception=None):
+#     if current_user.is_authenticated:
+#         logged_in_users.discard(current_user.id)
+#
+# # Funzione per vedere gli utenti loggati
+# @app.route("/utenti_loggati", methods=["GET"])
+# def utenti_loggati():
+#     return jsonify(list(logged_in_users))
+
+
+# =====================================================================================================================
+# # questa parte non la uso piu ma serviva per caricare le foto e le descrizioni tramite cartella
+# # ora lo facciamo da interfaccia
+# # carica le ricette in categoria.html per la visualizzazione grafica e restituisce json
+# def load_ricette(categoria):
+#     categoria_path = os.path.join(ricette_path, categoria)
+#     ricette = []
+#     if os.path.exists(categoria_path):
+#         for filename in os.listdir(categoria_path):
+#             if filename.endswith(".jpg"):
+#                 image_path = f"Ricette/{categoria}/{filename}"  # Rimuovi "static" dal percorso
+#                 recipe_txt = filename.replace(".jpg", ".txt")
+#                 txt_path = os.path.join(categoria_path, recipe_txt)
+#                 if os.path.exists(txt_path):
+#                     with open(txt_path, "r") as f:
+#                         description = f.read()
+#                         ricette.append({"image": image_path, "description": description}) # restituzione json
+#                         # questo serve per il debugging se non carica immagini e/o testo inserito
+#                         # print(f"Immagine trovata: {image_path}")
+#                         # print(f"Caricata ricetta: {filename}, descrizione: {description}") questi print aiutano il debug se non passano i dati richiesti
+#     # else:
+#         # print(f"Categoria '{categoria}' non trovata in {categoria_path}") come altro print
+#     return ricette
+# ======================================================================================================================
+# from flask_login import current_user
+# @app.route("/profile")
+# def profile():
+#     if current_user.is_authenticated:
+#         return f"Benvenuto, {current_user.username}!"
+#     else:
+#         return "Devi essere loggato per vedere il tuo profilo."
+# ======================================================================================================================
