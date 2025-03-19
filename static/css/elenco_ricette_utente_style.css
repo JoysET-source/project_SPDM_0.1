@@ -1,0 +1,70 @@
+/* Assicura che il body abbia uno sfondo diverso per risaltare il container */
+body {
+    background-image: url('../italian-cuisine.jpg');
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Occupa almeno tutta l'altezza della finestra */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Container principale per limitare la larghezza della pagina */
+.container-main {
+    max-width: 850px; /* Larghezza massima della pagina */
+    margin: 40px auto; /* Centra il contenuto orizzontalmente */
+    background-color: white; /* Sfondo bianco */
+    padding: 0px; /* Aggiunge spazio interno */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombra per un effetto più pulito */
+    border-radius: 10px; /* Angoli arrotondati */
+}
+
+.container-top {
+    display: flex;
+    align-items: stretch; /* allunga in altezza */
+    justify-content: space-between;
+    padding: 0px;
+    background-color: white; /* Sfondo per distinguere la sezione */
+    border-radius: 10px; /* Angoli arrotondati */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Leggera ombra */
+    overflow: hidden; /* Evita eventuali problemi di overflow */
+    background-color: aliceblue;
+}
+
+.top-section-left,
+.top-section-right {
+    flex: 1; /* Entrambi occupano lo stesso spazio */
+    padding: 10px;
+}
+
+ /*Sezione sinistra con immagine*/
+.top-section-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-section-left img {
+    width: 65%; /* L'immagine occupa tutta la larghezza disponibile */
+    height: 65%; /* Occupa tutta l'altezza del contenitore */
+    max-height: 500px; /* Imposta un'altezza massima per evitare problemi */
+    border-radius: 10px;
+    object-fit: cover; /* Mantiene le proporzioni e riempie lo spazio */
+}
+
+/* Sezione destra con elenco puntato */
+.top-section-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.top-section-right ul {
+    list-style-type: none; /* Rimuove i punti elenco */
+    padding: 0;
+    text-align: left;
+    font-size: 18px;
+}
