@@ -1,7 +1,7 @@
 # import  os
 #
 # def get_categorie():
-#     """Legge dinamicamente le categorie dalla cartella static/ricette"""
+#     """Legge dinamicamente le ricette dalla cartella static/ricette"""
 #     categorie_path = os.path.join("static", "ricette")
 #     if not os.path.exists(categorie_path):
 #         return []

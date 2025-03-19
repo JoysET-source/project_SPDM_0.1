@@ -24,7 +24,7 @@ def admin_dashboard():
 @dashboard_routes.route("/create_recipe", methods=["GET", "POST"])
 @login_required
 def create_recipe():
-    # collegamento OS per iterazione sulle cartelle categorie
+    # collegamento OS per iterazione sulle cartelle ricette
     cartella_base = "static/ricette/"
     elenco_categorie = [cartella_categoria for cartella_categoria in os.listdir(cartella_base)
                         if os.path.isdir(os.path.join(cartella_base, cartella_categoria))]
@@ -178,7 +178,7 @@ def read_recipe():
 @login_required
 def update_recipe(id):
 
-    # collegamento OS per iterazione sulle cartelle categorie
+    # collegamento OS per iterazione sulle cartelle ricette
     cartella_base = "static/ricette/"
     elenco_categorie = [cartella_categoria for cartella_categoria in os.listdir(cartella_base)
                         if os.path.isdir(os.path.join(cartella_base, cartella_categoria))]

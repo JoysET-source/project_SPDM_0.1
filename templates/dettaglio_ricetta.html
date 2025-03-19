@@ -1,49 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Dettaglio Ricetta</title>
+    <title>Dettaglio Ricetta: {{ ricetta.nome_ricetta }}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dettaglio_ricetta_style.css') }}">
-
 </head>
 <body>
+<div class="container-main">
     <!-- Sezione superiore -->
     <div class="container-top">
         <div class="top-section-left">
-            <img src="{{ url_for('static', filename=image) }}" alt="Immagine Ricetta">
+            {% if ricetta.immagine %}
+            <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
+            {% else %}
+            <p alt="Nessuna immagine disponibile">Immagine non disponibile</p>
+            {% endif %}
         </div>
         <div class="top-section-right">
-            <ul>
-                <li>Ricetta: </li>
-                <li>Strumenti: </li>
-                <li>Ingredienti: </li>
-                <li>Kcal: </li>
-                <li>Tempo di preparazione: 1h</li>
-                <li>Difficoltà: Media</li>
+            <ul class="lista-dettagli-ricetta">
+                <h1 style="text-align: center">{{ ricetta.nome_ricetta }}</h1>
+                <li>Categoria: <strong>{{ ricetta.categoria }}</strong></li>
+                <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
+                <li>Autore: <strong>{{ ricetta.autore }}</strong></li>
+                <li>Calorie: <strong>{{ ricetta.kcal }}</strong></li>
+                <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
+                <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
+                <li>Preparazione: <strong>{{ ricetta.preparation_time }}</strong></li>
+                <li>Tempo Cottura: <strong>{{ ricetta.cooking_time }}</strong></li>
+                <li>Tempo Totale: <strong>{{ ricetta.total_time }}</strong></li>
+                <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
             </ul>
         </div>
     </div>
 
     <table>
-
         <tr>
-            <th><h1 style="color: #ff6600;">Ingredienti</h1></th>
-            <th>Recipes</th>
-            <th>Tools</th>
-            <th>Ingredients</th>
-            <th>Steps</th>
-            <th>Time</th>
+            <th><strong style="color: #ff6600; font-size: xx-large;">Ingredienti</strong></th>
+            <th>{{ ricetta.ingredienti }}</th>
         </tr>
     </table>
 
-    <!-- Sezione descrizione passo passo -->
+    <!-- Sezione ingredienti e descrizione passo passo -->
     <div class="next-section">
         <h2>Procedimento</h2>
 
         <div class="step">
             <h3>Step 1</h3>
-            <p>Preparare il ragù cuocendo carne e pomodoro per almeno 30 minuti.</p>
+            <p>{{ ricetta.steps }}</p>
         </div>
 
         <div class="step">
@@ -66,6 +70,8 @@
             <p>Lasciare riposare per 10 minuti prima di servire.</p>
         </div>
     </div>
-    <a href="{{ url_for('ricette_routes.categoria', categoria='pasta') }}" class="back-home">Torna al menu pricipale</a>
+        <a href="{{ url_for('ricette_routes.categoria', categoria=categoria) }}" class="back-home">Torna al menu pricipale</a>
+</div>
 </body>
+
 </html>

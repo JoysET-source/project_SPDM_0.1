@@ -100,10 +100,10 @@
 #         messaggio="Aggiungi Ricetta",
 #         errore_categoria=errore_categoria,
 #         categoria=categoria,  # Mantiene il valore nel campo
-#         categorie=categorie_valide  # Passa le categorie al template
+#         ricette=categorie_valide  # Passa le ricette al template
 #     )
 # il return e' dentro if di post
-# return render_template("dashboard/admin_dashboard.html", categorie=categorie_valide)
+# return render_template("dashboard/admin_dashboard.html", ricette=categorie_valide)
 #
 # questo nel suo  html
 # <!-- <div class="container-fluid">
@@ -123,7 +123,7 @@
 # import  os
 #
 # def get_categorie():
-#     """Legge dinamicamente le categorie dalla cartella static/ricette"""
+#     """Legge dinamicamente le ricette dalla cartella static/ricette"""
 #     categorie_path = os.path.join("static", "ricette")
 #     if not os.path.exists(categorie_path):
 #         return []

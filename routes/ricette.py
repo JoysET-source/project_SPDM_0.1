@@ -32,23 +32,24 @@ def load_ricette(categoria):
         # print(f"Categoria '{categoria}' non trovata in {categoria_path}") come altro print
     return ricette
 
-#  questo chiama struttura come file per interfaccia
+#  questo chiama struttura come file per interfaccia home
 @ricette_routes.route('/')
 def home():
     return render_template("struttura.html")
 
-# questo chiama categoria come interfaccia per le ricette uploadate
+# <categoria> è la parte dinamica dell'URL che identifica quale categoria è stata cliccata.
 @ricette_routes.route("/categoria/<categoria>")
 def categoria(categoria):
-    ricette = load_ricette(categoria)
-    return render_template("categoria.html", categoria=categoria, ricette=ricette)
+    # recuperiamo tutte le ricette appartenenti alla categoria scelta
+    elenco_ricette = Ricetta.query.filter_by(categoria=categoria).all()
+
+    return render_template("categoria.html", categoria=categoria, elenco_ricette=elenco_ricette)
 
 @ricette_routes.route("/dettaglio_ricette/<categoria>/<nome_ricetta>")
 def dettaglio_ricetta(categoria, nome_ricetta):
-    image = request.args.get("image")  # Recupera il parametro dell'immagine
-    ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
+    ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta, categoria=categoria).first()
     # passa i parametri specificati a dettaglio_ricetta.html
-    return render_template("dettaglio_ricetta.html", categoria=categoria, ricetta=ricetta, image=image)
+    return render_template("dettaglio_ricetta.html", categoria=categoria, ricetta=ricetta)
 
 # @app.route("/dettaglio_ricetta/<int:id>")
 # def dettaglio_ricetta(id):
