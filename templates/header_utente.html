@@ -1,0 +1,31 @@
+
+
+<!-- definizione delle icone insta e fb -->
+<div class="container-header">
+    <div class="container1">
+        <div class="social-media">
+            <a href="https://www.instagram.com/sepoatedemincat" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/eugenio.travisi.5" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+
+        <!-- definizione della barra di ricerca e del pulsante cerca-->
+        <div class="search-container">
+            <!--            <label for="search-input" class="sr-only">Cerca ricetta</label>-->
+            <!--            <input type="text" id="search-input" placeholder="Cerca" aria-label="Cerca-ricetta"/>-->
+            <!--            <button id="search-button" type="button">Search</button>-->
+            <form action="{{ url_for('ricette_routes.trova_ricetta') }}">
+                <label for="search-input" class="sr-only"></label>
+                <input type="text" id="search-input" name="nome_ricetta" placeholder="Cerca" aria-label="Cerca ricetta"
+                       required/>
+                <button id="search-button" type="submit">Search</button>
+            </form>
+            <a href="{{url_for('auth_routes.login')}}" class="loginButton">Login</a>
+        </div>
+    </div>
+</div>
+
+
