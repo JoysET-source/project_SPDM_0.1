@@ -14,30 +14,16 @@
     <!-- dovrebbe adattare le immagini per diverse grandezze schermo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/struttura_style.css">  <!-- collegamento con struttura_style -->
+    <!-- collegamento con gli script funzionali  -->
+    <script type="text/javascript" src="static/js/struttura_script.js"></script>
 </head>
 
 <body>
-<!-- definizione delle icone insta e fb -->
-<div class="container-header">
-    <div class="container1">
-        <div class="social-media">
-            <a href="https://www.instagram.com/sepoatedemincat" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/eugenio.travisi.5" target="_blank">
-                <i class="fab fa-facebook"></i>
-            </a>
-        </div>
 
-        <!-- definizione della barra di ricerca e del pulsante cerca-->
-        <div class="search-container">
-            <label for="search-input" class="sr-only">Cerca ricetta</label>
-            <input type="text" id="search-input" placeholder="Cerca" aria-label="Cerca-ricetta"/>
-            <button id="search-button" type="button">Search</button>
-            <a href="{{url_for('auth_routes.login')}}" class="loginButton">Login</a>
-        </div>
-    </div>
-</div>
+<!-- collegamento a header_utente -->
+{% include "header_utente.html" %}
+
+
 <!-- definizione dei pulsanti e del logo della pagina principale -->
 <div class="container-main">
     <div class="container-top">
@@ -56,15 +42,13 @@
                 <button class="btn" onclick="location.href='/categoria/secondi'">Secondi Piatti</button>
                 <button class="btn" onclick="location.href='/categoria/streetFood'">Street Food</button>
                 <button class="btn" onclick="location.href='/categoria/pizza'">Pizza</button>
+                <button class="btn" onclick="location.href='/categoria/dolci'">Dolci</button>
                 <button class="btn" id="runButton0">Esegui Script</button>
                 <button class="btn" id="runButton">Aggiungi la tua ricetta</button>
                 <button class="btn" id="runButton3">Apporto Calorico</button>
-                <button class="btn" id="runButton2">Vuoto</button>
             </div>
         </div>
     </div>
-    <!-- collegamento con gli script funzionali  -->
-    <script type="text/javascript" src="static/js/struttura_script.js"></script>
 
     <!-- definizione della sezione centrale della pagina -->
     <div class="container-second"></div>
