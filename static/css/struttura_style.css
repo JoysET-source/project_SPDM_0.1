@@ -59,6 +59,7 @@ body {
     color: black;
     cursor: pointer;
     border: none;
+    margin-left: 10px;
 }
 
 .loginButton {
@@ -131,8 +132,8 @@ body {
     width: 100%;
     min-height: 200px;
     background: transparent;
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 40px;
+    padding: 0px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
