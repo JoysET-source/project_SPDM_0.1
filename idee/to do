@@ -9,8 +9,6 @@ sulla dash mettere commenti grafici controllo ospiti analsi andamento sito (libr
 
 sistemare il footer
 
-aggiungere la sezione fatte da voi come giallo zafferano
-
 ========================================================================================================================
 
 verificare gestione messaggi errori input passwd errata per pagina login
@@ -19,10 +17,16 @@ capire come nascondere alcune parti se non ce il login
 
 implementare la registrazione con google e facebook (video su youtube)
 
-implementare il modo per creare il tasto sulla home quando admin crea una nuova categoria
-
 implementare il tasto per la ricerca utente tramite calorie
 
+aggiungere la sezione fatte da voi come giallo zafferano
+
+levare dalle pagine utente i pulsanti per tornare indietro e mettere
+semplicemente NAV su header contenente tutte le sezioni e header in tutte le pagine utente
+
+togliere quindi tutti i pulsanti da home metterli in NAV
+
+mettere sulla home le ricette del giorno e le piu visitate( questo implica aggiunta anche su pagine admin e completare la dash)
 
 
 
