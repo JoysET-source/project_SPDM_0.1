@@ -59,7 +59,7 @@ def elenco_ricette():
     return render_template("elenco_ricette_utente.html", elenco_ricette=elenco_ricette)
 
 # esempio per visualizzazione parziale se non loggati
-from flask_login import current_user
+# from flask_login import current_user
 # @ricette_routes.route("/elenco_ricette", methods=["GET"])
 # def elenco_ricette():
 #     if current_user.is_authenticated:
@@ -74,15 +74,16 @@ from flask_login import current_user
 # sessione per la ricerca della ricetta desiderata tramite barra di ricerca
 @ricette_routes.route("/trova_ricetta", methods=["GET"])
 def trova_ricetta():
-    nome_ricetta = request.args.get("nome_ricetta") # Ottieni il valore del parametro nome_ricetta da JS
+    nome_ricetta = request.args.get("nome_ricetta")
+    if nome_ricetta is None:
+        return jsonify({"detail": "Nome ricetta non trovato"})
+
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
     if ricetta is None:
-        return jsonify({"detail": "Ricetta non trovata"}),404
-    return jsonify({
-            "nome_ricetta": ricetta.nome_ricetta,
-            "ingredienti": ricetta.ingredienti,
-            "kcal": ricetta.kcal
-            })
+        return jsonify({"detail": "Ricetta non trovata"}), 404
+
+    return render_template("dettaglio_ricetta.html", ricetta=ricetta)
+
 
 # sessione per gestire ricerca ricette in base alle calorie
 @ricette_routes.route("/trova_calorie", methods=["GET"])
