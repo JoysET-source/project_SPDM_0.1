@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Elenco Ricette Disponibili</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/elenco_ricette_utente_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+
+<!-- collegamento a header_utente -->
+{% include "header_utente.html" %}
+
 <div class="container-main">
     {% for ricetta in elenco_ricette %}
     <div class="container-top">
@@ -31,6 +36,7 @@
 
     </div>
     {% endfor %}
+    <a class="back-home" href="/">Torna alla pagina principale</a>
 </div>
 </body>
 </html>
