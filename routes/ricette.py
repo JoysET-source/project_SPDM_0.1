@@ -1,10 +1,11 @@
 import os
 
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, url_for
 
 from import_bridge import login_manager, db
 from models.ricetta_model import Ricetta
 from models.user_model import User
+
 
 
 ricette_routes = Blueprint('ricette_routes', __name__)
@@ -74,27 +75,74 @@ def elenco_ricette():
 # sessione per la ricerca della ricetta desiderata tramite barra di ricerca
 @ricette_routes.route("/trova_ricetta", methods=["GET"])
 def trova_ricetta():
-    nome_ricetta = request.args.get("nome_ricetta")
-    if nome_ricetta is None:
-        return jsonify({"detail": "Nome ricetta non trovato"})
+    nome_ricetta = request.args.get("nome_ricetta").lower()
+    # se non inserito il nome della ricetta o minore di 3 lettere
+    if not nome_ricetta or len(nome_ricetta) < 3:
+        return render_template("struttura.html", alert="Inserisci un nome valido")
 
-    ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta).first()
-    if ricetta is None:
-        return jsonify({"detail": "Ricetta non trovata"}), 404
+    # cerca tutte le ricette che contengono il nome inserito anche se parziale
+    elenco_ricette = Ricetta.query.filter(Ricetta.nome_ricetta.ilike(f"%{nome_ricetta}%")).all()
 
-    return render_template("dettaglio_ricetta.html", ricetta=ricetta)
+    if elenco_ricette:
+        return render_template("elenco_ricette_utente.html", elenco_ricette=elenco_ricette)
+
+    return render_template("struttura.html", errore="Ricetta non trovata")
+
 
 
 # sessione per gestire ricerca ricette in base alle calorie
 @ricette_routes.route("/trova_calorie", methods=["GET"])
 def trova_calorie():
     calorie = request.args.get("kcal") # Ottieni il valore del parametro calorie da JS
-    elenco = Ricetta.query.filter_by(kcal=calorie).all()
-    if elenco is None:
-        return jsonify({"detail": "Ricette non trovate per calorie specificate"}),404
+    # se non inserito il valore delle calorie o non numerico
+    if not calorie or not calorie.isdigit():
+        return render_template("kcal_searching.html", alert="Inserisci un valore valido")
 
-    return render_template("lista_calorie.html", calorie=calorie, elenco=elenco)
+    elenco_calorie = Ricetta.query.filter_by(kcal=calorie).all()
+    if elenco_calorie is None:
+        return render_template("kcal_searching.html", alert="Ricette non trovate per calorie specificate")
 
+    return render_template("kcal_searching.html", calorie=calorie, elenco_calorie=elenco_calorie)
+
+
+# @ricette_routes.route("/trova_calorie", methods=["GET"])
+# def trova_calorie():
+#     calorie = request.args.get("kcal")
+#
+#     # Se il valore non è valido
+#     if not calorie or not calorie.isdigit():
+#         return "<p class='alert alert-danger'>Inserisci un valore numerico valido</p>"
+#
+#     elenco_calorie = Ricetta.query.filter(Ricetta.kcal == int(calorie)).all()
+#
+#     # Se nessuna ricetta trovata
+#     if not elenco_calorie:
+#         return "<p class='alert alert-warning'>Nessuna ricetta trovata per queste calorie.</p>"
+#
+#     # Genera la lista HTML delle ricette trovate
+#     results_html = ""
+#     for ricetta in elenco_calorie:
+#         results_html += f"""
+#         <div class="container-top">
+#             <div class="top-section-left">
+#                 <a class="btn btn-primary" href="{url_for('ricette_routes.dettaglio_ricetta', categoria=ricetta.categoria, nome_ricetta=ricetta.nome_ricetta)}">
+#                     <img src="{url_for('static', filename=ricetta.immagine[7:])}" alt="Immagine Ricetta">
+#                 </a>
+#             </div>
+#             <div class="top-section-right">
+#                 <ul class="dettagli-ricetta">
+#                     <li>Calorie: <h3>{ricetta.kcal}</h3></li>
+#                     <li>Cucina: <strong>{ricetta.cousine_type}</strong></li>
+#                     <li>Nome: <strong>{ricetta.nome_ricetta}</strong></li>
+#                     <li>Difficoltà: <strong>{ricetta.difficulty_level}</strong></li>
+#                     <li>Tempo: <strong>{ricetta.total_time}</strong></li>
+#                     <li>Prezzo: <strong>{ricetta.prezzo} {ricetta.valuta}</strong></li>
+#                 </ul>
+#             </div>
+#         </div>
+#         """
+#
+#     return results_html  # Restituisce solo i risultati (senza ricaricare la pagina)
 
 
 
