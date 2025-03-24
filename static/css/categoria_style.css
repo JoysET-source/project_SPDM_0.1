@@ -4,40 +4,58 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .categorie {
     text-align: center;
     font-size: 200%;
+    align-items: center;
+    justify-content: center;
 }
 
 mark {
-    background-color: blue;
-    color: tomato;
-    border-radius: 10px;
+    background-color: white;
+    color: black;
+    border-radius: 4px;
 }
 
 .ricette-container {
     display: flex;
     flex-wrap: wrap; /* Permette di andare a capo quando lo spazio finisce */
     gap: 10px; /* Spazio tra le immagini */
-    justify-content: center; /* Centra le immagini nella pagina */
+    justify-content: flex-start;
     padding: 0;
 }
+
+.ricette-container a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    width: 200px; /* Stessa larghezza per tutte */
+}
+
+.ricette-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px; /* Per un look più carino */
+}
+
+.ricette-container p {
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: large;
+}
+
 
 .ricette-container button {
     background: none;
     border: none;
     padding: 0; /* margine interno */
     cursor: pointer; /* Cambia il cursore in manina */
-}
-
-.ricette-container img {
-    width: 200px; /* Larghezza immagini */
-    height: auto;
-    display: block; /* Evita spazi indesiderati */
 }
 
 .back-home {

@@ -17,28 +17,25 @@
 <!-- con jinja creiamo il ciclo per iterare tutte le ricette inserite e mostrarle con la loro immagine personale  -->
 <body>
 <div class="background">
+
     <div class="categorie">
         <mark>Ricette della categoria: {{ categoria }}</mark>
     </div>
     <br><br><br>
-    <div>
+
+    <div class="ricette-container">
         {% for ricetta in elenco_ricette %}
-        <div class="ricette-container">
-            <h2>{{ ricetta.nome_ricetta }}</h2>
-            <a href="{{ url_for('ricette_routes.dettaglio_ricetta',
-            categoria=categoria,
-            nome_ricetta=ricetta.nome_ricetta
-            )}}">
-                <button>
-                    {% if ricetta.immagine %}
-                    <img src="{{ url_for('static', filename=ricetta.immagine[7:] )}}"
-                         alt="{{ ricetta.nome_ricetta }}" width="200">
-                    {% else %}
-                    <h3>Immagine non Disponibile</h3>
-                    {% endif %}
-                </button>
-            </a>
-        </div>
+        <a href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=categoria, nome_ricetta=ricetta.nome_ricetta) }}">
+            <button>
+                {% if ricetta.immagine %}
+                <img src="{{ url_for('static', filename=ricetta.immagine[7:] )}}"
+                     alt="{{ ricetta.nome_ricetta }}" width="200">
+                {% else %}
+                Immagine non Disponibile
+                {% endif %}
+            </button>
+            <p>{{ricetta.nome_ricetta}}</p>
+        </a>
         {% endfor %}
     </div>
 
