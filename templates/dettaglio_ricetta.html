@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dettaglio_ricetta_style.css') }}">
 </head>
 <body>
+
 <div class="container-main">
+    <h1 style="text-align: start; margin-left: 10px">
+        {{ ricetta.categoria|capitalize }} {{ ricetta.nome_ricetta|capitalize }}
+    </h1>
     <!-- Sezione superiore -->
     <div class="container-top">
 
@@ -24,15 +28,12 @@
         <!-- gestione dettagli parte destra -->
         <div class="top-section-right">
             <ul class="lista-dettagli-ricetta">
-                <h1 style="text-align: center">{{ ricetta.nome_ricetta }}</h1>
-                <li>Categoria: <strong>{{ ricetta.categoria }}</strong></li>
-                <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
+                <li><mark>{{ ricetta.kcal }} kcal</mark>calorie per porzione</li>
                 <li>Autore: <strong>{{ ricetta.autore }}</strong></li>
-                <li>Calorie: <strong>{{ ricetta.kcal }}</strong></li>
                 <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
                 <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
-                <li>Preparazione: <strong>{{ ricetta.preparation_time }}</strong></li>
-                <li>Tempo Cottura: <strong>{{ ricetta.cooking_time }}</strong></li>
+                <li>Preparazione: <strong>{{ ricetta.preparation_time }} min</strong></li>
+                <li>Tempo Cottura: <strong>{{ ricetta.cooking_time }} min</strong></li>
                 <li>Tempo Totale: <strong>{{ ricetta.total_time }}</strong></li>
                 <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
             </ul>

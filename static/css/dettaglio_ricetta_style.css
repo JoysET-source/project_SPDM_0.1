@@ -11,7 +11,7 @@ body {
 
 /* Container principale per limitare la larghezza della pagina */
 .container-main {
-    max-width: 850px; /* Larghezza massima della pagina */
+    width: 900px; /* Larghezza massima della pagina */
     margin: 40px auto; /* Centra il contenuto orizzontalmente */
     background-color: white; /* Sfondo bianco */
     padding: 0px; /* Aggiunge spazio interno */
@@ -68,6 +68,12 @@ body {
     padding: 0;
     text-align: left;
     font-size: 18px;
+}
+
+.top-section-right mark {
+    background-color: darkslategray;
+    color: white;
+    border-radius: 4px;
 }
 
 /* Sezione descrizione passo passo */
