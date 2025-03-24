@@ -42,7 +42,7 @@ mark {
 
 .back-home {
     position: fixed;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
     background-color: #ff6600;
     color: white;
