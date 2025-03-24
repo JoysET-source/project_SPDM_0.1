@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calorie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/kcal_searching_style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- gestione delle flag per errori inserimento calorie -->
+{% if alert %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ alert }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<div class="container-header">
+    <div class="container1">
+        <!-- definizione della barra di ricerca e del pulsante cerca-->
+        <div class="search-container">
+            <form id="search-form">
+                <label for="search-input" class="sr-only"></label>
+                <input type="text" id="search-input" name="kcal" placeholder="Calorie" aria-label="Cerca-calorie" required/>
+                <button id="search-button" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <!-- Qui compariranno i risultati -->
+    <div id="results"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/struttura_script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calorie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/kcal_searching_style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- gestione delle flag per errori inserimento calorie -->
+{% if alert %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ alert }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<div class="container-header">
+    <div class="container1">
+        <!-- definizione della barra di ricerca e del pulsante cerca-->
+        <div class="search-container">
+
+            <!-- questo form e'per js su struttura -->
+            <!--            <form id="search-form">-->
+            <!--                <label for="search-input" class="sr-only"></label>-->
+            <!--                <input type="text" id="search-input" placeholder="Calorie" aria-label="Cerca-calorie" required/>-->
+            <!--                <button id="search-button" type="button">Search</button>-->
+            <!--            </form>-->
+
+            <form action="{{ url_for('ricette_routes.trova_calorie') }}">
+                <label for="search-input" class="sr-only"></label>
+                <input type="text" id="search-input" name="nome_ricetta" placeholder="Cerca" aria-label="Cerca ricetta"
+                       required/>
+                <button id="search-button" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <!-- Qui compariranno i risultati -->
+    <div id="results"></div>
+</div>
+
+{% for ricetta in elenco_calorie %}
+<div class="container-top">
+
+    <div class="top-section-left">
+        {% if ricetta.immagine %}
+        <a style="border: none; outline: none; box-shadow: none; background: transparent; padding: 0;"
+           class="btn btn-primary"
+           href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=ricetta.categoria, nome_ricetta=ricetta.nome_ricetta) }}"
+           role="button">
+            <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
+        </a>
+        {% else %}
+        <p>Immagine non disponibile</p>
+        {% endif %}
+    </div>
+
+    <div class="top-section-right">
+        <ul class="dettagli-ricetta">
+            <li>Calorie: <h3>{{ ricetta.kcal }}</h3></li>
+            <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
+            <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
+            <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
+            <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>
+            <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
+        </ul>
+    </div>
+
+</div>
+{% endfor %}
+
+
+<a class="back-home" href="/">Torna alla pagina principale</a>
+
+<!-- Includi Popper.js e il JavaScript di Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
