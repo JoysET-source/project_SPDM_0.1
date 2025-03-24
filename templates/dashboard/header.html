@@ -1,20 +1,22 @@
-
-<header>        
-        <!-- creiamo il menu a tre barre chiamato toggle  -->
-    <div class="menu-toggle">&#9776;</div> 
-        <!-- importiamo il messaggio da python -->
+<header>
+    <!-- creiamo il menu a tre barre chiamato toggle  -->
+    <div class="menu-toggle">&#9776;</div>
+    <!-- importiamo il messaggio da python -->
     <h1>{{ messaggio }}</h1>
-        <!-- icona omino come logout -->
+    <!-- icona omino come logout -->
     <a style="color: limegreen;" href="{{ url_for('auth_routes.logout') }}">
         <i class="fa fa-user-circle status-icon"></i> Logout
-    </a>    
-       <!-- interno del menu a tendina -->
-<nav id="menu" class="hidden">
-    <ul>
-        <li><a style="text-decoration: none;" href="{{url_for('dashboard_routes.admin_dashboard')}}">Dashboard</a></li>        
-        <li><a style="text-decoration: none;" href="{{url_for('dashboard_routes.create_recipe')}}">Crea Ricetta</a></li>        
-        <li><a style="text-decoration: none;" href="{{url_for('dashboard_routes.list_recipes')}}">Lista Ricette</a></li>               
-    </ul>
-</nav> 
-<script type="text/javascript" src="{{ url_for('static', filename='dashboard/js/admin_dsh_script.js') }}"></script>
+    </a>
+    <!-- interno del menu a tendina -->
+    <nav id="menu" class="hidden">
+        <ul>
+            <li><a style="text-decoration: none;" href="{{url_for('dashboard_routes.admin_dashboard')}}">Dashboard</a>
+            </li>
+            <li><a style="text-decoration: none;" href="{{url_for('dashboard_routes.create_recipe')}}">Crea Ricetta</a>
+            </li>
+            <li><a style="text-decoration: none;" href="{{url_for('dashboard_routes.list_recipes')}}">Lista Ricette</a>
+            </li>
+        </ul>
+    </nav>
+    <script type="text/javascript" src="{{ url_for('static', filename='dashboard/js/admin_dsh_script.js') }}"></script>
 </header> 
