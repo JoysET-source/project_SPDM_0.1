@@ -37,9 +37,14 @@ nav {
     top: 80px;    
     background-color: white;
     border: 1px solid #ccc;
-    display: none; /* menu nascosto di default */
+    /*display: none; !* menu nascosto di default *!*/
     color: black;    
 }
+
+.hidden {
+    display: none;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
