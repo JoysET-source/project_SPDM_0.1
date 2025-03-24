@@ -26,6 +26,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     gap: 16px;
+    align-items: center;
 }
 
 .social-media {
@@ -71,6 +72,52 @@ body {
     cursor: pointer;
     text-decoration: none;
 }
+/* menu a tendina */
+.menu-toggle {
+    cursor: pointer;
+    font-size: 30px;
+    z-index: 1000;
+    position: relative;
+    color: white;
+}
+nav {
+    position: absolute;
+    left: 0;
+    top: 40px;
+    background-color: white;
+    border: 1px solid #ccc;
+    /*display: none; !* menu nascosto di default *!*/
+    color: black;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Cambiare il colore delle scritte dei menu */
+nav#menu ul li a {
+    color: black; /* Cambia il colore del testo a nero */
+    text-decoration: none; /* Rimuovi la sottolineatura */
+}
+
+.no-decoration {
+    text-decoration: none;
+    color: inherit; /* Mantiene il colore del testo */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+nav ul li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+nav ul li:hover {
+    background-color: orange;
+}
 
 /* CONTAINER PRINCIPALE */
 .container-main {
@@ -83,49 +130,29 @@ body {
     padding: 0px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: -1;
 }
 
 /* Contenitore superiore: Logo a sinistra, pulsanti a destra */
 .container-top {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     margin-top: 40px;
+    position: relative;
+    z-index: -1;
 }
 
 /* Logo */
 .logo {
-    width: 250px;
+    width: 400px;
     height: auto;
     opacity: 0.587;
     border-radius: 280px;
+    z-index: -1;
 }
 
-/* Pulsanti */
-.btn-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-end;
-}
-
-.btn {
-    font-size: 16px;
-    background-color: rgba(10, 13, 236, 0.4);
-    width: 140px;
-    height: 50px;
-    border-radius: 10px;
-    cursor: pointer;
-    border: none;
-    margin: 5px;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background-color: rgb(180, 109, 43, 0.9);
-    transform: scale(1.05);
-}
 
 /* SECONDO CONTAINER */
 .container-second {
@@ -136,5 +163,6 @@ body {
     padding: 0px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
 }
+
+

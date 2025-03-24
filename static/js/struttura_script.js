@@ -7,6 +7,25 @@ document.getElementById("runButton0").onclick = function () {
 };
 
 
+
+// gestisce barra di ricerca e tasto search su kcal_searching
+// document.getElementById("search-form").addEventListener("submit", function(event) {
+//     event.preventDefault(); // Impedisce il reload della pagina
+//
+//     let inputCalorie = document.getElementById("search-input").value;
+//
+//     fetch(`/trova_calorie?kcal=${inputCalorie}`) // Chiamata la route Flask
+//         .then(response => response.text()) // Converte la risposta in testo HTML
+//         .then(data => {
+//             document.getElementById("results").innerHTML = data; // Aggiorna i risultati senza ricaricare
+//         })
+//         .catch(error => console.error("Errore nella ricerca:", error));
+// });
+
+
+
+
+
 // gestisce barra di ricerca e  tasto search su homePage
 
 // document.getElementById("search-button").onclick = function () { //quando premi il pulsante fai function
