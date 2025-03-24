@@ -4,12 +4,15 @@
     <title>Dettaglio Ricetta: {{ ricetta.nome_ricetta }}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- collegamento a CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dettaglio_ricetta_style.css') }}">
 </head>
 <body>
 <div class="container-main">
     <!-- Sezione superiore -->
     <div class="container-top">
+
+        <!-- gestione immagine parte sinistra -->
         <div class="top-section-left">
             {% if ricetta.immagine %}
             <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
@@ -17,6 +20,8 @@
             <p alt="Nessuna immagine disponibile">Immagine non disponibile</p>
             {% endif %}
         </div>
+
+        <!-- gestione dettagli parte destra -->
         <div class="top-section-right">
             <ul class="lista-dettagli-ricetta">
                 <h1 style="text-align: center">{{ ricetta.nome_ricetta }}</h1>
@@ -34,14 +39,13 @@
         </div>
     </div>
 
-    <table>
-        <tr>
-            <th><strong style="color: #ff6600; font-size: xx-large;">Ingredienti</strong></th>
-            <th>{{ ricetta.ingredienti }}</th>
-        </tr>
-    </table>
+    <!-- sezione ingredienti   -->
+    <div>
+        <p><strong style="color: #ff6600; font-size: xx-large;">Ingredienti</strong></p>
+        <p>{{ ricetta.ingredienti }}</p>
+    </div>
 
-    <!-- Sezione ingredienti e descrizione passo passo -->
+    <!-- Sezione descrizione passo passo -->
     <div class="next-section">
         <h2>Procedimento</h2>
 
@@ -70,7 +74,8 @@
             <p>Lasciare riposare per 10 minuti prima di servire.</p>
         </div>
     </div>
-        <a href="{{ url_for('ricette_routes.categoria', categoria=categoria) }}" class="back-home">Torna al menu pricipale</a>
+    <a href="{{ url_for('ricette_routes.categoria', categoria=categoria) }}" class="back-home">Torna al menu
+        pricipale</a>
 </div>
 </body>
 
