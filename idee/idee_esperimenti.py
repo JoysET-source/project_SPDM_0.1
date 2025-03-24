@@ -193,3 +193,51 @@
 #     else:
 #         return "Devi essere loggato per vedere il tuo profilo."
 # ======================================================================================================================
+#  questa sezione era usata in principio e'una lista di tasti per la navigazione sulla destra di un container
+# <!--        <div class="top-section-right">-->
+# <!--            <div class="btn-container">-->
+# <!--                <a href="{{ url_for('ricette_routes.elenco_ricette') }}">-->
+# <!--                    <button class="btn">Elenco Ricette</button>-->
+# <!--                </a>-->
+# <!--                <button class="btn" onclick="location.href='/categoria/entree'">Entree</button>-->
+# <!--                <button class="btn" onclick="location.href='/categoria/primi'">Primi Piatti</button>-->
+# <!--                <button class="btn" onclick="location.href='/categoria/pasta'">Paste</button>-->
+# <!--                <button class="btn" onclick="location.href='/categoria/risotti'">Risotti</button>-->
+# <!--                <button class="btn" onclick="location.href='/categoria/secondi'">Secondi Piatti</button>-->
+# <!--                <button class="btn" onclick="location.href='/categoria/streetFood'">Street Food</button>-->
+# <!--                <button class="btn" onclick="location.href='/categoria/pizza'">Pizza</button>-->
+# <!--                <button class="btn" onclick="location.href='/categoria/dolci'">Dolci</button>-->
+# <!--                <button class="btn" id="runButton0">Esegui Script</button>-->
+# <!--                <button class="btn" id="runButton">Aggiungi la tua ricetta</button>-->
+# <!--                <button class="btn" id="runButton3">Apporto Calorico</button>-->
+# <!--            </div>-->
+# <!--        </div>-->
+
+# il loro style
+# /* Pulsanti */
+# .btn-container {
+#     display: flex;
+#     flex-wrap: wrap;
+#     gap: 10px;
+#     justify-content: flex-end;
+# }
+#
+# .btn {
+#     font-size: 16px;
+#     background-color: rgba(10, 13, 236, 0.4);
+#     width: 140px;
+#     height: 50px;
+#     border-radius: 10px;
+#     cursor: pointer;
+#     border: none;
+#     margin: 5px;
+#     transition: 0.3s;
+# }
+#
+# .btn:hover {
+#     background-color: rgb(180, 109, 43, 0.9);
+#     transform: scale(1.05);
+# }
+
+# ======================================================================================================================
+
