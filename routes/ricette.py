@@ -94,15 +94,24 @@ def trova_ricetta():
 @ricette_routes.route("/trova_calorie", methods=["GET"])
 def trova_calorie():
     calorie = request.args.get("kcal") # Ottieni il valore del parametro calorie da JS
+    print(f"Calorie parameter: {calorie}")  # traccia il valore del parametro calorie quando apre la pagina
+
+    # se quando carica la pagina il valore di calorie è None carica semplicemente la pagina
+    if calorie is None:
+        return render_template("kcal_searching.html")
+
     # se non inserito il valore delle calorie o non numerico
     if not calorie or not calorie.isdigit():
         return render_template("kcal_searching.html", alert="Inserisci un valore valido")
 
-    elenco_calorie = Ricetta.query.filter_by(kcal=calorie).all()
-    if elenco_calorie is None:
-        return render_template("kcal_searching.html", alert="Ricette non trovate per calorie specificate")
+    # Converti il valore delle calorie in un intero
+    calorie = int(calorie)
 
-    return render_template("kcal_searching.html", calorie=calorie, elenco_calorie=elenco_calorie)
+    elenco_calorie = Ricetta.query.filter_by(kcal=calorie).all()
+    if elenco_calorie:
+        return render_template("kcal_searching.html", calorie=calorie, elenco_calorie=elenco_calorie)
+
+    return render_template("kcal_searching.html", alert="Ricette non trovate per calorie specificate")
 
 
 # @ricette_routes.route("/trova_calorie", methods=["GET"])
