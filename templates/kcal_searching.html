@@ -21,7 +21,6 @@
 <div class="container-header">
     <div class="container1">
         <!-- definizione della barra di ricerca e del pulsante cerca-->
-        <div class="search-container">
 
             <!-- questo form e'per js su struttura -->
             <!--            <form id="search-form">-->
@@ -30,12 +29,16 @@
             <!--                <button id="search-button" type="button">Search</button>-->
             <!--            </form>-->
 
-            <form action="{{ url_for('ricette_routes.trova_calorie') }}">
-                <label for="search-input" class="sr-only"></label>
-                <input type="text" id="search-input" name="nome_ricetta" placeholder="Cerca" aria-label="Cerca ricetta"
-                       required/>
-                <button id="search-button" type="submit">Search</button>
-            </form>
+        <!-- questo form fa capo diretto ad endpoint  -->
+        <div class="search-container">
+            <div class="search-container">
+                <form action="{{ url_for('ricette_routes.trova_calorie') }}" method="GET">
+                    <label for="search-input" class="sr-only"></label>
+                    <input type="text" id="search-input" name="kcal" placeholder="Calorie" aria-label="Cerca ricetta"
+                           required/>
+                    <button id="search-button" type="submit">Search</button>
+                </form>
+            </div>
         </div>
     </div>
     <!-- Qui compariranno i risultati -->
