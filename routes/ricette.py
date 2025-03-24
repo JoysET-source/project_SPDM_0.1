@@ -113,7 +113,8 @@ def trova_calorie():
 
     return render_template("kcal_searching.html", alert="Ricette non trovate per calorie specificate")
 
-
+# ======================================================================================================================
+#  questa route dovrebbe essere per API con ajax e swagger
 # @ricette_routes.route("/trova_calorie", methods=["GET"])
 # def trova_calorie():
 #     calorie = request.args.get("kcal")
