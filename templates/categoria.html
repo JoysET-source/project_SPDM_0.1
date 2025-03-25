@@ -8,38 +8,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/categoria_style.css">
 </head>
+
 <!-- il background lo mettiamo qui in questo caso perche css e'solo statico e non analizza jinja -->
 <style>
     .background {
-        background-image: url("{{ url_for('static', filename='sfondi/{}_sfondo.jpg'.format(categoria)) }}");
+        background-image: url("{{ url_for('static', filename='sfondi/' + sfondo_finale) }}");
     }
 </style>
+
 <!-- con jinja creiamo il ciclo per iterare tutte le ricette inserite e mostrarle con la loro immagine personale  -->
 <body>
 <div class="background">
+    <div class="container">
+        <div class="categorie">
+            <mark>Ricette  {{ categoria }}</mark>
+        </div>
+        <br><br><br>
 
-    <div class="categorie">
-        <mark>Ricette della categoria: {{ categoria }}</mark>
+        <div class="ricette-container">
+            {% for ricetta in elenco_ricette %}
+            <a href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=categoria, nome_ricetta=ricetta.nome_ricetta) }}">
+                <button>
+                    {% if ricetta.immagine %}
+                    <img src="{{ url_for('static', filename=ricetta.immagine[7:] )}}"
+                         alt="{{ ricetta.nome_ricetta }}">
+                    {% else %}
+                    Immagine non Disponibile
+                    {% endif %}
+                </button>
+                <p>{{ricetta.nome_ricetta}}</p>
+            </a>
+            {% endfor %}
+        </div>
+
+        <a class="back-home" href="/">Home</a>
+
     </div>
-    <br><br><br>
-
-    <div class="ricette-container">
-        {% for ricetta in elenco_ricette %}
-        <a href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=categoria, nome_ricetta=ricetta.nome_ricetta) }}">
-            <button>
-                {% if ricetta.immagine %}
-                <img src="{{ url_for('static', filename=ricetta.immagine[7:] )}}"
-                     alt="{{ ricetta.nome_ricetta }}" width="200">
-                {% else %}
-                Immagine non Disponibile
-                {% endif %}
-            </button>
-            <p>{{ricetta.nome_ricetta}}</p>
-        </a>
-        {% endfor %}
-    </div>
-
-    <a class="back-home" href="/">Torna alla pagina principale</a>
 </div>
 </body>
 </html>

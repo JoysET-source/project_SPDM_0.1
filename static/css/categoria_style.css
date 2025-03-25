@@ -1,9 +1,18 @@
 .background {
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+.container {
+    width: 1000px; /* Set the width of the container */
+    margin: 0 auto; /* Center the container */
+    background-color: transparent; /* Optional: Add a background color with transparency */
+    padding: 20px; /* Optional: Add some padding */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
 }
 
 .categorie {
@@ -36,7 +45,7 @@ mark {
 }
 
 .ricette-container img {
-    width: 100%;
+    width: 150px;
     height: auto;
     display: block;
     border-radius: 10px; /* Per un look più carino */
