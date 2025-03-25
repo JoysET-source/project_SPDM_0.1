@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, redirect, url_for, request, jsonify
+from flask import Blueprint, render_template, redirect, url_for, request, jsonify, flash
 from flask_login import login_user, logout_user, login_required
+
 
 from import_bridge import bcrypt, db
 from models.login_model import LoginForm, RegisterForm
@@ -12,20 +13,25 @@ def login():
     form = LoginForm() # stai creando un modulo con: campo username, password e tasto di invio
 
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first() # questo serve per controllare se user gia presente in db o no
-        if user:
-            if bcrypt.check_password_hash(user.password, form.password.data):# questo controlla che la password appartiene a user
-                login_user(user) # e quindi ti logga dentro
+        # questo serve per controllare se user gia presente in db o no
+        user = User.query.filter_by(username=form.username.data).first()
 
-                # controlla se login di admin
-                if user.username == "admin":
-                    return redirect(url_for("dashboard_routes.admin_dashboard"))
-                else:
-                    # e ti rimanda alla pagina dashboard in templates(struttura a pagamento per me)
-                    # return "Login effettuato! <a href='/'>Torna alla home</a>"
-                    return redirect(url_for("auth_routes.login_dashboard"))
+        # verifica che la password appartiene a user
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user) # e quindi ti logga dentro
+
+            # controlla se login di admin
+            if user.username == "admin":
+                return redirect(url_for("dashboard_routes.admin_dashboard"))
+
+            # se non admin, reindirizza alla home
+            return redirect(url_for("ricette_routes.home"))
+
+        # Se la password è sbagliata o l'utente non esiste
+        return render_template("auth/login.html", form=form, alert="Credenziali errate o non registrate!")
 
     return render_template("auth/login.html", form=form)
+
 
 @auth_routes.route("/register", methods=["GET", "POST"])
 def register():
@@ -40,12 +46,13 @@ def register():
 
             db.session.add(new_user)
             db.session.commit()
-            # return redirect(url_for("login"))
-            return jsonify({"success":"Registrazione completata"}),200
+            flash("Registrazione completata con successo!", "success")
+            return redirect(url_for("auth_routes.login"))
+            # return render_template("auth/login.html", form=form, success="Utente registrato!")
         else:
             # Flask raccoglie gli errori del form e li restituisce come JSON
-            errors = {field.name: field.errors for field in form if field.errors}
-            return jsonify({"errors": errors}), 400
+            errors = "User e password esistenti o non validi"
+            return render_template("auth/register.html", form=form, errore=errors)
 
     return render_template("auth/register.html", form=form)
 
