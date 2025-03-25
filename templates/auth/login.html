@@ -5,6 +5,29 @@
 {% block form_title %}Login{% endblock %}
 
 {% block form_content %}
+
+<!-- Container per i messaggi flash -->
+<div class="container mt-3">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
+<!-- Messaggio di errore alert -->
+{% if alert %}
+<div class="alert alert-danger" role="alert">
+    {{ alert }}
+</div>
+{% endif %}
+
+<!-- FORM LOGIN -->
 <form id="login-form" method="POST">
     {{ form.hidden_tag() }}
 
@@ -16,20 +39,22 @@
     <label for="password">Password</label>
     {{ form.password(class="form-control", placeholder="Password") }}
 
-     <div id="password" class="text-danger"></div>
+    <div id="password" class="text-danger"></div>
 
     {% if form.password.errors %}
-        <p class="text-danger">{{ form.password.errors[0] }}</p>
+    <p class="text-danger">{{ form.password.errors[0] }}</p>
     {% endif %}
 
-    <p>Non hai un account? <a href="{{ url_for('auth_routes.register') }}" style="color: blue;">Registrati</a></p><br><br>
+    <p>Non hai un account? <a href="{{ url_for('auth_routes.register') }}" style="color: blue;">Registrati</a></p>
+    <br><br>
     <a href="/">Torna alla pagina principale</a>
 
     {{ form.submit(class="btn btn-primary") }}
 
-    <div class="social">
-      <div class="go"><i class="fab fa-google"></i>  Google</div>
-      <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
-    </div>
+    <!--    <div class="social">-->
+    <!--        <div class="go"><i class="fab fa-google"></i>  Google</div>-->
+    <!--        <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>-->
+    <!--    </div>-->
 </form>
+
 {% endblock %}
