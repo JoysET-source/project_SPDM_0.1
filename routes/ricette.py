@@ -19,13 +19,36 @@ ricette_path = os.path.join("static", "Ricette")
 def home():
     return render_template("struttura.html")
 
+
 # <categoria> è la parte dinamica dell'URL che identifica quale categoria è stata cliccata.
+# e ne fornisce anche l`immagine di sfondo in diversi formati
 @ricette_routes.route("/categoria/<categoria>")
 def categoria(categoria):
-    # recuperiamo tutte le ricette appartenenti alla categoria scelta
+    # Recuperiamo tutte le ricette appartenenti alla categoria scelta
     elenco_ricette = Ricetta.query.filter_by(categoria=categoria).all()
-    # restituiamo gli attributi a categoria html per visualizzarle
-    return render_template("categoria.html", categoria=categoria, elenco_ricette=elenco_ricette)
+
+    # Percorso della cartella degli sfondi
+    sfondi_dir = os.path.join("static", "sfondi")
+
+    # Possibili estensioni
+    estensioni = [".jpg", ".jpeg", ".png"]
+
+    # Troviamo il file esistente
+    sfondo_finale = None
+    for estensione in estensioni:
+        sfondo_file = f"{categoria}_sfondo{estensione}"
+        if os.path.exists(os.path.join(sfondi_dir, sfondo_file)):
+            sfondo_finale = sfondo_file
+            break
+
+    # Se non trova nessuna immagine, usa un'immagine di default
+    if not sfondo_finale:
+        sfondo_finale = "default.jpg"
+
+    # Passiamo l'immagine scelta al template
+    return render_template("categoria.html", categoria=categoria, elenco_ricette=elenco_ricette,
+                           sfondo_finale=sfondo_finale)
+
 
 # dettaglio e`la parte che gestisce il dettaglio delle singole ricette
 @ricette_routes.route("/dettaglio_ricette/<categoria>/<nome_ricetta>")
