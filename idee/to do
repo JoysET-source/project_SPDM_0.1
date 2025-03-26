@@ -2,8 +2,6 @@ Prossimi passi:
 
 # per la dashboard:
 
-capire perche non prende <script type="text/javascript" src="static/js/struttura_script.js"></script>
-per i tasti delete e crea categoria
 
 sulla dash mettere commenti grafici controllo ospiti analsi andamento sito (libreria matplotlib)
 
@@ -13,9 +11,11 @@ sistemare il footer
 
 spostare tutta la parte utente nella cartella UI e correggere i path
 
-verificare gestione messaggi errori input passwd errata per pagina login
+implementare la home con login e senza
 
-capire come nascondere alcune parti se non ce il login
+cambiare il tasto login con l omino verde e grigio
+
+nascondere alcune parti se non ce il login
 
 implementare la registrazione con google e facebook (video su youtube)
 
