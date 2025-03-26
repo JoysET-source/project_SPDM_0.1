@@ -1,6 +1,10 @@
 /* Assicura che il body abbia uno sfondo diverso per risaltare il container */
 body {
-    background-color: aliceblue; /* Colore di sfondo leggero */
+    background-image: url('../italian-cuisine.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
     display: flex;
