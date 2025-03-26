@@ -2,26 +2,24 @@ Prossimi passi:
 
 # per la dashboard:
 
-
 sulla dash mettere commenti grafici controllo ospiti analsi andamento sito (libreria matplotlib)
 
 sistemare il footer
 
 ========================================================================================================================
 
-spostare tutta la parte utente nella cartella UI e correggere i path
-
-implementare la home con login e senza
-
-cambiare il tasto login con l omino verde e grigio
-
 nascondere alcune parti se non ce il login
 
-implementare la registrazione con google e facebook (video su youtube)
+mettere sulla home le ricette del giorno e le piu visitate
+( questo implica aggiunta anche su pagine admin e completare la dash)
 
-aggiungere la sezione fatte da voi come giallo zafferano
+spostare tutta la parte utente nella cartella UI e correggere i path
 
-mettere sulla home le ricette del giorno e le piu visitate( questo implica aggiunta anche su pagine admin e completare la dash)
+(opzionale) implementare la registrazione con google e facebook (video su youtube)
+
+(opzionale) aggiungere la sezione fatte da voi come giallo zafferano
+
+
 
 
 

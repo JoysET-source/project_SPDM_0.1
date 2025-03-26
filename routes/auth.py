@@ -68,7 +68,7 @@ def register():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("auth_routes.login"))
+    return redirect(url_for("ricette_routes.home"))
 
 @auth_routes.route("/login_dashboard")
 def login_dashboard():
