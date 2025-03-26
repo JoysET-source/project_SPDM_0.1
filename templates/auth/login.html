@@ -6,7 +6,7 @@
 
 {% block form_content %}
 
-<!-- Messaggio di errore alert -->
+<!-- Messaggio di errore alert di route.login-->
 {% if alert %}
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     {{ alert }}
@@ -15,7 +15,7 @@
 {% endif %}
 
 
-<!-- Container per i messaggi flash di register per -->
+<!-- Container per i messaggi flash di route.register -->
 <div class="container mt-3">
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
