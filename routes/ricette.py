@@ -1,6 +1,8 @@
 import os
 
 from flask import Blueprint, render_template, request, jsonify, url_for
+from flask_login import current_user, login_required
+
 
 from import_bridge import login_manager, db
 from models.ricetta_model import Ricetta
@@ -52,6 +54,7 @@ def categoria(categoria):
 
 # dettaglio e`la parte che gestisce il dettaglio delle singole ricette
 @ricette_routes.route("/dettaglio_ricette/<categoria>/<nome_ricetta>")
+@login_required
 def dettaglio_ricetta(categoria, nome_ricetta):
     # chiamiamo dal DB la ricetta in base a nome e categoria
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta, categoria=categoria).first()
