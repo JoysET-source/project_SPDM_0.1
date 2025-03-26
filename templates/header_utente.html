@@ -54,7 +54,17 @@
                 <button id="search-button" type="submit">Search</button>
             </form>
 
-            <a href="{{url_for('auth_routes.login')}}" class="loginButton">Login</a>
+            <!-- icona omino come login/logout -->
+            {% if current_user.is_authenticated %}
+            <a style="color: limegreen; font-size: larger;" href="{{ url_for('auth_routes.logout') }}">
+                <i class="fa fa-user-circle status-icon"></i> Logout
+            </a>
+            {% else %}
+            <a style="color: white; font-size: larger;" href="{{ url_for('auth_routes.login') }}">
+                <i class="fa fa-user-circle status-icon"></i> Login
+            </a>
+            {% endif %}
+
         </div>
     </div>
 </div>
