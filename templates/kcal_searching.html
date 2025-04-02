@@ -50,16 +50,6 @@
         <script type="text/javascript"
                 src="{{ url_for('static', filename='dashboard/js/admin_dsh_script.js') }}"></script>
 
-
-        <!-- definizione della barra di ricerca e del pulsante cerca-->
-
-            <!-- questo form e'per js su struttura -->
-            <!--            <form id="search-form">-->
-            <!--                <label for="search-input" class="sr-only"></label>-->
-            <!--                <input type="text" id="search-input" placeholder="Calorie" aria-label="Cerca-calorie" required/>-->
-            <!--                <button id="search-button" type="button">Search</button>-->
-            <!--            </form>-->
-
         <!-- questo form fa capo diretto ad endpoint  -->
         <div class="search-container">
             <div class="search-container">
@@ -77,37 +67,66 @@
 </div>
 
 {% for ricetta in elenco_calorie %}
-<div class="container-top">
+<section class="layout">
+    <div class="container-top">
 
-    <div class="top-section-left">
-        {% if ricetta.immagine %}
-        <a style="border: none; outline: none; box-shadow: none; background: transparent; padding: 0;"
-           class="btn btn-primary"
-           href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=ricetta.categoria, nome_ricetta=ricetta.nome_ricetta) }}"
-           role="button">
-            <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
-        </a>
+        {% if loop.index <= 3 or current_user.is_authenticated %}
+
+        <div class="top-section-left">
+            {% if ricetta.immagine %}
+            <a style="border: none; outline: none; box-shadow: none; background: transparent; padding: 0;"
+               class="btn btn-primary"
+               href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=ricetta.categoria, nome_ricetta=ricetta.nome_ricetta) }}"
+               role="button">
+                <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
+            </a>
+            {% else %}
+            <p>Immagine non disponibile</p>
+            {% endif %}
+        </div>
+
+        <div class="top-section-right">
+            <ul class="dettagli-ricetta">
+                <li>Calorie: <h3>{{ ricetta.kcal }}</h3></li>
+                <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
+                <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
+                <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
+                <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>
+                <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
+            </ul>
+        </div>
+
         {% else %}
-        <p>Immagine non disponibile</p>
+        <div class="kcal-searching-disabled">
+            <div class="top-section-left">
+                {% if ricetta.immagine %}
+                <a style="border: none; outline: none; box-shadow: none; background: transparent; padding: 0;"
+                   class="btn btn-primary"
+                   href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=ricetta.categoria, nome_ricetta=ricetta.nome_ricetta) }}"
+                   role="button">
+                    <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
+                </a>
+                {% else %}
+                <p>Immagine non disponibile</p>
+                {% endif %}
+            </div>
+
+            <div class="top-section-right">
+                <ul class="dettagli-ricetta">
+                    <li>Calorie: <h3>{{ ricetta.kcal }}</h3></li>
+                    <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
+                    <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
+                    <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
+                    <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>
+                    <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
+                </ul>
+            </div>
+        </div>
         {% endif %}
     </div>
-
-    <div class="top-section-right">
-        <ul class="dettagli-ricetta">
-            <li>Calorie: <h3>{{ ricetta.kcal }}</h3></li>
-            <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
-            <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
-            <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
-            <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>
-            <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
-        </ul>
-    </div>
-
-</div>
+</section>
 {% endfor %}
 
-
-<a class="back-home" href="/">Home</a>
 
 <!-- Includi Popper.js e il JavaScript di Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
