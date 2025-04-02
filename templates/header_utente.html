@@ -20,24 +20,28 @@
         <!-- interno del menu a tendina -->
         <nav id="menu" class="hidden">
             <ul>
-                <li><a class="no-decoration" href="/">Torna alla Home</a></li>
-                <li><a href="{{ url_for('ricette_routes.elenco_ricette') }}">
-                    <button class="btn">Elenco Ricette</button>
-                </a></li>
-                <li><a href="{{ url_for('ricette_routes.trova_calorie') }}" class="no-decoration">Cerca per
-                    calorie</a></li>
-                <li><strong>Categorie</strong></li>
-                <li><a href="/categoria/entree" class="no-decoration">Entree</a></li>
-                <li><a href="/categoria/primi" class="no-decoration">Primi Piatti</a></li>
-                <li><a href="/categoria/pasta" class="no-decoration">Pasta</a></li>
-                <li><a href="/categoria/risotti" class="no-decoration">Risotti</a></li>
-                <li><a href="/categoria/secondi" class="no-decoration">Secondi Piatti</a></li>
-                <li><a href="/categoria/streetFood" class="no-decoration">Street Food</a></li>
-                <li><a href="/categoria/dolci" class="no-decoration">Dolci</a></li>
-                <li><a href="/categoria/fusion" class="no-decoration">Fusion</a></li>
-                <li><a href="/categoria/insalata" class="no-decoration">Contorni</a></li>
-                <li><a href="/categoria/test1" class="no-decoration">Vuoto</a></li>
-                <li><a href="/categoria/test2" class="no-decoration">Vuoto</a></li>
+                <div class="title-menu">
+                    <li><a class="no-decoration" href="/">Torna alla Home</a></li>
+                    <li><a href="{{ url_for('ricette_routes.elenco_ricette') }}">
+                        <button class="btn">Elenco Ricette</button>
+                    </a></li>
+                    <li><a href="{{ url_for('ricette_routes.trova_calorie') }}" class="no-decoration">Cerca per
+                        calorie</a></li>
+                    <li class="no-style"><strong>Categorie</strong></li>
+                </div>
+                <div class="voci-menu">
+                    <li><a href="/categoria/entree" class="no-decoration">Entree</a></li>
+                    <li><a href="/categoria/primi" class="no-decoration">Primi Piatti</a></li>
+                    <li><a href="/categoria/pasta" class="no-decoration">Pasta</a></li>
+                    <li><a href="/categoria/risotti" class="no-decoration">Risotti</a></li>
+                    <li><a href="/categoria/secondi" class="no-decoration">Secondi Piatti</a></li>
+                    <li><a href="/categoria/streetFood" class="no-decoration">Street Food</a></li>
+                    <li><a href="/categoria/dolci" class="no-decoration">Dolci</a></li>
+                    <li><a href="/categoria/fusion" class="no-decoration">Fusion</a></li>
+                    <li><a href="/categoria/insalata" class="no-decoration">Contorni</a></li>
+                    <li><a href="/categoria/test1" class="no-decoration">Vuoto</a></li>
+                    <li><a href="/categoria/test2" class="no-decoration">Vuoto</a></li>
+                </div>
             </ul>
         </nav>
         <!-- collegamento allo script hidden/show del menu a barre -->
