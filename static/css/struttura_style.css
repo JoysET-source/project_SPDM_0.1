@@ -63,6 +63,11 @@ body {
     margin-left: 10px;
 }
 
+#search-button:hover {
+    background-color: orange;
+    color: white;
+}
+
 .loginButton {
     padding: 8px 18px;
     font-size: 10px;
@@ -115,8 +120,26 @@ nav ul li {
     cursor: pointer;
     border-bottom: 1px solid #ddd;
 }
+
 nav ul li:hover {
     background-color: orange;
+}
+
+.title-menu{
+    text-align: center;
+}
+
+.voci-menu{
+    text-align: left;
+}
+
+.no-style{
+    cursor: not-allowed;
+    text-decoration: none;
+}
+.no-style:hover{
+    background-color: transparent;
+    color: black;
 }
 
 /* CONTAINER PRINCIPALE */
