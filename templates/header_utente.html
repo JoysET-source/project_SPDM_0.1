@@ -21,12 +21,15 @@
         <nav id="menu" class="hidden">
             <ul>
                 <div class="title-menu">
-                    <li><a class="no-decoration" href="/">Torna alla Home</a></li>
+                    {% if current_user.is_authenticated and current_user.username == "admin" %}
+                    <li><a href="{{ url_for('dashboard_routes.admin_dashboard') }}" style="color: red">Admin
+                        Dashboard</a></li>
+                    {% endif %}
+                    <li><a href="/">Torna alla Home</a></li>
                     <li><a href="{{ url_for('ricette_routes.elenco_ricette') }}">
                         <button class="btn">Elenco Ricette</button>
                     </a></li>
-                    <li><a href="{{ url_for('ricette_routes.trova_calorie') }}" class="no-decoration">Cerca per
-                        calorie</a></li>
+                    <li><a href="{{ url_for('ricette_routes.trova_calorie') }}">Cerca per calorie</a></li>
                     <li class="no-style"><strong>Categorie</strong></li>
                 </div>
                 <div class="voci-menu">
