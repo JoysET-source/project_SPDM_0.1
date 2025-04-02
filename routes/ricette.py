@@ -54,10 +54,11 @@ def categoria(categoria):
 
 # dettaglio e`la parte che gestisce il dettaglio delle singole ricette
 @ricette_routes.route("/dettaglio_ricette/<categoria>/<nome_ricetta>")
-@login_required
 def dettaglio_ricetta(categoria, nome_ricetta):
+
     # chiamiamo dal DB la ricetta in base a nome e categoria
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta, categoria=categoria).first()
+
     # passa i parametri specificati a dettaglio_ricetta.html
     return render_template("dettaglio_ricetta.html", categoria=categoria, ricetta=ricetta)
 
@@ -81,7 +82,10 @@ def run_script():
 # sessione che gestisce elenco delle ricette inserite visualizzabili da utente
 @ricette_routes.route("/elenco_ricette", methods=["GET"])
 def elenco_ricette():
+
+    # Utente loggato, restituisci tutte le ricette
     elenco_ricette = Ricetta.query.all()
+
 
     return render_template("elenco_ricette_utente.html", elenco_ricette=elenco_ricette)
 
