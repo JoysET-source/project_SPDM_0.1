@@ -19,6 +19,8 @@
     {% for ricetta in elenco_ricette %}
     <div class="container-top">
 
+        {% if loop.index <= 5 or current_user.is_authenticated %}
+
         <div class="top-section-left">
             {% if ricetta.immagine %}
             <a style="border: none; outline: none; box-shadow: none; background: transparent; padding: 0;"
@@ -43,6 +45,35 @@
             </ul>
         </div>
 
+        {% else %}
+
+        <div class="elenco-ricetta-disabled">
+
+            <div class="top-section-left">
+                {% if ricetta.immagine %}
+                <a style="border: none; outline: none; box-shadow: none; background: transparent; padding: 0;"
+                   class="btn btn-primary"
+                   href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=ricetta.categoria, nome_ricetta=ricetta.nome_ricetta) }}"
+                   role="button">
+                    <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
+                </a>
+                {% else %}
+                <p alt="Nessuna immagine disponibile">Immagine non disponibile</p>
+                {% endif %}
+            </div>
+
+            <div class="top-section-right">
+                <ul class="dettagli-ricetta">
+                    <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
+                    <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
+                    <li>Calorie: <strong>{{ ricetta.kcal }}</strong></li>
+                    <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
+                    <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>
+                    <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
     </div>
     {% endfor %}
 

@@ -193,14 +193,10 @@ nav ul li:hover {
 /*    background-color: #cc5500;*/
 /*}*/
 
-/* SECONDO CONTAINER */
-.container-second {
-    width: 100%;
-    min-height: 200px;
-    background: transparent;
-    margin-top: 40px;
-    padding: 0px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
+.elenco-ricetta-disabled{
+    display: flex;
+    color: gray;
+    pointer-events: none;
+    opacity: 0.6;
 }
