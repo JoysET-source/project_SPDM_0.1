@@ -6,7 +6,13 @@ sulla dash mettere commenti grafici controllo ospiti analsi andamento sito (libr
 
 sistemare il footer
 
+implementare cancellazione user
+
+implementare email nel login
+
 ========================================================================================================================
+
+implementare section per css e adaugare due file per css setting e style cosi da divider di piu le sezioni e i container
 
 nascondere alcune parti se non ce il login
 
@@ -15,9 +21,14 @@ mettere sulla home le ricette del giorno e le piu visitate
 
 spostare tutta la parte utente nella cartella UI e correggere i path
 
+sulla Home una volta fatto il login da admin deve apparire un tasto per tornare alla dashboard admin
+visibile solo da admin
+
 (opzionale) implementare la registrazione con google e facebook (video su youtube)
 
 (opzionale) aggiungere la sezione fatte da voi come giallo zafferano
+
+(opzionale) sistemare convert time
 
 
 
