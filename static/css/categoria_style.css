@@ -83,3 +83,9 @@ mark {
 .back-home:hover {
     background-color: #cc5500;
 }
+
+.categorie-disabled{
+    pointer-events: none;
+    opacity: 0.5;
+}
+

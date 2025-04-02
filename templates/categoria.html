@@ -21,12 +21,15 @@
 <div class="background">
     <div class="container">
         <div class="categorie">
-            <mark>Ricette  {{ categoria }}</mark>
+            <mark>Ricette {{ categoria }}</mark>
         </div>
         <br><br><br>
 
         <div class="ricette-container">
+
             {% for ricetta in elenco_ricette %}
+
+            {% if loop.index <= 5 or current_user.is_authenticated %}
             <a href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=categoria, nome_ricetta=ricetta.nome_ricetta) }}">
                 <button>
                     {% if ricetta.immagine %}
@@ -38,6 +41,24 @@
                 </button>
                 <p>{{ricetta.nome_ricetta}}</p>
             </a>
+
+            {% else %}
+            <div class="categorie-disabled">
+
+                <a href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=categoria, nome_ricetta=ricetta.nome_ricetta) }}">
+                    <button>
+                        {% if ricetta.immagine %}
+                        <img src="{{ url_for('static', filename=ricetta.immagine[7:] )}}"
+                             alt="{{ ricetta.nome_ricetta }}">
+                        {% else %}
+                        Immagine non Disponibile
+                        {% endif %}
+                    </button>
+                    <p>{{ricetta.nome_ricetta}}</p>
+                </a>
+            </div>
+            {% endif %}
+
             {% endfor %}
         </div>
 
