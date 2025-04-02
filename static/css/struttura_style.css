@@ -134,7 +134,8 @@ nav ul li:hover {
 }
 
 .no-style{
-    cursor: not-allowed;
+    pointer-events: none;
+    /*cursor: not-allowed;*/
     text-decoration: none;
 }
 .no-style:hover{
