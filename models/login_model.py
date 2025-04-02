@@ -17,8 +17,8 @@ def password_complexity_check(form, field):
 
 # usando Flask-WTF serve per raccogliere i dati inseriti dall'utente in un modulo HTML.
 class RegisterForm(FlaskForm):
-    username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw= {"placeholder": "Username"})
-    password = PasswordField(validators=[InputRequired(), Length(min=8, max=20), password_complexity_check], render_kw={"placeholder": "Password"})
+    username = StringField(validators=[InputRequired(), Length(min=4, max=60)], render_kw= {"placeholder": "Username"})
+    password = PasswordField(validators=[InputRequired(), Length(min=8, max=60), password_complexity_check], render_kw={"placeholder": "Password"})
     # questo e`il backend del pulsante login(tasto di invio) esplicitato nel front
     submit = SubmitField("Register")
 
@@ -32,7 +32,7 @@ class RegisterForm(FlaskForm):
 
 # usando Flask-WTF serve per raccogliere i dati inseriti dall'utente in un modulo HTML.
 class LoginForm(FlaskForm):
-    username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw= {"placeholder": "Username"})
-    password = PasswordField(validators=[InputRequired(), Length(min=8, max=20), password_complexity_check], render_kw= {"placeholder": "Password"})
+    username = StringField(validators=[InputRequired(), Length(min=4, max=60)], render_kw= {"placeholder": "Username"})
+    password = PasswordField(validators=[InputRequired(), Length(min=8, max=60), password_complexity_check], render_kw= {"placeholder": "Password"})
     # questo e`il backend del pulsante login(tasto di invio) esplicitato nel front
     submit = SubmitField("Login")
