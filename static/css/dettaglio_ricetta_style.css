@@ -36,13 +36,13 @@ body {
 
 .top-section-left,
 .top-section-right {
-    flex: 1; /* Entrambi occupano lo stesso spazio */
+    /*flex: 1; !* Entrambi occupano lo stesso spazio *!*/
     padding: 10px;
 }
 
  /*Sezione sinistra con immagine*/
 .top-section-left {
-    width: 50%;
+    width: 100%;
 }
 
 .top-section-left img {
@@ -140,4 +140,12 @@ li {
     margin-bottom: 10px;
 }
 
+.testo-ingredienti{
+    white-space: pre-line;
+    margin-left: 20px;
+}
+
+.testo-steps{
+    white-space: pre-line;
+}
 
