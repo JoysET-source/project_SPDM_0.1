@@ -66,10 +66,9 @@
 
         <div class="col-md-2">
             <label for="autore" class="form-label mb-2">Autore</label>
-            <input type="text" id="autore" name="autore" required placeholder="Es.Chef Ramsey" class="form-control"
+            <input type="text" id="autore" name="autore" placeholder="Es.Chef Ramsey" class="form-control"
                    value="{{ autore or '' }}" required>
         </div>
-
     </div>
 
 
@@ -93,78 +92,78 @@
             <label class="form-label mb-2">Steps</label>
             <textarea name="steps" rows="6" class="form-control"></textarea>
         </div>
+    </div>
 
+    <div class="row mb-4">
 
-        <div class="row mb-4">
-
-            <div class="col-md-2">
-                <label class="form-label mb-2">Kcal</label>
-                <input type="number" name="kcal" required placeholder="Inserisci calorie" min="0" step="0.1"
-                       class="form-control"
-                       value="{{ kcal or '' }}" required>
-            </div>
-
-            <div class="col-md-2">
-                <label class="form-label mb-2">Servings</label>
-                <input type="number" name="servings" required placeholder="numero porzioni" min="1" class="form-control"
-                       value="{{ servings or '' }}" required>
-            </div>
-
-            <div class="col-md-2">
-                <label for="cousine_type" class="form-label mb-2">Tipo di cucina</label>
-                <input type="text" id="cousine_type" name="cousine_type" required placeholder="Es.Fusion"
-                       class="form-control"
-                       value="{{ cousine_type or '' }}" required>
-            </div>
-
-            <div class="col-md-2">
-                <label class="form-label mb-2">Preparation_time</label>
-                <input type="number" name="preparation_time" required placeholder="Preparazione(minuti)"
-                       min="0" class="form-control"
-                       value="{{ preparation_time or '' }}" required>
-            </div>
-
-            <div class="col-md-2">
-                <label class="form-label mb-2">Cooking_time</label>
-                <input type="number" name="cooking_time" required placeholder="Cottura(minuti)" min="0"
-                       class="form-control" value="{{ cooking_time or '' }}" required>
-            </div>
-
+        <div class="col-md-2">
+            <label class="form-label mb-2">Kcal</label>
+            <input type="number" name="kcal" placeholder="Inserisci calorie" min="0" step="0.1"
+                   class="form-control"
+                   value="{{ kcal or '' }}" required>
         </div>
 
-
-        <div class="row mb-4">
-
-            <div class="col-auto">
-                <label for="rating" class="form-label mb-2">Rating</label>
-                <input type="number" id="rating" name="rating" min="0" class="form-control"
-                       value="{{ rating or '' }}" required>
-            </div>
-
-            <div class="col-auto">
-                <label for="tags" class="form-label mb-2">Tags</label>
-                <input type="text" id="tags" name="tags" required placeholder="Es.#Snack, #Dolci" class="form-control"
-                       value="{{ tags or '' }}" required>
-            </div>
-
-            <div class="col-auto">
-                <label for="prezzo" class="form-label mb-2">Prezzo</label>
-                <input type="number" id="prezzo" name="prezzo" required placeholder="Es.80" min="0" class="form-control"
-                       value="{{ prezzo or '' }}" required>
-            </div>
-
-            <div class="col-auto">
-                <label for="valuta" class="form-label mb-2">Valuta</label>
-                <select class="form-select form-select" id="valuta" name="valuta" required>
-                    <option value="€">€ EUR</option>
-                    <option value="$">$ USD</option>
-                    <option value="£">£ GBP</option>
-                    <option value="¥">¥ JPY</option>
-                </select>
-            </div>
+        <div class="col-md-2">
+            <label class="form-label mb-2">Servings</label>
+            <input type="number" name="servings" placeholder="numero porzioni" min="1" class="form-control"
+                   value="{{ servings or '' }}" required>
         </div>
 
-        <button type="submit">Carica Ricetta</button>
+        <div class="col-md-2">
+            <label for="cousine_type" class="form-label mb-2">Tipo di cucina</label>
+            <input type="text" id="cousine_type" name="cousine_type" placeholder="Es.Fusion"
+                   class="form-control"
+                   value="{{ cousine_type or '' }}" required>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label mb-2">Preparation_time</label>
+            <input type="number" name="preparation_time" placeholder="Preparazione(minuti)"
+                   min="0" class="form-control"
+                   value="{{ preparation_time or '' }}" required>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label mb-2">Cooking_time</label>
+            <input type="number" name="cooking_time" placeholder="Cottura(minuti)" min="0"
+                   class="form-control" value="{{ cooking_time or '' }}" required>
+        </div>
+
+    </div>
+
+
+    <div class="row mb-4">
+
+        <div class="col-auto">
+            <label for="rating" class="form-label mb-2">Rating</label>
+            <input type="number" id="rating" name="rating" min="0" class="form-control"
+                   value="{{ rating or '' }}" required>
+        </div>
+
+        <div class="col-auto">
+            <label for="tags" class="form-label mb-2">Tags</label>
+            <input type="text" id="tags" name="tags" placeholder="Es.#Snack, #Dolci" class="form-control"
+                   value="{{ tags or '' }}" required>
+        </div>
+
+        <div class="col-auto">
+            <label for="prezzo" class="form-label mb-2">Prezzo</label>
+            <input type="number" id="prezzo" name="prezzo" placeholder="Es.80" min="0" class="form-control"
+                   value="{{ prezzo or '' }}" required>
+        </div>
+
+        <div class="col-auto">
+            <label for="valuta" class="form-label mb-2">Valuta</label>
+            <select class="form-select form-select" id="valuta" name="valuta" required>
+                <option value="€">€ EUR</option>
+                <option value="$">$ USD</option>
+                <option value="£">£ GBP</option>
+                <option value="¥">¥ JPY</option>
+            </select>
+        </div>
+    </div>
+
+    <button type="submit">Carica Ricetta</button>
 
 
 </form>
