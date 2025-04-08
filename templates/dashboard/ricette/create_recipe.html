@@ -134,25 +134,25 @@
 
     <div class="row mb-4">
 
-        <div class="col-auto">
+        <div class="col-md-2">
             <label for="rating" class="form-label mb-2">Rating</label>
             <input type="number" id="rating" name="rating" min="0" class="form-control"
                    value="{{ rating or '' }}" required>
         </div>
 
-        <div class="col-auto">
+        <div class="col-md-2">
             <label for="tags" class="form-label mb-2">Tags</label>
             <input type="text" id="tags" name="tags" placeholder="Es.#Snack, #Dolci" class="form-control"
                    value="{{ tags or '' }}" required>
         </div>
 
-        <div class="col-auto">
+        <div class="col-md-2">
             <label for="prezzo" class="form-label mb-2">Prezzo</label>
             <input type="number" id="prezzo" name="prezzo" placeholder="Es.80" min="0" class="form-control"
                    value="{{ prezzo or '' }}" required>
         </div>
 
-        <div class="col-auto">
+        <div class="col-md-2">
             <label for="valuta" class="form-label mb-2">Valuta</label>
             <select class="form-select form-select" id="valuta" name="valuta" required>
                 <option value="€">€ EUR</option>
@@ -161,10 +161,20 @@
                 <option value="¥">¥ JPY</option>
             </select>
         </div>
+
+        <div class="col-md-2">
+            <label class="form-label mb-2">Visibility</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="visibility" name="visibility"
+                       value="1" {% if visibility %}checked{% endif %} checked>
+                <label class="form-check-label" for="visibility">Visibile(True)</label>
+            </div>
+        </div>
+
+
     </div>
 
     <button type="submit">Carica Ricetta</button>
-
 
 </form>
 

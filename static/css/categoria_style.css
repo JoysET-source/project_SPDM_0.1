@@ -23,9 +23,11 @@
 }
 
 mark {
-    background-color: white;
+    /*background-color: white;*/
     color: black;
     border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
 }
 
 .ricette-container {
@@ -52,11 +54,13 @@ mark {
 }
 
 .ricette-container p {
-    background-color: white;
+    /*background-color: white;*/
     color: black;
     border-radius: 4px;
     text-decoration: none;
     font-size: large;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
 }
 
 
@@ -85,7 +89,7 @@ mark {
 }
 
 .categorie-disabled{
-    pointer-events: none;
+    /*pointer-events: none;*/
     opacity: 0.5;
 }
 

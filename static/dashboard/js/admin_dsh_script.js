@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+// ===================================
 
-
-<!-- si occupa di  andare a capo in textarea ingredienti  -->
+<!-- si occupa di andare a capo in textarea ingredienti  -->
 document.querySelector("textarea[name='ingredienti']").addEventListener("blur", function () {
     document.querySelector(".testo-ingredienti").textContent = this.value;
 });
@@ -27,4 +27,5 @@ document.querySelector("textarea[name='steps']").addEventListener("blur", functi
 });
 
 <!-- ====================== -->
+
 

@@ -9,11 +9,12 @@ class Ricetta(db.Model):
     nome_ricetta = db.Column(db.String(100), unique=True, nullable=False)
     ingredienti = db.Column(db.Text, nullable=True)
     kcal = db.Column(db.Integer, nullable=True)
-    immagine = db.Column(db.String(100), nullable=True)  # Aggiungi questo campo per memorizzare l'URL(il percorso) dell'immagine che sta su static
+    # Aggiungi questo campo per memorizzare l'URL(il percorso) dell'immagine che sta su static
+    immagine = db.Column(db.String(100), nullable=True)
     categoria = db.Column(db.String(100), nullable=False)
     titolo = db.Column(db.String(100), nullable=True)
     descrizione = db.Column(db.String(5000), nullable=True)
-    visibility = db.Column(db.Boolean, nullable=True)
+    visibility = db.Column(db.Boolean, default=True)
     servings = db.Column(db.Integer, nullable=True)
     preparation_time = db.Column(db.Integer, nullable=True)
     cooking_time = db.Column(db.Integer, nullable=True)
@@ -28,6 +29,7 @@ class Ricetta(db.Model):
     valuta = db.Column(db.String(100), nullable=True)
     created_at = db.Column(db.DateTime, nullable=True, default=func.now()) # Assegna la data automatica alla creazione
     updated_at = db.Column(db.DateTime, nullable=True, default=func.now(), onupdate=func.now()) # Aggiorna ogni volta che viene modificato
+    access_logs = db.relationship('AccessLog', back_populates='ricetta') # collegamento a AccessLog model
 
 
 

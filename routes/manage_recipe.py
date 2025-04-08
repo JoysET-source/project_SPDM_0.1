@@ -51,6 +51,7 @@ def create_recipe():
         tags = request.form.get("tags")
         prezzo = request.form.get("prezzo")
         valuta = request.form.get("valuta")
+        visibility = bool(request.form.get("visibility"))
 
         # questo serve a rimandare il template gia compilato se abbiamo dimenticato il campo categoria
         if categoria is None or categoria == "Seleziona categoria":
@@ -100,7 +101,8 @@ def create_recipe():
                 difficulty_level=difficulty_level,
                 rating=rating,
                 valuta=valuta,
-                total_time=total_time
+                total_time=total_time,
+                visibility=visibility
         )
 
         # Salvataggio nel database con gestione errori
@@ -151,6 +153,8 @@ def list_recipes():
             "nome_ricetta": ricetta.nome_ricetta,
             "ingredienti": ricetta.ingredienti,
             "total_time": ricetta.total_time,
+            "calorie": ricetta.kcal,
+            "visibility": ricetta.visibility,
             "categoria": ricetta.categoria,
             "prezzo": ricetta.prezzo,
             "valuta": ricetta.valuta,
@@ -218,6 +222,7 @@ def update_recipe(id):
         db_ricetta.tags = request.form.get("tags")
         db_ricetta.prezzo = request.form.get("prezzo")
         db_ricetta.valuta = request.form.get("valuta")
+        db_ricetta.visibility = bool(request.form.get("visibility"))
 
         # Gestisci l'immagine, se è stata aggiornata
         immagine = request.files.get("immagine")

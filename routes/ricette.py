@@ -2,7 +2,7 @@ import os
 
 from flask import Blueprint, render_template, request, jsonify, url_for
 from flask_login import current_user, login_required
-
+from sqlalchemy.sql.expression import func
 
 from import_bridge import login_manager, db
 from models.ricetta_model import Ricetta
@@ -19,7 +19,36 @@ ricette_path = os.path.join("static", "Ricette")
 #  questo chiama struttura come file per interfaccia home
 @ricette_routes.route('/')
 def home():
-    return render_template("struttura.html")
+    # stabilisce la variabile per il 50% delle ricette
+    percent_items_to_show = 0.5
+
+    # conta tutte le ricette presenti nel DB
+    total_items = Ricetta.query.count()
+
+    # se non ci sono ricette nel DB restituisci la home vuota
+    if total_items == 0:
+        return render_template("struttura.html", ricette = [])
+
+    # calcola la percentuale sul totale perche limit accetto solo integer
+    items_to_show_count = int(total_items * percent_items_to_show)
+
+    # filtra il 50% delle ricette visibili e le ordina casualmente
+    ricette_giornaliere = Ricetta.query.filter_by(visibility=True).order_by(func.rand()).limit(items_to_show_count).all()
+
+    # creiamo un set vuoto per evitare duplicati
+    check_categorie = set()
+
+    # creiamo una lista vuota per stoccare le ricette di categorie uniche
+    ricette_categoria_unica = []
+
+    # iteriamo e stocchiamo le ricette di categorie uniche
+    for ricette in ricette_giornaliere:
+        if ricette.categoria not in check_categorie:
+            check_categorie.add(ricette.categoria)
+            ricette_categoria_unica.append(ricette)
+
+    # Passiamo le ricette uniche al template
+    return render_template("struttura.html", ricette_categoria_unica=ricette_categoria_unica)
 
 
 # <categoria> è la parte dinamica dell'URL che identifica quale categoria è stata cliccata.
@@ -84,7 +113,7 @@ def run_script():
 def elenco_ricette():
 
     # Utente loggato, restituisci tutte le ricette
-    elenco_ricette = Ricetta.query.all()
+    elenco_ricette = Ricetta.query.order_by(Ricetta.visibility.desc()).all()
 
 
     return render_template("elenco_ricette_utente.html", elenco_ricette=elenco_ricette)

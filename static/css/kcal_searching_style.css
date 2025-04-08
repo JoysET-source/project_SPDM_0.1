@@ -8,16 +8,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-body {
-    background-image: url('../italian-cuisine.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
 .container-header {
     display: flex;
     justify-content: space-between;
@@ -147,6 +137,6 @@ nav ul li:hover {
 }
 
 .kcal-searching-disabled{
-    pointer-events: none;
+    /*pointer-events: none;*/
     opacity: 0.5;
 }

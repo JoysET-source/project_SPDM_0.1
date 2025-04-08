@@ -102,8 +102,7 @@
                 {% if ricetta.immagine %}
                 <a style="border: none; outline: none; box-shadow: none; background: transparent; padding: 0;"
                    class="btn btn-primary"
-                   href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=ricetta.categoria, nome_ricetta=ricetta.nome_ricetta) }}"
-                   role="button">
+                   href="{{ url_for('auth_routes.login') }}" role="button">
                     <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
                 </a>
                 {% else %}

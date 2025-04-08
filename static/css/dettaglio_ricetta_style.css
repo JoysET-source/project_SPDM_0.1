@@ -15,12 +15,14 @@ body {
 
 /* Container principale per limitare la larghezza della pagina */
 .container-main {
-    width: 900px; /* Larghezza massima della pagina */
+    width: 1000px; /* Larghezza della pagina */
     margin: 40px auto; /* Centra il contenuto orizzontalmente */
-    background-color: white; /* Sfondo bianco */
+    /*background-color: white; !* Sfondo bianco *!*/
     padding: 0px; /* Aggiunge spazio interno */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombra per un effetto più pulito */
     border-radius: 10px; /* Angoli arrotondati */
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
 }
 
 /* Contenitore della parte superiore */
@@ -34,11 +36,11 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Leggera ombra */
 }
 
-.top-section-left,
-.top-section-right {
-    /*flex: 1; !* Entrambi occupano lo stesso spazio *!*/
-    padding: 10px;
-}
+/*.top-section-left,*/
+/*.top-section-right {*/
+/*    !*flex: 1; !* Entrambi occupano lo stesso spazio *!*!*/
+/*    padding: 10px;*/
+/*}*/
 
  /*Sezione sinistra con immagine*/
 .top-section-left {
@@ -47,9 +49,12 @@ body {
 
 .top-section-left img {
     width: 100%;
-    height: auto;
+    height: 100%;
     border-radius: 10px;
     object-fit: cover;
+    /*border: none;*/
+    /*padding: 0;*/
+    /*background: none;*/
 }
 
 

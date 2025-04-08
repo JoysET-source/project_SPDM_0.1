@@ -19,7 +19,7 @@
     {% for ricetta in elenco_ricette %}
     <div class="container-top">
 
-        {% if loop.index <= 5 or current_user.is_authenticated %}
+        {% if current_user.is_authenticated or ricetta.visibility %}
 
         <div class="top-section-left">
             {% if ricetta.immagine %}
@@ -45,7 +45,7 @@
             </ul>
         </div>
 
-        {% else %}
+        {% elif ricetta.visibility==False %}
 
         <div class="elenco-ricetta-disabled">
 
@@ -53,8 +53,7 @@
                 {% if ricetta.immagine %}
                 <a style="border: none; outline: none; box-shadow: none; background: transparent; padding: 0;"
                    class="btn btn-primary"
-                   href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=ricetta.categoria, nome_ricetta=ricetta.nome_ricetta) }}"
-                   role="button">
+                   href="{{ url_for('auth_routes.login') }}" role="button">
                     <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
                 </a>
                 {% else %}

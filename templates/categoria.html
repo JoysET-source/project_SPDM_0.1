@@ -45,7 +45,7 @@
             {% else %}
             <div class="categorie-disabled">
 
-                <a href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=categoria, nome_ricetta=ricetta.nome_ricetta) }}">
+                <a href="{{ url_for('auth_routes.login') }}">
                     <button>
                         {% if ricetta.immagine %}
                         <img src="{{ url_for('static', filename=ricetta.immagine[7:] )}}"

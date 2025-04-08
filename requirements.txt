@@ -25,7 +25,9 @@
 # impostare il percorso che chiama flask
 # $env:FLASK_APP="app"
 
-
+# per eseguire la migration
+# flask db migrate -m "Aggiunta campo visibility con default True"
+# flask db upgrade
 
 
 flask==3.1.0

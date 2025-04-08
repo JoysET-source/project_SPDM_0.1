@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 from flask_login import UserMixin
 from import_bridge import db
 
@@ -10,3 +13,6 @@ class User(db.Model, UserMixin):
     # email = db.Column(db.String, nullable=True)
     username = db.Column(db.String(20), unique=True, nullable=True)
     password = db.Column(db.String(255), nullable=True)
+    # prima_visita = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    # ultima_visita = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    access_logs = db.relationship('AccessLog', back_populates='user')

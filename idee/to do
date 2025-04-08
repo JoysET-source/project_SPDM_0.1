@@ -3,17 +3,40 @@ Prossimi passi:
 # per la dashboard:
 
 sulla dash mettere commenti grafici controllo ospiti analsi andamento sito (libreria matplotlib)
+pivot table per vedere i piatti piu richiesti
+
+aggiungere una tabella per registrare chi si collega, da quale paese, con quale dispositivo, e quali ricette guarda
+usa Matomo o google analytics per html
 
 sistemare il footer
 
 implementare cancellazione user
 
+integrare created_at e updated_at
+
+verificare la conversione di total time in hh:mm
+
+risolvere il problema di nav che va dietro al vetro
+
 ========================================================================================================================
 
-mettere sulla home le ricette del giorno e le piu visitate
+mettere sulla home  le piu visitate
 ( questo implica aggiunta anche su pagine admin e completare la dash)
 
 spostare tutta la parte utente nella cartella UI e correggere i path
+
+========================================================================================================================
+implementare il pagamento per la registrazione (con stripe o paypal) pip install stripe, pip install paypalrestsdk
+Step 1: Form registrazione
+Raccogli i dati utente
+
+Step 2: Reindirizza a pagina pagamento
+Usa Stripe Checkout o PayPal
+
+Step 3: Webhook
+Ricevi conferma del pagamento nel backend
+Solo allora crea l’utente nel DB
+========================================================================================================================
 
 (opzionale) implementare la registrazione con google e facebook (video su youtube)
 
