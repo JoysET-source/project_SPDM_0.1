@@ -1,6 +1,4 @@
 from sqlalchemy import func
-
-
 from flask_login import UserMixin
 from import_bridge import db
 
