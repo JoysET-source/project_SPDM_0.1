@@ -41,10 +41,12 @@ with app.app_context():
 from routes.auth import auth_routes
 from routes.ricette import ricette_routes
 from routes.manage_recipe import dashboard_routes
+from routes.accessLog_routes import accessLog_routes
 
 app.register_blueprint(auth_routes)
 app.register_blueprint(ricette_routes)
 app.register_blueprint(dashboard_routes)
+app.register_blueprint(accessLog_routes)
 
 if __name__ == '__main__':
     app.run(debug=False)
