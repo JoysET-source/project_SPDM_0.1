@@ -13,7 +13,6 @@ from models.controllo_dimensione_immagini import ridimensiona_immagine
 from routes.ricette import elenco_ricette
 
 
-
 dashboard_routes = Blueprint("dashboard_routes", __name__)
 
 
