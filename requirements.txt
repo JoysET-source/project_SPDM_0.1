@@ -25,7 +25,12 @@
 # impostare il percorso che chiama flask
 # $env:FLASK_APP="app"
 
-# per eseguire la migration
+# per creare la migration e i db:
+# flask db init
+# flask db migrate -m "Inizializzazione DB"
+# flask db upgrade
+
+# per eseguire la migration:
 # flask db migrate -m "Aggiunta campo visibility con default True"
 # flask db upgrade
 
