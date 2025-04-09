@@ -7,7 +7,7 @@ from sqlalchemy.sql.expression import func
 from import_bridge import login_manager, db
 from models.ricetta_model import Ricetta
 from models.user_model import User
-
+from routes.accessLog_routes import log_access
 
 
 ricette_routes = Blueprint('ricette_routes', __name__)
@@ -46,6 +46,14 @@ def home():
         if ricette.categoria not in check_categorie:
             check_categorie.add(ricette.categoria)
             ricette_categoria_unica.append(ricette)
+
+    log_access(
+            user_id=current_user.id,
+
+            action="visita_home",
+            ricetta_vista=None,  # Non c'è una ricetta in questo caso
+            ricetta_id=None
+    )
 
     # Passiamo le ricette uniche al template
     return render_template("struttura.html", ricette_categoria_unica=ricette_categoria_unica)
@@ -87,6 +95,14 @@ def dettaglio_ricetta(categoria, nome_ricetta):
 
     # chiamiamo dal DB la ricetta in base a nome e categoria
     ricetta = Ricetta.query.filter_by(nome_ricetta=nome_ricetta, categoria=categoria).first()
+
+    # Qui registri l'accesso al log
+    log_access(
+            user_id=current_user.id,  # ID dell'utente attualmente loggato
+            action="visualizzazione_ricetta",  # Definisci l'azione, per esempio 'visualizzazione_ricetta'
+            ricetta_vista=ricetta.nome,  # Nome della ricetta che l'utente ha visualizzato
+            ricetta_id=ricetta.id  # ID della ricetta
+    )
 
     # passa i parametri specificati a dettaglio_ricetta.html
     return render_template("dettaglio_ricetta.html", categoria=categoria, ricetta=ricetta)
