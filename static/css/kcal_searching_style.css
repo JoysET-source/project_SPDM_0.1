@@ -66,6 +66,9 @@ nav {
     border: 1px solid #ccc;
     /*display: none; !* menu nascosto di default *!*/
     color: black;
+    /*background-color: rgba(255, 255, 255, 0.2);*/
+    /*backdrop-filter: blur(10px);*/
+    border-radius: 4px;
 }
 
 .hidden {

@@ -48,8 +48,6 @@ def home():
             ricette_categoria_unica.append(ricette)
 
     log_access(
-            user_id=current_user.id,
-
             action="visita_home",
             ricetta_vista=None,  # Non c'è una ricetta in questo caso
             ricetta_id=None
@@ -98,9 +96,8 @@ def dettaglio_ricetta(categoria, nome_ricetta):
 
     # Qui registri l'accesso al log
     log_access(
-            user_id=current_user.id,  # ID dell'utente attualmente loggato
             action="visualizzazione_ricetta",  # Definisci l'azione, per esempio 'visualizzazione_ricetta'
-            ricetta_vista=ricetta.nome,  # Nome della ricetta che l'utente ha visualizzato
+            ricetta_vista=ricetta.nome_ricetta,  # Nome della ricetta che l'utente ha visualizzato
             ricetta_id=ricetta.id  # ID della ricetta
     )
 
