@@ -1,20 +1,33 @@
 from flask import Blueprint, request, render_template
 from datetime import datetime
-
+from flask_login import current_user
 
 from models.accessLog_model import AccessLog
 from import_bridge import db
+from test.geo_location import get_geo_location
+
+
+
 
 accessLog_routes = Blueprint("accessLog_routes", __name__)
 
 
 def log_access(
-        user_id,
         action,
         details=None,
         ricetta_vista=None,
         ricetta_id=None,
 ):
+
+    if not current_user.is_authenticated:
+        user_id = None
+    else:
+        user_id = current_user.id
+
+    ip_address = request.remote_addr
+
+    country = get_geo_location(ip_address)
+
     # crea un nuovo log di accesso
     new_log = AccessLog(
             user_id=user_id,
@@ -22,9 +35,9 @@ def log_access(
             details=details,
             ricetta_vista=ricetta_vista,
             ricetta_id=ricetta_id,
-            country=request.headers.get("X-Country"),
+            country=country,
             user_agent=request.headers.get("User-Agent"),
-            ip_address=request.remote_addr,
+            ip_address=ip_address,
             timestamp=datetime.utcnow()
     )
 

@@ -6,6 +6,7 @@ from models.ricetta_model import Ricetta
 
 
 
+
 # Creazione della tabella AccessLog
 class AccessLog(db.Model):
     __tablename__ = 'access_log'
@@ -18,7 +19,7 @@ class AccessLog(db.Model):
     details = db.Column(db.Text, nullable=True)
 
     # collegamento con id specifico nella tabella user
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     # Relationship with User model
     user = db.relationship('User', back_populates='access_logs')
 
