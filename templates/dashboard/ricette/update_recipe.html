@@ -76,6 +76,15 @@
         </div>
     </div>
 
+    <!-- per quill -->
+    <!--    <div class="row">-->
+    <!--        <div class="col">-->
+    <!--            <label for="editorIngredienti" class="form-label mb-2">Ingredienti</label>-->
+    <!--            <div id="editorIngredienti" style="height: 200px;">{{ db_ricetta.ingredienti | safe }}</div>-->
+    <!--            <input type="hidden" name="ingredienti" id="hiddenIngredienti">-->
+    <!--        </div>-->
+    <!--    </div>-->
+
 
     <div class="row">
         <div class="col">
@@ -84,6 +93,15 @@
                       class="form-control">{{ db_ricetta.steps }}</textarea>
         </div>
     </div>
+
+    <!--  per quill -->
+    <!--    <div class="row">-->
+    <!--        <div class="col">-->
+    <!--            <label class="form-label mb-2">Steps</label>-->
+    <!--            <div id="editorSteps" style="height: 200px;">{{ db_ricetta.steps | safe }}</div>-->
+    <!--            <input type="hidden" name="steps" id="hiddenSteps">-->
+    <!--        </div>-->
+    <!--    </div>-->
 
 
     <div class="row mb-4">
@@ -157,7 +175,7 @@
             </select>
         </div>
 
-         <div class="col-md-2">
+        <div class="col-md-2">
             <label class="form-label mb-2">Visibility</label>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="visibility" name="visibility"

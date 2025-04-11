@@ -45,7 +45,7 @@
         <p class="title-ingredienti">
             <strong>Ingredienti</strong>
         </p>
-        <p class="testo-ingredienti">{{ ricetta.ingredienti }}</p>
+        <p class="testo-ingredienti">{{ ricetta.ingredienti | safe }}</p>
     </div>
 
     <!-- Sezione descrizione passo passo -->
@@ -54,7 +54,7 @@
 
         <div class="step">
             <h3>Step</h3>
-            <p class="testo-steps">{{ ricetta.steps }}</p>
+            <p class="testo-steps">{{ ricetta.steps | safe }}</p>
         </div>
 
     </div>

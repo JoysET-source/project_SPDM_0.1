@@ -9,7 +9,7 @@ from models.login_model import LoginForm
 from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.login_model import password_complexity_check
-from models.controllo_dimensione_immagini import ridimensiona_immagine
+from test.controllo_dimensione_immagini import ridimensiona_immagine
 from routes.ricette import elenco_ricette
 
 
