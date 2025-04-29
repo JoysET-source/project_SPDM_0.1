@@ -59,7 +59,7 @@
 
     </div>
 
-
+    <!-- modifica textarea -->
     <div class="row">
         <div class="col">
             <label for="descrizione" class="form-label mb-2">Descrizione</label>
@@ -68,13 +68,14 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col">
-            <label for="ingredienti" class="form-label mb-2">Ingredienti</label>
-            <textarea id="ingredienti" name="ingredienti" rows="6"
-                      class="form-control">{{ db_ricetta.ingredienti }}</textarea>
-        </div>
-    </div>
+    <!-- classic editor-->
+    <!--<div class="row">-->
+    <!--        <div class="col">-->
+    <!--            <label for="ingredienti" class="form-label mb-2">Ingredienti</label>-->
+    <!--            <textarea id="ingredienti" name="ingredienti" rows="6"-->
+    <!--                      class="form-control">{{ db_ricetta.ingredienti }}</textarea>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
     <!-- per quill -->
     <!--    <div class="row">-->
@@ -85,14 +86,22 @@
     <!--        </div>-->
     <!--    </div>-->
 
-
+    <!-- per tiny -->
     <div class="row">
         <div class="col">
-            <label for="steps" class="form-label mb-2">Steps</label>
-            <textarea id="steps" name="steps" rows="6"
-                      class="form-control">{{ db_ricetta.steps }}</textarea>
+            <label class="form-label mb-2">Ingredienti</label>
+            <textarea class="editor" name="ingredienti">{{ db_ricetta.ingredienti | safe }}</textarea>
         </div>
     </div>
+
+    <!-- classic editor-->
+    <!--    <div class="row">-->
+    <!--        <div class="col">-->
+    <!--            <label for="steps" class="form-label mb-2">Steps</label>-->
+    <!--            <textarea id="steps" name="steps" rows="6"-->
+    <!--                      class="form-control">{{ db_ricetta.steps }}</textarea>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
     <!--  per quill -->
     <!--    <div class="row">-->
@@ -102,6 +111,15 @@
     <!--            <input type="hidden" name="steps" id="hiddenSteps">-->
     <!--        </div>-->
     <!--    </div>-->
+
+
+    <!-- per tiny -->
+    <div class="row">
+        <div class="col">
+            <label class="form-label mb-2">Ingredienti</label>
+            <textarea class="editor" name="steps">{{ db_ricetta.steps | safe }}</textarea>
+        </div>
+    </div>
 
 
     <div class="row mb-4">
