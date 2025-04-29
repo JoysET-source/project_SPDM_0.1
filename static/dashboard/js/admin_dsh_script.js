@@ -1,4 +1,4 @@
-// controlla il menu a barre
+// controlla il menu a barre toggle nav
 document.addEventListener('DOMContentLoaded', function () {
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.getElementById('menu');
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 // ===================================
 
-<!-- si occupa di andare a capo in textarea ingredienti  -->
+<!-- si occupa di andare a capo in classic editor  -->
 // document.querySelector("textarea[name='ingredienti']").addEventListener("blur", function () {
 //     document.querySelector(".testo-ingredienti").textContent = this.value;
 // });
