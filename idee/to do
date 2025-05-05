@@ -2,11 +2,8 @@ Prossimi passi:
 
 # per la dashboard:
 
-sulla dash mettere commenti grafici controllo ospiti analsi andamento sito (libreria matplotlib)
+sulla dash mettere commenti grafici controllo ospiti analisi andamento sito (libreria matplotlib)
 pivot table per vedere i piatti piu richiesti
-
-aggiungere una tabella per registrare chi si collega, da quale paese, con quale dispositivo, e quali ricette guarda
-usa Matomo o google analytics per html
 
 sistemare il footer
 
@@ -15,8 +12,6 @@ implementare cancellazione user
 integrare created_at e updated_at
 
 verificare la conversione di total time in hh:mm
-
-risolvere il problema di nav che va dietro al vetro
 
 ========================================================================================================================
 
