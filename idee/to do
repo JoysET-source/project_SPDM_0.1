@@ -9,9 +9,11 @@ sistemare il footer
 
 implementare cancellazione user
 
-integrare created_at e updated_at
+integrare created_at e updated_at su lista ricette admin
 
 verificare la conversione di total time in hh:mm
+
+elenco ricette va sistemato / no header? / da fare responsive
 
 ========================================================================================================================
 
