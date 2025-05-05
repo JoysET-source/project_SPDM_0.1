@@ -17,10 +17,13 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ricette.db'
 # app.config['SQLALCHEMY_BINDS'] = {'users': 'sqlite:///users.db'}
 
-# collegamenti per creare db in mysql e secret key
+# collegamento per creare db in mysql
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'mysql+pymysql://root@localhost/spdm')
+
+# collegamento per creare db online in mysql con server remoto aiven
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 
+# collegamento per secret key
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.getenv("SECRET_KEY")
 
