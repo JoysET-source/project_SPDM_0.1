@@ -6,15 +6,15 @@
     <title>Ricette - {{ categoria }}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/categoria_style.css">
+    <link rel="stylesheet" href="../static/css/categoria_style_responsive.css">
+    <!-- il background lo mettiamo qui in questo caso perche css e'solo statico e non analizza jinja -->
+    <style>
+        .background {
+            background-image: url("{{ url_for('static', filename='sfondi/' + sfondo_finale) }}");
+        }
+    </style>
 </head>
 
-<!-- il background lo mettiamo qui in questo caso perche css e'solo statico e non analizza jinja -->
-<style>
-    .background {
-        background-image: url("{{ url_for('static', filename='sfondi/' + sfondo_finale) }}");
-    }
-</style>
 
 <!-- con jinja creiamo il ciclo per iterare tutte le ricette inserite e mostrarle con la loro immagine personale  -->
 <body>
@@ -34,7 +34,7 @@
                 <button>
                     {% if ricetta.immagine %}
                     <img src="{{ url_for('static', filename=ricetta.immagine[7:] )}}"
-                         alt="{{ ricetta.nome_ricetta }}">
+                         alt="Immagine della ricetta {{ ricetta.nome_ricetta }}">
                     {% else %}
                     Immagine non Disponibile
                     {% endif %}
