@@ -1,21 +1,9 @@
 <!-- header collegato a  struttura.html.css -->
 
-
-
 <!-- container principale -->
 <div class="container-header">
     <!-- container generale  -->
     <div class="container1">
-
-        <!-- definizione delle icone insta e fb -->
-        <div class="social-media">
-            <a href="https://www.instagram.com/sepoatedemincat" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/eugenio.travisi.5" target="_blank">
-                <i class="fab fa-facebook"></i>
-            </a>
-        </div>
 
         <!-- creiamo il menu a tre barre chiamato toggle  -->
         <div class="menu-toggle">&#9776;</div>
@@ -51,6 +39,16 @@
         <script type="text/javascript"
                 src="{{ url_for('static', filename='dashboard/js/admin_dsh_script.js') }}"></script>
 
+         <!-- definizione delle icone insta e fb -->
+        <div class="social-media">
+            <a href="https://www.instagram.com/sepoatedemincat" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/eugenio.travisi.5" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+
 
         <!-- definizione della barra di ricerca e del pulsante cerca-->
         <div class="search-container">
@@ -58,7 +56,7 @@
                 <label for="search-input" class="sr-only"></label>
                 <input type="text" id="search-input" name="nome_ricetta" placeholder="Cerca" aria-label="Cerca ricetta"
                        required/>
-                <button id="search-button" type="submit">Search</button>
+<!--                <button id="search-button" type="submit">Search</button>-->
             </form>
 
             <!-- icona omino come login/logout -->
