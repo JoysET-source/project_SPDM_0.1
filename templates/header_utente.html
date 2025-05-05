@@ -58,7 +58,9 @@
                        required/>
 <!--                <button id="search-button" type="submit">Search</button>-->
             </form>
+        </div>
 
+        <div>
             <!-- icona omino come login/logout -->
             {% if current_user.is_authenticated %}
             <a style="color: limegreen; font-size: larger;" href="{{ url_for('auth_routes.logout') }}">
@@ -69,8 +71,8 @@
                 <i class="fa fa-user-circle status-icon"></i> Login
             </a>
             {% endif %}
-
         </div>
+
     </div>
 </div>
 
