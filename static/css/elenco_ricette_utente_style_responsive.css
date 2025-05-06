@@ -29,6 +29,7 @@ body {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    max-width: 1000px;
 }
 
 /* --- MENU --- */
@@ -49,9 +50,9 @@ nav {
     backdrop-filter: blur(10px);
     border-radius: 4px;
     border: 1px solid #ccc;
-    width: auto; /* Impostato su "auto" per evitare che il menu occupi tutta la larghezza */
-    max-width: 250px; /* Imposta una larghezza massima (modifica in base alle tue esigenze) */
-    z-index: 1000;
+    /*width: auto; !* Impostato su "auto" per evitare che il menu occupi tutta la larghezza *!*/
+    /*max-width: 250px; !* Imposta una larghezza massima (modifica in base alle tue esigenze) *!*/
+    /*z-index: 1000;*/
 }
 
 .hidden {
@@ -164,25 +165,25 @@ nav#menu ul li a {
     opacity: 0.6;
 }
 
-/* --- RESPONSIVE: MOBILE FRIENDLY --- */
-@media (max-width: 768px) {
-    .top-section-right {
-        max-width: 100%;
-        padding: 10px;
-    }
+/*!* --- RESPONSIVE: MOBILE FRIENDLY --- *!*/
+/*@media (max-width: 768px) {*/
+/*    .top-section-right {*/
+/*        max-width: 100%;*/
+/*        padding: 10px;*/
+/*    }*/
 
-    .menu-toggle {
-        font-size: 24px;
-    }
+/*    .menu-toggle {*/
+/*        font-size: 24px;*/
+/*    }*/
 
-    .social-media i {
-        font-size: 24px;
-    }
+/*    .social-media i {*/
+/*        font-size: 24px;*/
+/*    }*/
 
-    nav {
-        left: 0; /* Si allinea con il lato del bottone */
-        top: 100%; /* Posiziona il menu sotto il bottone */
-        width: auto; /* Impostato su "auto" */
-        max-width: 200px; /* Imposta una larghezza massima ridotta su schermi piccoli */
-    }
-}
+/*    nav {*/
+/*        left: 0; !* Si allinea con il lato del bottone *!*/
+/*        top: 100%; !* Posiziona il menu sotto il bottone *!*/
+/*        width: auto; !* Impostato su "auto" *!*/
+/*        max-width: 200px; !* Imposta una larghezza massima ridotta su schermi piccoli *!*/
+/*    }*/
+/*}*/
