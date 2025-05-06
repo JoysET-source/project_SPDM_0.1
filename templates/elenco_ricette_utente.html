@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Elenco Ricette Disponibili</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/elenco_ricette_utente_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/elenco_ricette_utente_style_responsive.css') }}">
     <!-- libreria CDN per icone di instagram e facebook -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- collegamento a Bootstrap   -->
@@ -11,8 +11,75 @@
 </head>
 <body>
 
-<!-- collegamento a header_utente -->
-{% include "header_utente.html" %}
+<!-- header -->
+
+<!-- container principale -->
+<div class="container-header">
+    <!-- container generale  -->
+    <div class="container1">
+
+        <!-- creiamo il menu a tre barre chiamato toggle  -->
+        <div class="menu-toggle">&#9776;</div>
+        <!-- interno del menu a tendina -->
+        <nav id="menu" class="hidden">
+            <ul>
+                <div class="title-menu">
+                    {% if current_user.is_authenticated and current_user.username == "admin" %}
+                    <li><a href="{{ url_for('dashboard_routes.admin_dashboard') }}" style="color: red">Admin
+                        Dashboard</a></li>
+                    {% endif %}
+                    <li><a href="/">Torna alla Home</a></li>
+                    <li><a href="{{ url_for('ricette_routes.elenco_ricette') }}">
+                        <button class="btn">Elenco Ricette</button>
+                    </a></li>
+                    <li><a href="{{ url_for('ricette_routes.trova_calorie') }}">Cerca per calorie</a></li>
+                    <li class="no-style"><strong>Categorie</strong></li>
+                </div>
+                <div class="voci-menu">
+                    <li><a href="/categoria/entree" class="no-decoration">Entree</a></li>
+                    <li><a href="/categoria/primi" class="no-decoration">Primi Piatti</a></li>
+                    <li><a href="/categoria/pasta" class="no-decoration">Pasta</a></li>
+                    <li><a href="/categoria/risotti" class="no-decoration">Risotti</a></li>
+                    <li><a href="/categoria/secondi" class="no-decoration">Secondi Piatti</a></li>
+                    <li><a href="/categoria/streetFood" class="no-decoration">Street Food</a></li>
+                    <li><a href="/categoria/dolci" class="no-decoration">Dolci</a></li>
+                    <li><a href="/categoria/fusion" class="no-decoration">Fusion</a></li>
+                    <li><a href="/categoria/insalata" class="no-decoration">Contorni</a></li>
+                </div>
+            </ul>
+        </nav>
+        <!-- collegamento allo script hidden/show del menu a barre -->
+        <script type="text/javascript"
+                src="{{ url_for('static', filename='dashboard/js/admin_dsh_script.js') }}"></script>
+
+         <!-- definizione delle icone insta e fb -->
+        <div class="social-media">
+            <a href="https://www.instagram.com/sepoatedemincat" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/eugenio.travisi.5" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+<!--            <a href="https://www.youtube.com/channel/tuo-id-canale" target="_blank">-->
+<!--                <i class="fab fa-youtube"></i>-->
+<!--            </a>-->
+        </div>
+
+        <div>
+            <!-- icona omino come login/logout -->
+            {% if current_user.is_authenticated %}
+            <a style="color: limegreen; font-size: larger;" href="{{ url_for('auth_routes.logout') }}">
+                <i class="fa fa-user-circle status-icon"></i> Logout
+            </a>
+            {% else %}
+            <a style="color: white; font-size: larger;" href="{{ url_for('auth_routes.login') }}">
+                <i class="fa fa-user-circle status-icon"></i> Login
+            </a>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
 
 <!-- gestione immagine e dettaglio ricetta -->
 <div class="container-main">

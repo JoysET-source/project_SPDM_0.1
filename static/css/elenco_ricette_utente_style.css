@@ -22,7 +22,7 @@ body {
 
 /* Posizionamento delle icone social media */
 .container1 {
-     display: flex;
+    display: flex;
     gap: 16px;
     align-items: center;
     justify-content: center;
