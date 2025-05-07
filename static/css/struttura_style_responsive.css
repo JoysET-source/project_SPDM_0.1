@@ -58,6 +58,7 @@ body {
     font-size: 14px;
     width: 600px;
     max-width: 80vw;
+    border-radius: 6px;
 }
 
 #search-button {
