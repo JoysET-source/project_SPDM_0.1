@@ -1,5 +1,3 @@
-from models.ricetta_model import Ricetta
-from app import db
 
 
 # convertitore minuti => HH:MM
