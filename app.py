@@ -15,6 +15,7 @@ from models.accessLog_model import AccessLog
 
 
 load_dotenv()
+# print("ENV cloudinary:", os.getenv("CLOUDINARY_URL"))
 
 app = Flask(__name__)
 
@@ -31,6 +32,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 # collegamento per secret key
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.getenv("SECRET_KEY")
+
+# Configura CLOUDINARY
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True
+)
+# print("Cloudinary configurato con:", cloudinary.config().cloud_name)
 
 # caricare le immagini inserite in HTML su flask nel percorso specificato
 UPLOAD_FOLDER = "static/ricette"
