@@ -1,8 +1,10 @@
 import os
+import cloudinary.uploader
 
 from flask import abort, request, jsonify
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_user, logout_user, login_required
+from cloudinary.utils import cloudinary_url
 
 from import_bridge import bcrypt, db
 from models.login_model import LoginForm
@@ -10,6 +12,7 @@ from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.login_model import password_complexity_check
 from test.controllo_dimensione_immagini import ridimensiona_immagine
+from test.format_time_converter import format_time
 from routes.ricette import elenco_ricette
 
 
@@ -61,24 +64,51 @@ def create_recipe():
                                    )
 
         # gestisce stoccaggio immagini caricate su html
-        image_filename = None
+        # image_filename = None
+        image_url = None
+        # if immagine:
+        #     categoria_path = os.path.join("static/ricette", categoria)
+        #     os.makedirs(categoria_path, exist_ok=True)
+        #
+        #     estensione = os.path.splitext(immagine.filename)[1]
+        #     image_filename = f"{nome_ricetta}{estensione}"
+        #     image_path = os.path.join(categoria_path, image_filename)
+        #     immagine.save(image_path)
+        #
+        #     # Ridimensionamento immagine
+        #     ridimensiona_immagine(image_path)
+        #
+        #     # Salva solo il percorso dell immagine nel database
+        #     image_filename = f"static/ricette/{categoria}/{image_filename}"
+
         if immagine:
-            categoria_path = os.path.join("static/ricette", categoria)
-            os.makedirs(categoria_path, exist_ok=True)
+            try:
+                # Upload su Cloudinary
+                upload_result = cloudinary.uploader.upload(immagine,
+                                                           folder=f"ricette/{categoria}/",
+                                                           public_id=nome_ricetta,
+                                                           overwrite=True,
+                                                           resource_type="image")
+                image_url = upload_result.get("secure_url")
 
-            estensione = os.path.splitext(immagine.filename)[1]
-            image_filename = f"{nome_ricetta}{estensione}"
-            image_path = os.path.join(categoria_path, image_filename)
-            immagine.save(image_path)
+                # Ottimizza l'immagine con Cloudinary (auto-format e auto-quality)
+                optimize_url, _ = cloudinary_url(image_url, fetch_format="auto", quality="auto")
 
-            # Ridimensionamento immagine
-            ridimensiona_immagine(image_path)
+                # Puoi anche fare altre trasformazioni come ridimensionamento (esempio: 500px)
+                auto_crop_url, _ = cloudinary_url(image_url, width=800, height=600, crop="auto", gravity="auto")
 
-            # Salva solo il percorso dell immagine nel database
-            image_filename = f"static/ricette/{categoria}/{image_filename}"
+                # Qui scegli quale URL usare (ottimizzato o ritagliato, dipende dalle tue necessità)
+                image_url = auto_crop_url
+
+            except Exception as e:
+                return render_template("dashboard/ricette/create_recipe.html",
+                                       errore=f"Errore nel caricamento immagine: {e}",
+                                       elenco_categorie=elenco_categorie,
+                                       **request.form)
 
         # calcoliamo il valore total_time prima dell inserimento nel DB
         total_time = int(preparation_time or 0) + int(cooking_time or 0)
+        total_time = format_time(total_time)
 
         # crea la ricetta inserita e salva nel DB
         nuova_ricetta = Ricetta(
@@ -86,7 +116,8 @@ def create_recipe():
                 nome_ricetta=nome_ricetta,
                 ingredienti=ingredienti,
                 kcal=kcal,
-                immagine=image_filename,
+                # immagine=image_filename,
+                immagine=image_url,
                 titolo=titolo,
                 descrizione=descrizione,
                 servings=servings,
