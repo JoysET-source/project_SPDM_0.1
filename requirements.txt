@@ -34,6 +34,9 @@
 # flask db migrate -m "Aggiunta campo visibility con default True"
 # flask db upgrade
 
+# comandi utili per migration
+# flask db history , per vedere se ci sono migrazioni che non sono state applicate
+# flask db current, ti dice a che punto sei con le migrazioni
 
 flask==3.1.0
 flask_sqlalchemy==3.1.1
@@ -49,4 +52,5 @@ cryptography==44.0.2
 geoip2==5.0.1
 utils==1.0.2
 gunicorn==21.2.0
+cloudinary==1.44.0
 
