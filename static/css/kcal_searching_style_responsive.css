@@ -106,7 +106,7 @@ nav ul li:hover {
 
 .container-top {
     display: flex;
-    margin: 20px 0 auto;
+    margin: 20px auto;
     justify-content: space-between;
     align-items: center;
     background-color: aliceblue;

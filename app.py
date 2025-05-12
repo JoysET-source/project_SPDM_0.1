@@ -1,12 +1,17 @@
 import os
+import cloudinary
+import cloudinary.uploader
 from flask import Flask
 from dotenv import load_dotenv
 from import_bridge import db, migrate, bcrypt, login_manager
+
+
 
 # Importa i modelli per creare le tabelle nel database
 from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.accessLog_model import AccessLog
+
 
 
 load_dotenv()
