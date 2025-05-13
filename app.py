@@ -1,10 +1,10 @@
 import os
 import cloudinary
-import cloudinary.uploader
+
+from cloudinary.uploader import upload
 from flask import Flask
 from dotenv import load_dotenv
 from import_bridge import db, migrate, bcrypt, login_manager
-
 
 
 # Importa i modelli per creare le tabelle nel database
@@ -13,9 +13,11 @@ from models.ricetta_model import Ricetta
 from models.accessLog_model import AccessLog
 
 
-
 load_dotenv()
-# print("ENV cloudinary:", os.getenv("CLOUDINARY_URL"))
+
+# print("CLOUD NAME:", os.getenv("CLOUDINARY_CLOUD_NAME"))
+# print("API KEY:", os.getenv("CLOUDINARY_API_KEY"))
+# print("API SECRET:", os.getenv("CLOUDINARY_API_SECRET"))
 
 app = Flask(__name__)
 
@@ -41,6 +43,11 @@ cloudinary.config(
     secure=True
 )
 # print("Cloudinary configurato con:", cloudinary.config().cloud_name)
+# print("Cloudinary configurato con:", cloudinary.config().api_key)
+# print("Cloudinary configurato con:", cloudinary.config().api_secret)
+
+# result = upload("static/ricette/primi/test.jpg", folder="ricette/test/", public_id="prova_upload", overwrite=True)
+# print(result["secure_url"])
 
 # caricare le immagini inserite in HTML su flask nel percorso specificato
 UPLOAD_FOLDER = "static/ricette"
