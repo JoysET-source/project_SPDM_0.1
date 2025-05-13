@@ -65,48 +65,48 @@ def create_recipe():
                                    )
 
         # gestisce stoccaggio immagini caricate su html
-        # image_filename = None
-        image_url = None
-        # if immagine:
-        #     categoria_path = os.path.join("static/ricette", categoria)
-        #     os.makedirs(categoria_path, exist_ok=True)
-        #
-        #     estensione = os.path.splitext(immagine.filename)[1]
-        #     image_filename = f"{nome_ricetta}{estensione}"
-        #     image_path = os.path.join(categoria_path, image_filename)
-        #     immagine.save(image_path)
-        #
-        #     # Ridimensionamento immagine
-        #     ridimensiona_immagine(image_path)
-        #
-        #     # Salva solo il percorso dell immagine nel database
-        #     image_filename = f"static/ricette/{categoria}/{image_filename}"
-
+        image_filename = None
+        # image_url = None
         if immagine:
-            try:
-                # Upload su Cloudinary
-                upload_result = cloudinary.uploader.upload(immagine,
-                                                           folder=f"ricette/{categoria}/",
-                                                           public_id=nome_ricetta,
-                                                           overwrite=True,
-                                                           resource_type="image")
-                image_url = upload_result.get("secure_url")
-                print(image_url)
+            categoria_path = os.path.join("static/ricette", categoria)
+            os.makedirs(categoria_path, exist_ok=True)
 
-                # Ottimizza l'immagine con Cloudinary (auto-format e auto-quality)
-                optimize_url, _ = cloudinary_url(image_url, fetch_format="auto", quality="auto")
+            estensione = os.path.splitext(immagine.filename)[1]
+            image_filename = f"{nome_ricetta}{estensione}"
+            image_path = os.path.join(categoria_path, image_filename)
+            immagine.save(image_path)
 
-                # Puoi anche fare altre trasformazioni come ridimensionamento (esempio: 500px)
-                auto_crop_url, _ = cloudinary_url(image_url, width=800, height=600, crop="auto", gravity="auto")
+            # Ridimensionamento immagine
+            ridimensiona_immagine(image_path)
 
-                # Qui scegli quale URL usare (ottimizzato o ritagliato, dipende dalle tue necessità)
-                image_url = auto_crop_url
+            # Salva solo il percorso dell immagine nel database
+            image_filename = f"static/ricette/{categoria}/{image_filename}"
 
-            except Exception as e:
-                return render_template("dashboard/ricette/create_recipe.html",
-                                       errore=f"Errore nel caricamento immagine: {e}",
-                                       elenco_categorie=elenco_categorie,
-                                       **request.form)
+        # if immagine:
+        #     try:
+        #         # Upload su Cloudinary
+        #         upload_result = cloudinary.uploader.upload(immagine,
+        #                                                    folder=f"ricette/{categoria}/",
+        #                                                    public_id=nome_ricetta,
+        #                                                    overwrite=True,
+        #                                                    resource_type="image")
+        #         image_url = upload_result.get("secure_url")
+        #         print(image_url)
+        #
+        #         # Ottimizza l'immagine con Cloudinary (auto-format e auto-quality)
+        #         optimize_url, _ = cloudinary_url(image_url, fetch_format="auto", quality="auto")
+        #
+        #         # Puoi anche fare altre trasformazioni come ridimensionamento (esempio: 500px)
+        #         auto_crop_url, _ = cloudinary_url(image_url, width=800, height=600, crop="auto", gravity="auto")
+        #
+        #         # Qui scegli quale URL usare (ottimizzato o ritagliato, dipende dalle tue necessità)
+        #         image_url = auto_crop_url
+
+            # except Exception as e:
+            #     return render_template("dashboard/ricette/create_recipe.html",
+            #                            errore=f"Errore nel caricamento immagine: {e}",
+            #                            elenco_categorie=elenco_categorie,
+            #                            **request.form)
 
         # calcoliamo il valore total_time prima dell inserimento nel DB
         total_time = int(preparation_time or 0) + int(cooking_time or 0)
@@ -118,8 +118,8 @@ def create_recipe():
                 nome_ricetta=nome_ricetta,
                 ingredienti=ingredienti,
                 kcal=kcal,
-                # immagine=image_filename,
-                immagine=image_url,
+                immagine=image_filename,
+                # immagine=image_url,
                 titolo=titolo,
                 descrizione=descrizione,
                 servings=servings,
