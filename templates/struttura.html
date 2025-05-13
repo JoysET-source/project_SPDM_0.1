@@ -74,7 +74,7 @@
             <a class="btn btn-primary" style="border: none; padding: 0; background: none;"
                href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=ricette.categoria, nome_ricetta=ricette.nome_ricetta) }}"
                role="button">
-                <img src="{{ url_for('static', filename=ricette.immagine[7:]) }}" alt="Immagine Ricetta">
+                <img src="{{ ricetta.immagine }}" alt="Immagine Ricetta">
             </a>
             {% else %}
             <p>Immagine non disponibile</p>
