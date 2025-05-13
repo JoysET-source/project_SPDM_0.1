@@ -103,20 +103,31 @@ nav ul li:hover {
     background-color: orange;
 }
 
+.layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+    max-width: 1000px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
 .container-top {
     display: flex;
-    margin: 20px auto;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin: 20px auto;
     background-color: aliceblue;
     border-radius: 10px;
-    width: 1000px;
+    width: 100%;
 }
 
 .top-section-left {
-    display: flex;
-    align-items: center;
+    width: 100%;
+    max-width: 600px;
 }
 
 .top-section-left img {
@@ -127,10 +138,14 @@ nav ul li:hover {
 }
 
 .top-section-right {
-    width: 45%;
+    width: 100%;
+    max-width: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .top-section-right ul {
