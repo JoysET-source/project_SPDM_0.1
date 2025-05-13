@@ -1,7 +1,8 @@
 import os
 import cloudinary
 
-from cloudinary.uploader import upload
+# from cloudinary.uploader import upload
+
 from flask import Flask
 from dotenv import load_dotenv
 from import_bridge import db, migrate, bcrypt, login_manager
