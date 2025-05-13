@@ -91,7 +91,7 @@ def create_recipe():
                                                            overwrite=True,
                                                            resource_type="image")
                 image_url = upload_result.get("secure_url")
-                print(f"Image uploaded successfully: {image_url}")
+
 
                 # Ottimizza l'immagine con Cloudinary (auto-format e auto-quality)
                 optimize_url, _ = cloudinary_url(image_url, fetch_format="auto", quality="auto")
