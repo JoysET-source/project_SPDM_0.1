@@ -33,7 +33,7 @@
             <a href="{{ url_for('ricette_routes.dettaglio_ricetta', categoria=categoria, nome_ricetta=ricetta.nome_ricetta) }}">
                 <button>
                     {% if ricetta.immagine %}
-                    <img src="{{ url_for('static', filename=ricetta.immagine[7:] )}}"
+                    <img src="{{ ricetta.immagine }}"
                          alt="Immagine della ricetta {{ ricetta.nome_ricetta }}">
                     {% else %}
                     Immagine non Disponibile
@@ -48,7 +48,7 @@
                 <a href="{{ url_for('auth_routes.login') }}">
                     <button>
                         {% if ricetta.immagine %}
-                        <img src="{{ url_for('static', filename=ricetta.immagine[7:] )}}"
+                        <img src="{{ ricetta.immagine }}"
                              alt="{{ ricetta.nome_ricetta }}">
                         {% else %}
                         Immagine non Disponibile

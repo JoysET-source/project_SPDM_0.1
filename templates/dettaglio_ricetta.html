@@ -19,7 +19,7 @@
         <!-- gestione immagine parte sinistra -->
         <div class="top-section-left">
             {% if ricetta.immagine %}
-            <img src="{{ url_for('static', filename=ricetta.immagine[7:]) }}" alt="Immagine Ricetta">
+            <img src="{{ ricetta.immagine }}" alt="Immagine Ricetta">
             {% else %}
             <p alt="Nessuna immagine disponibile">Immagine non disponibile</p>
             {% endif %}
