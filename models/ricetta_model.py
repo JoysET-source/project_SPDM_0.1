@@ -10,7 +10,7 @@ class Ricetta(db.Model):
     ingredienti = db.Column(db.Text, nullable=True)
     kcal = db.Column(db.Integer, nullable=True)
     # Aggiungi questo campo per memorizzare l'URL(il percorso) dell'immagine che sta su static
-    immagine = db.Column(db.String(100), nullable=True)
+    immagine = db.Column(db.String(255), nullable=True)
     categoria = db.Column(db.String(100), nullable=False)
     titolo = db.Column(db.String(100), nullable=True)
     descrizione = db.Column(db.String(5000), nullable=True)
