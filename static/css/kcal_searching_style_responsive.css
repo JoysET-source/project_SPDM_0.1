@@ -12,31 +12,50 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     padding: 10px 20px;
     background-color: transparent;
 }
 
 /* Posizionamento delle icone social media */
+
+/*.container1 {*/
+/*    display: flex;*/
+/*    position: relative;*/
+/*    bottom: 0;*/
+/*    left: 50%;*/
+/*    transform: translateX(-50%);*/
+/*    gap: 16px;*/
+/*    align-items: center;*/
+/*}*/
+
 .container1 {
     display: flex;
-    position: relative;
-    bottom: 0;
-    /*left: 50%;*/
-    /*transform: translateX(-50%);*/
     gap: 16px;
-    /*align-items: center;*/
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 1000px;
+    width: 100%;
 }
 
 .search-container {
     display: flex;
-    /*align-items: center;*/
+    align-items: center;
     gap: 14px;
+    flex-wrap: wrap;
+    width: 75%;
 }
 
 #search-input {
     padding: 8px;
     font-size: 8px;
     width: 600px;
+    max-width: 80vw;
+    border-radius: 6px;
 }
 
 #search-button {
@@ -55,7 +74,7 @@ body {
     cursor: pointer;
     font-size: 30px;
     z-index: 1000;
-    position: relative;
+    /*position: relative;*/
     color: white;
 }
 
