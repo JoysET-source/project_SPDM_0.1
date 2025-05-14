@@ -166,9 +166,18 @@ nav#menu ul li a {
 
 /* --- RESPONSIVE: MOBILE FRIENDLY --- */
 @media (max-width: 768px) {
-    .top-section-right {
-        max-width: 100%;
-        padding: 10px;
+    .container-header {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .container-top {
+        flex-direction: column;
+        width: 95%;
+    }
+
+     .top-section-right,
+    .top-section-left {
+        width: 100%;
     }
 
     .menu-toggle {
