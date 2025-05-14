@@ -164,25 +164,25 @@ nav#menu ul li a {
     opacity: 0.6;
 }
 
-/*!* --- RESPONSIVE: MOBILE FRIENDLY --- *!*/
-/*@media (max-width: 768px) {*/
-/*    .top-section-right {*/
-/*        max-width: 100%;*/
-/*        padding: 10px;*/
-/*    }*/
+/* --- RESPONSIVE: MOBILE FRIENDLY --- */
+@media (max-width: 768px) {
+    .top-section-right {
+        max-width: 100%;
+        padding: 10px;
+    }
 
-/*    .menu-toggle {*/
-/*        font-size: 24px;*/
-/*    }*/
+    .menu-toggle {
+        font-size: 24px;
+    }
 
-/*    .social-media i {*/
-/*        font-size: 24px;*/
-/*    }*/
+    .social-media i {
+        font-size: 24px;
+    }
 
-/*    nav {*/
-/*        left: 0; !* Si allinea con il lato del bottone *!*/
-/*        top: 100%; !* Posiziona il menu sotto il bottone *!*/
-/*        width: auto; !* Impostato su "auto" *!*/
-/*        max-width: 200px; !* Imposta una larghezza massima ridotta su schermi piccoli *!*/
-/*    }*/
-/*}*/
+    nav {
+        left: 0; /* Si allinea con il lato del bottone */
+        top: 100%; /* Posiziona il menu sotto il bottone */
+        width: auto; /* Impostato su "auto" */
+        max-width: 200px; /* Imposta una larghezza massima ridotta su schermi piccoli */
+    }
+}
