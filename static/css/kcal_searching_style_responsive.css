@@ -164,7 +164,6 @@ nav ul li:hover {
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .container-header {
-        flex-direction: column;
         align-items: center;
         gap: 10px;
     }

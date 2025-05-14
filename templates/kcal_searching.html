@@ -46,20 +46,18 @@
                 <li><a href="/categoria/test2" class="no-decoration">Vuoto</a></li>
             </ul>
         </nav>
-        <!-- collegamento allo script hidden/show del menu a barre -->
+        <!-- collegamento allo script hidden del menu a barre -->
         <script type="text/javascript"
                 src="{{ url_for('static', filename='dashboard/js/admin_dsh_script.js') }}"></script>
 
-        <!-- questo form fa capo diretto ad endpoint  -->
+        <!-- questo form fa capo diretto a endpoint  -->
         <div class="search-container">
-            <div class="search-container">
-                <form action="{{ url_for('ricette_routes.trova_calorie') }}" method="GET">
-                    <label for="search-input" class="sr-only"></label>
-                    <input type="text" id="search-input" name="kcal" placeholder="Calorie" aria-label="Cerca ricetta"
-                           required/>
-<!--                    <button id="search-button" type="submit">Search</button>-->
-                </form>
-            </div>
+            <form action="{{ url_for('ricette_routes.trova_calorie') }}" method="GET">
+                <label for="search-input" class="sr-only"></label>
+                <input type="text" id="search-input" name="kcal" placeholder="Calorie" aria-label="Cerca ricetta"
+                       required/>
+                <!-- <button id="search-button" type="submit">Search</button> -->
+            </form>
         </div>
     </div>
     <!-- Qui compariranno i risultati -->
@@ -89,8 +87,8 @@
             <ul class="dettagli-ricetta">
                 <li>Calorie: <h3>{{ ricetta.kcal }}</h3></li>
                 <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
-                <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
-                <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
+                <li>Nome: <strong>{{ricetta.nome_ricetta}}</strong></li>
+                <li>Difficolta: <strong>{{ricetta.difficulty_level}}</strong></li>
                 <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>
                 <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
             </ul>
@@ -114,8 +112,8 @@
                 <ul class="dettagli-ricetta">
                     <li>Calorie: <h3>{{ ricetta.kcal }}</h3></li>
                     <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
-                    <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
-                    <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
+                    <li>Nome: <strong>{{ricetta.nome_ricetta}}</strong></li>
+                    <li>Difficolta: <strong>{{ricetta.difficulty_level}}</strong></li>
                     <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>
                     <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
                 </ul>
