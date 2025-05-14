@@ -140,7 +140,7 @@ nav#menu ul li a {
 }
 
 .top-section-right {
-    width: 100%;
+    width: 65%;
     max-width: 400px;
     display: flex;
     align-items: center;
