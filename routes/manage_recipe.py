@@ -159,8 +159,9 @@ def create_recipe():
 def aggiungi_categoria():
     cartella_base = "static/ricette/"
     nome_categoria = request.json.get("nome_categoria", "").strip()
+    file_keep = ".gitkeep.txt"
 
-    new_categoria = os.path.join(cartella_base, nome_categoria)
+    new_categoria = os.path.join(cartella_base, nome_categoria, file_keep)
 
     if not os.path.exists(new_categoria):
         os.makedirs(new_categoria)
