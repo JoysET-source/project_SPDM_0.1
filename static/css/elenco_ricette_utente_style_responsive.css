@@ -165,33 +165,33 @@ nav#menu ul li a {
 }
 
 /* --- RESPONSIVE: MOBILE FRIENDLY --- */
-@media (max-width: 768px) {
-    .container-header {
-        flex-direction: column;
-        gap: 12px;
-    }
-    .container-top {
-        flex-direction: column;
-        width: 95%;
-    }
+/*@media (max-width: 768px) {*/
+/*    .container-header {*/
+/*        flex-direction: column;*/
+/*        gap: 12px;*/
+/*    }*/
+/*    .container-top {*/
+/*        flex-direction: column;*/
+/*        width: 95%;*/
+/*    }*/
 
-     .top-section-right,
-    .top-section-left {
-        width: 100%;
-    }
+/*     .top-section-right,*/
+/*    .top-section-left {*/
+/*        width: 100%;*/
+/*    }*/
 
-    .menu-toggle {
-        font-size: 24px;
-    }
+/*    .menu-toggle {*/
+/*        font-size: 24px;*/
+/*    }*/
 
-    .social-media i {
-        font-size: 24px;
-    }
+/*    .social-media i {*/
+/*        font-size: 24px;*/
+/*    }*/
 
-    nav {
-        left: 0; /* Si allinea con il lato del bottone */
-        top: 100%; /* Posiziona il menu sotto il bottone */
-        width: auto; /* Impostato su "auto" */
-        max-width: 200px; /* Imposta una larghezza massima ridotta su schermi piccoli */
-    }
-}
+/*    nav {*/
+/*        left: 0; !* Si allinea con il lato del bottone *!*/
+/*        top: 100%; !* Posiziona il menu sotto il bottone *!*/
+/*        width: auto; !* Impostato su "auto" *!*/
+/*        max-width: 200px; !* Imposta una larghezza massima ridotta su schermi piccoli *!*/
+/*    }*/
+/*}*/
