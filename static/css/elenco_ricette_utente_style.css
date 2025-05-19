@@ -76,6 +76,29 @@ nav ul li:hover {
     background-color: orange;
 }
 
+.no-decoration {
+    text-decoration: none;
+    color: inherit;
+}
+
+.title-menu {
+    text-align: center;
+}
+
+.voci-menu {
+    text-align: left;
+}
+
+.no-style {
+    pointer-events: none;
+    text-decoration: none;
+}
+
+.no-style:hover {
+    background-color: transparent;
+    color: black;
+}
+
 
 .social-media {
     display: flex;
