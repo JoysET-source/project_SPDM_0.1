@@ -27,12 +27,10 @@
         <nav id="menu" class="hidden">
             <ul>
                 <li><a class="no-decoration" href="/">Torna alla Home</a></li>
-                <li><a href="{{ url_for('ricette_routes.elenco_ricette') }}">
-                    <button class="btn">Elenco Ricette</button>
-                </a></li>
+                <li><a href="{{ url_for('ricette_routes.elenco_ricette') }}">Elenco Ricette</a></li>
                 <li><a href="{{ url_for('ricette_routes.trova_calorie') }}" class="no-decoration">Cerca per
                     calorie</a></li>
-                <li><strong>Categorie</strong></li>
+                <li class="no-style"><strong>Categorie</strong></li>
                 <li><a href="/categoria/entree" class="no-decoration">Entree</a></li>
                 <li><a href="/categoria/primi" class="no-decoration">Primi Piatti</a></li>
                 <li><a href="/categoria/pasta" class="no-decoration">Pasta</a></li>
