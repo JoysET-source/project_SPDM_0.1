@@ -256,26 +256,33 @@ def update_recipe(id):
 
         # Gestisci l'immagine, se è stata aggiornata
         immagine = request.files.get("immagine")
+        image_url = db_ricetta.immagine
         if immagine:
-            # Elimina la vecchia immagine, se esiste
-            if db_ricetta.immagine:
-                os.remove(db_ricetta.immagine)
 
-            # Salva la nuova immagine
-            categoria = request.form.get("categoria")  # Assumendo che la categoria venga fornita dal form
-            categoria_path = os.path.join("static/ricette", categoria)
-            if not os.path.exists(categoria_path):
-                os.makedirs(categoria_path)  # Crea la cartella se non esiste
-            estensione = os.path.splitext(immagine.filename)[1]
-            image_filename = f"{db_ricetta.nome_ricetta}{estensione}"
-            image_path = os.path.join(categoria_path, image_filename)
-            immagine.save(image_path)
+            # Sovrascrivi la nuova immagine su Cloudinary
+            try:
+                # Upload su Cloudinary
+                upload_result = cloudinary.uploader.upload(immagine,
+                                                           folder=f"ricette/{db_ricetta.categoria}/",
+                                                           public_id=db_ricetta.nome_ricetta,
+                                                           overwrite=True,
+                                                           invalidate=True,
+                                                           resource_type="image")
+                image_url = upload_result.get("secure_url")
 
-            # Ridimensionamento immagine
-            ridimensiona_immagine(image_path)
+                # ridimensionamento
+                auto_crop_url, _ = cloudinary_url(image_url, width=800, height=600, crop="auto", gravity="auto")
 
-            # Salva il percorso dell'immagine nel database
-            db_ricetta.immagine = f"static/ricette/{categoria}/{image_filename}"
+                # Qui scegli quale URL usare
+                image_url = auto_crop_url
+
+            except Exception as e:
+                return render_template("dashboard/ricette/create_recipe.html",
+                                       errore=f"Errore nel caricamento immagine: {e}",
+                                       elenco_categorie=elenco_categorie,
+                                       **request.form)
+
+        db_ricetta.immagine = image_url
 
         db_ricetta.total_time = int(db_ricetta.preparation_time) + int(db_ricetta.cooking_time)
 
