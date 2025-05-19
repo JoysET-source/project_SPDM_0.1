@@ -285,6 +285,7 @@ def update_recipe(id):
         db_ricetta.immagine = image_url
 
         db_ricetta.total_time = int(db_ricetta.preparation_time) + int(db_ricetta.cooking_time)
+        db_ricetta.total_time = format_time(db_ricetta.total_time)
 
         try:
             # Salva le modifiche nel database
