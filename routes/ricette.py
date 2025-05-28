@@ -49,7 +49,7 @@ def home():
 
     print(f"🔍 Trovate {len(ricette_categoria_unica)} ricette uniche:")
     for r in ricette_categoria_unica:
-        print(f"- {r.nome} (immagine: {r.immagine})")
+        print(f"- {r.nome_ricetta} (immagine: {r.immagine})")
 
     log_access(
             action="visita_home",
