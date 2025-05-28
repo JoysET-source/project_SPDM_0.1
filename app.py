@@ -13,8 +13,7 @@ from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.accessLog_model import AccessLog
 
-
-
+# Carica le variabili d'ambiente dal file .env
 load_dotenv()
 
 # print("CLOUD NAME:", os.getenv("CLOUDINARY_CLOUD_NAME"))

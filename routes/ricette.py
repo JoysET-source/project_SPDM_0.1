@@ -47,6 +47,10 @@ def home():
             check_categorie.add(ricette.categoria)
             ricette_categoria_unica.append(ricette)
 
+    print(f"🔍 Trovate {len(ricette_categoria_unica)} ricette uniche:")
+    for r in ricette_categoria_unica:
+        print(f"- {r.nome} (immagine: {r.immagine})")
+
     log_access(
             action="visita_home",
             ricetta_vista=None,  # Non c'è una ricetta in questo caso

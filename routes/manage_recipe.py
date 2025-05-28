@@ -92,7 +92,7 @@ def create_recipe():
                                                            overwrite=True,
                                                            resource_type="image")
                 image_url = upload_result.get("secure_url")
-                print(image_url)
+                print(f"Upload riuscito: {image_url}")
 
                 # ridimensionamento
                 auto_crop_url, _ = cloudinary_url(image_url, width=800, height=600, crop="auto", gravity="auto")
