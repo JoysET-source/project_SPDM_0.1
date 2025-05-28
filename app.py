@@ -14,6 +14,7 @@ from models.ricetta_model import Ricetta
 from models.accessLog_model import AccessLog
 
 
+
 load_dotenv()
 
 # print("CLOUD NAME:", os.getenv("CLOUDINARY_CLOUD_NAME"))

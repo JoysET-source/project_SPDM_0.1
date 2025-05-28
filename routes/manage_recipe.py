@@ -17,6 +17,7 @@ from test.format_time_converter import format_time
 from routes.ricette import elenco_ricette
 
 
+# Blueprint per le rotte del dashboard
 dashboard_routes = Blueprint("dashboard_routes", __name__)
 
 
