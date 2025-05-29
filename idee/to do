@@ -1,8 +1,14 @@
 Prossimi passi:
 
-la descrizione ricetta non la uso bisogna aggiungerla
+la descrizione ricetta non la uso bisogna aggiungerla sotto il nome in dettaglio ricetta
 
-nel dettaglio ricetta utente bisogna sistemare tempo totale che è ancora in minuti
+manca servings sul dettaglio ricetta da mettere
+
+manca caricamento immagini in steps
+
+modificare elenco ricette utente guarda la sezione ricette di chucchiaio d'argento
+
+da aggiungere la sezione per bambini e per gym
 
 # per la dashboard:
 
@@ -39,7 +45,7 @@ Solo allora crea l’utente nel DB
 
 (opzionale) aggiungere la sezione fatte da voi come giallo zafferano
 
-(opzionale) sistemare convert time
+
 
 
 
