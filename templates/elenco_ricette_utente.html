@@ -100,16 +100,16 @@
             {% endif %}
         </div>
 
-        <div class="top-section-right">
-            <ul class="dettagli-ricetta">
-                <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
-                <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
-                <li>Calorie: <strong>{{ ricetta.kcal }}</strong></li>
-                <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
-                <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>
-                <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
-            </ul>
-        </div>
+<!--        <div class="top-section-right">-->
+<!--            <ul class="dettagli-ricetta">-->
+<!--                <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>-->
+<!--                <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>-->
+<!--                <li>Calorie: <strong>{{ ricetta.kcal }}</strong></li>-->
+<!--                <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>-->
+<!--                <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>-->
+<!--                <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>-->
+<!--            </ul>-->
+<!--        </div>-->
 
         {% elif ricetta.visibility==False %}
 
@@ -127,16 +127,16 @@
                 {% endif %}
             </div>
 
-            <div class="top-section-right">
-                <ul class="dettagli-ricetta">
-                    <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>
-                    <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>
-                    <li>Calorie: <strong>{{ ricetta.kcal }}</strong></li>
-                    <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>
-                    <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>
-                    <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>
-                </ul>
-            </div>
+<!--            <div class="top-section-right">-->
+<!--                <ul class="dettagli-ricetta">-->
+<!--                    <li>Cucina: <strong>{{ ricetta.cousine_type }}</strong></li>-->
+<!--                    <li>Nome: <strong>{{ ricetta.nome_ricetta }}</strong></li>-->
+<!--                    <li>Calorie: <strong>{{ ricetta.kcal }}</strong></li>-->
+<!--                    <li>Difficolta: <strong>{{ ricetta.difficulty_level }}</strong></li>-->
+<!--                    <li>Tempo: <strong>{{ ricetta.total_time }}</strong></li>-->
+<!--                    <li>Prezzo: <strong>{{ ricetta.prezzo }}</strong> <strong>{{ ricetta.valuta }}</strong></li>-->
+<!--                </ul>-->
+<!--            </div>-->
         </div>
         {% endif %}
     </div>
