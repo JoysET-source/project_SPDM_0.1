@@ -8,7 +8,7 @@ from import_bridge import login_manager, db
 from models.ricetta_model import Ricetta
 from models.user_model import User
 from routes.accessLog_routes import log_access
-
+from app import cache
 
 ricette_routes = Blueprint('ricette_routes', __name__)
 # specifica il path contenente le ricette caricate
@@ -18,6 +18,7 @@ ricette_path = os.path.join("static", "Ricette")
 
 #  questo chiama struttura come file per interfaccia home
 @ricette_routes.route('/')
+@cache.cached(timeout=60*60*24)  # Cache per 24 ore
 def home():
     # stabilisce la variabile per il 50% delle ricette
     percent_items_to_show = 0.5
@@ -47,6 +48,7 @@ def home():
             check_categorie.add(ricette.categoria)
             ricette_categoria_unica.append(ricette)
 
+    # debug: stampa le ricette uniche trovate
     print(f"🔍 Trovate {len(ricette_categoria_unica)} ricette uniche:")
     for r in ricette_categoria_unica:
         print(f"- {r.nome_ricetta} (immagine: {r.immagine})")
