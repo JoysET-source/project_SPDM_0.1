@@ -61,9 +61,10 @@ cloudinary.config(
 # app.config["CACHE_TYPE"] = "RedisCache"
 # app.config["CACHE_REDIS_URL"] = os.getenv("REDIS_URL")
 
+redis_port = os.getenv("REDIS_PORT", "6379")
 redis_client = redis.Redis(
     host=os.getenv("REDIS_HOST"),
-    port=int(os.getenv("REDIS_PORT")),
+    port=int(redis_port),
     password=os.getenv("REDIS_PASSWORD"),
     ssl=True,
     socket_timeout=5,
