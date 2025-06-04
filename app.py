@@ -1,11 +1,12 @@
 import os
 import cloudinary
-import redis
+# import redis
 
 
 from flask import Flask
 from dotenv import load_dotenv
-from import_bridge import db, migrate, bcrypt, login_manager, cache
+from import_bridge import db, migrate, bcrypt, login_manager
+# from import_bridge import cache
 
 # Importa i modelli per creare le tabelle nel database
 from models.user_model import User
@@ -61,16 +62,16 @@ cloudinary.config(
 # app.config["CACHE_TYPE"] = "RedisCache"
 # app.config["CACHE_REDIS_URL"] = os.getenv("REDIS_URL")
 
-redis_port = os.getenv("REDIS_PORT", "6379")
-redis_client = redis.Redis(
-    host=os.getenv("REDIS_HOST"),
-    port=int(redis_port),
-    password=os.getenv("REDIS_PASSWORD"),
-    ssl=True,
-    socket_timeout=5,
-    socket_connect_timeout=5,
-    retry_on_timeout=True
-)
+# redis_port = os.getenv("REDIS_PORT", "6379")
+# redis_client = redis.Redis(
+#     host=os.getenv("REDIS_HOST"),
+#     port=int(redis_port),
+#     password=os.getenv("REDIS_PASSWORD"),
+#     ssl=True,
+#     socket_timeout=5,
+#     socket_connect_timeout=5,
+#     retry_on_timeout=True
+# )
 
 #=============================================================
 
@@ -85,7 +86,7 @@ migrate.init_app(app, db)
 bcrypt.init_app(app)
 login_manager.init_app(app)
 login_manager.login_view = "auth_routes.login"
-cache.init_app(app)
+# cache.init_app(app)
 
 # apre app e crea i db
 with app.app_context():
