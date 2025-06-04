@@ -1,13 +1,9 @@
 import os
 import cloudinary
 
-
-
 from flask import Flask
-from flask_caching import Cache
 from dotenv import load_dotenv
-from import_bridge import db, migrate, bcrypt, login_manager
-
+from import_bridge import db, migrate, bcrypt, login_manager, cache
 
 # Importa i modelli per creare le tabelle nel database
 from models.user_model import User
@@ -58,7 +54,6 @@ cloudinary.config(
 
 #=============================================================
 # Configura Flask-Caching
-cache = Cache()
 app.config["CACHE_TYPE"] = "RedisCache"
 app.config["CACHE_REDIS_URL"] = os.getenv("REDIS_URL")
 #=============================================================
