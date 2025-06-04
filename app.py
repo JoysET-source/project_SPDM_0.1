@@ -1,9 +1,10 @@
 import os
 import cloudinary
 
-# from cloudinary.uploader import upload
+
 
 from flask import Flask
+from flask_caching import Cache
 from dotenv import load_dotenv
 from import_bridge import db, migrate, bcrypt, login_manager
 
@@ -22,12 +23,15 @@ load_dotenv()
 
 app = Flask(__name__)
 
+#=============================================================
+# creazione DB in locale
 # collegamenti per creare DB in sql lite
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ricette.db'
 # app.config['SQLALCHEMY_BINDS'] = {'users': 'sqlite:///users.db'}
-
+# spostare db su mysql ma sembre locale
 # collegamento per creare db in mysql
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'mysql+pymysql://root@localhost/spdm')
+#=============================================================
 
 # collegamento per creare db online in mysql con server remoto aiven
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
@@ -35,7 +39,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 # collegamento per secret key
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.getenv("SECRET_KEY")
-
+#=============================================================
 # Configura CLOUDINARY
 cloudinary.config(
     cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
@@ -43,24 +47,34 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET"),
     secure=True
 )
+# debug cloudinary
 # print("Cloudinary configurato con:", cloudinary.config().cloud_name)
 # print("Cloudinary configurato con:", cloudinary.config().api_key)
 # print("Cloudinary configurato con:", cloudinary.config().api_secret)
 
 # result = upload("static/ricette/primi/test.jpg", folder="ricette/test/", public_id="prova_upload", overwrite=True)
 # print(result["secure_url"])
+#=============================================================
+
+#=============================================================
+# Configura Flask-Caching
+cache = Cache()
+app.config["CACHE_TYPE"] = "RedisCache"
+app.config["CACHE_REDIS_URL"] = os.getenv("REDIS_URL")
+#=============================================================
 
 # caricare le immagini inserite in HTML su flask nel percorso specificato
 UPLOAD_FOLDER = "static/ricette"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# inizializza app, migrate, bcrypt e login
+# inizializza db, migrate, bcrypt, login, cache
 db.init_app(app)
 migrate.init_app(app, db)
 bcrypt.init_app(app)
 login_manager.init_app(app)
 login_manager.login_view = "auth_routes.login"
+cache.init_app(app)
 
 # apre app e crea i db
 with app.app_context():
