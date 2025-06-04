@@ -1,9 +1,9 @@
 import os
 import cloudinary
+import redis
 
 
 from flask import Flask
-from redis import Redis
 from dotenv import load_dotenv
 from import_bridge import db, migrate, bcrypt, login_manager, cache
 
@@ -11,6 +11,8 @@ from import_bridge import db, migrate, bcrypt, login_manager, cache
 from models.user_model import User
 from models.ricetta_model import Ricetta
 from models.accessLog_model import AccessLog
+
+
 
 # Carica le variabili d'ambiente dal file .env
 load_dotenv()
@@ -59,17 +61,16 @@ cloudinary.config(
 # app.config["CACHE_TYPE"] = "RedisCache"
 # app.config["CACHE_REDIS_URL"] = os.getenv("REDIS_URL")
 
-redis_conn = Redis.from_url(
-    os.getenv("REDIS_URL"),
-    ssl=True,  # <--- fondamentale per Upstash
+redis_client = redis.Redis(
+    host=os.getenv("REDIS_HOST"),
+    port=int(os.getenv("REDIS_PORT")),
+    password=os.getenv("REDIS_PASSWORD"),
+    ssl=True,
+    socket_timeout=5,
+    socket_connect_timeout=5,
+    retry_on_timeout=True
 )
 
-cache(config={
-    "CACHE_TYPE": "RedisCache",
-    "CACHE_DEFAULT_TIMEOUT": 60 * 60 * 24, # Cache per 24 ore
-    "CACHE_KEY_PREFIX": "spdm_",  # utile se condividi Redis
-    "CACHE_REDIS_CLIENT": redis_conn,
-})
 #=============================================================
 
 # caricare le immagini inserite in HTML su flask nel percorso specificato
