@@ -4,11 +4,13 @@ from flask import Blueprint, render_template, request, jsonify, url_for
 from flask_login import current_user, login_required
 from sqlalchemy.sql.expression import func
 
-from import_bridge import login_manager, db
+from import_bridge import login_manager, db, cache
 from models.ricetta_model import Ricetta
 from models.user_model import User
 from routes.accessLog_routes import log_access
-from app import cache
+
+
+
 
 ricette_routes = Blueprint('ricette_routes', __name__)
 # specifica il path contenente le ricette caricate
