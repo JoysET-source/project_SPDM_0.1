@@ -20,7 +20,7 @@ ricette_path = os.path.join("static", "Ricette")
 
 #  questo chiama struttura come file per interfaccia home
 @ricette_routes.route('/')
-@cache.cached(timeout=60*60*24)  # Cache per 24 ore
+@cache.cached()
 def home():
     # stabilisce la variabile per il 50% delle ricette
     percent_items_to_show = 0.5
