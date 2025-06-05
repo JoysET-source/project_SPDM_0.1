@@ -9,8 +9,8 @@ from import_bridge import login_manager, db
 from models.ricetta_model import Ricetta
 from models.user_model import User
 from routes.accessLog_routes import log_access
-# from app import redis_client
-# from import_bridge import cache
+from test.redis_config import redis_client
+
 
 
 
@@ -23,6 +23,17 @@ ricette_path = os.path.join("static", "Ricette")
 #  questo chiama struttura come file per interfaccia home
 @ricette_routes.route('/')
 def home():
+    cache_key = "home_ricette"
+
+    # Prova a leggere dalla cache
+    cached_data = redis_client.get(cache_key)
+    if cached_data:
+        try:
+            ricette_categoria_unica = pickle.loads(cached_data)
+            print("📦 Ricette caricate da Redis.")
+            return render_template("struttura.html", ricette_categoria_unica=ricette_categoria_unica)
+        except Exception as e:
+            print("⚠️ Errore durante il caricamento dalla cache:", e)
 
     # stabilisce la variabile per il 50% delle ricette
     percent_items_to_show = 0.5
@@ -56,6 +67,13 @@ def home():
     print(f"🔍 Trovate {len(ricette_categoria_unica)} ricette uniche:")
     for r in ricette_categoria_unica:
         print(f"- {r.nome_ricetta} (immagine: {r.immagine})")
+
+    # Salva in Redis per 24 ore
+    try:
+        redis_client.setex(cache_key, 86400, pickle.dumps(ricette_categoria_unica))
+        print("✅ Ricette salvate nella cache Redis.")
+    except Exception as e:
+        print("❌ Errore nel salvataggio Redis:", e)
 
     log_access(
             action="visita_home",

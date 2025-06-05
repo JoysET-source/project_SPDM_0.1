@@ -1,12 +1,12 @@
 import os
 import cloudinary
-# import redis
+import redis
 
 
 from flask import Flask
 from dotenv import load_dotenv
 from import_bridge import db, migrate, bcrypt, login_manager
-# from import_bridge import cache
+
 
 # Importa i modelli per creare le tabelle nel database
 from models.user_model import User
@@ -17,6 +17,9 @@ from models.accessLog_model import AccessLog
 
 # Carica le variabili d'ambiente dal file .env
 load_dotenv()
+
+# inizializza il client Redis
+from test.redis_config import redis_client
 
 # print("CLOUD NAME:", os.getenv("CLOUDINARY_CLOUD_NAME"))
 # print("API KEY:", os.getenv("CLOUDINARY_API_KEY"))
@@ -57,24 +60,6 @@ cloudinary.config(
 # print(result["secure_url"])
 #=============================================================
 
-#=============================================================
-# Configura Redis-cache Flask-Caching
-# app.config["CACHE_TYPE"] = "RedisCache"
-# app.config["CACHE_REDIS_URL"] = os.getenv("REDIS_URL")
-
-# redis_port = os.getenv("REDIS_PORT", "6379")
-# redis_client = redis.Redis(
-#     host=os.getenv("REDIS_HOST"),
-#     port=int(redis_port),
-#     password=os.getenv("REDIS_PASSWORD"),
-#     ssl=True,
-#     socket_timeout=5,
-#     socket_connect_timeout=5,
-#     retry_on_timeout=True
-# )
-
-#=============================================================
-
 # caricare le immagini inserite in HTML su flask nel percorso specificato
 UPLOAD_FOLDER = "static/ricette"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -86,10 +71,21 @@ migrate.init_app(app, db)
 bcrypt.init_app(app)
 login_manager.init_app(app)
 login_manager.login_view = "auth_routes.login"
-# cache.init_app(app)
 
-# apre app e crea i db
+
+# apre app
 with app.app_context():
+
+    # debug redis
+    try:
+        redis_client.set("test_redis", "funziona", ex=10)
+        print("✅ Redis test: chiave scritta correttamente")
+        value = redis_client.get("test_redis")
+        print("🔁 Redis test: valore letto =", value)
+    except Exception as e:
+        print("❌ Redis test fallito:", e)
+
+    # Crea le tabelle nel database
     db.create_all()
 
 from routes.auth import auth_routes
