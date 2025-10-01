@@ -16,7 +16,6 @@ from test.controllo_dimensione_immagini import ridimensiona_immagine
 from test.format_time_converter import format_time
 from routes.ricette import elenco_ricette
 
-
 # Blueprint per le rotte del dashboard
 dashboard_routes = Blueprint("dashboard_routes", __name__)
 
@@ -160,6 +159,7 @@ def create_recipe():
 def aggiungi_categoria():
     cartella_base = "static/ricette/"
     nome_categoria = request.json.get("nome_categoria", "").strip()
+    # percorso_categoria = os.path.join(cartella_base, nome_categoria)
     file_keep = ".gitkeep.txt"
 
     new_categoria = os.path.join(cartella_base, nome_categoria, file_keep)
@@ -329,12 +329,9 @@ def logout():
     logout_user()
     return redirect(url_for("auth_routes.login"))
 
-
 # vedere tutti gli utenti registrati
 # @dashboard_routes.route("/utenti", methods=["GET"])
 # def lista_utenti():
 #     users = User.query.all()
 #     utenti = [{"id": user.id, "username": user.username} for user in users]
 #     return jsonify(utenti)
-
-
