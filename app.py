@@ -14,7 +14,6 @@ from models.ricetta_model import Ricetta
 from models.accessLog_model import AccessLog
 
 
-
 # Carica le variabili d'ambiente dal file .env
 load_dotenv()
 
