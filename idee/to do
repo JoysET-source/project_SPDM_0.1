@@ -1,6 +1,9 @@
 Prossimi passi:
 
-aggiungi categoria funziona in locale , ma solo parzialmente in produzione (problema con il db sqlite3)
+visibility funziona solo su elenco ricette, ma le puoi vedere se vai nella sua categoria anche in logout
+
+aggiungi categoria funziona in locale, in produzione no, crea la categoria solo on line ma non crea la cartella sotto
+static nel programma, non crea la categoria nel menu a tendina
 
 google search console e seo
 
